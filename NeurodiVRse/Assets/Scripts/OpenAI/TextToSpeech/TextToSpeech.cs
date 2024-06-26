@@ -1,12 +1,9 @@
-using System.Collections;
+/*using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.IO;
-using System.Net;
 
 public class TextToSpeech : MonoBehaviour
 {
-    private const string ttsApiKey = "your-tts-api-key";
     private const string ttsApiUrl = "https://api.openai.com/v1/audio/speech";
 
     public IEnumerator ConvertTextToSpeech(string text, System.Action<AudioClip> callback)
@@ -24,7 +21,7 @@ public class TextToSpeech : MonoBehaviour
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + ttsApiKey);
+            request.SetRequestHeader("Authorization", "Bearer " + APIManager.GetTTSApiKey());
 
             yield return request.SendWebRequest();
 
@@ -41,3 +38,4 @@ public class TextToSpeech : MonoBehaviour
         }
     }
 }
+*/

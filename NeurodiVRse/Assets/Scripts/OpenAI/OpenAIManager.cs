@@ -1,12 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
+using OpenAI;
+using UnityEngine.Events;
 
 public class OpenAIManager : MonoBehaviour
 {
-    private const string apiKey = "YOUR_OPENAI_API_KEY";
-    private const string apiUrl = "https://api.openai.com/v1/engines/davinci-codex/completions";
+    public OnResponseEvent OnResponse;
+
+    [System.Serializable]
+    public class OnResponseEvent : UnityEvent<string> { }
+
+    private OpenAIApi openAI = new OpenAIApi();
+    private List<ChatMessage> messages = new List<ChatMessage>();
+
+    public async void AskChatGPT(string newText)
+    {
+        ChatMessage newMessage = new ChatMessage();
+        newMessage.Content = newText;
+        newMessage.Role = "user";
+
+        messages.Add(newMessage);
+
+        CreateChatCompletionRequest request = new CreateChatCompletionRequest();
+        request.Messages = messages;
+        request.Model = "gpt-3.5-turbo";
+
+        var response = await openAI.CreateChatCompletion(request);
+
+        if(response.Choices != null && response.Choices.Count > 0)
+        {
+            var chatResponse = response.Choices[0].Message;
+            messages.Add(chatResponse);
+
+            Debug.Log(chatResponse.Content);
+            
+            OnResponse.Invoke(chatResponse.Content);
+        }
+    }
+
+
+
+    /*private const string apiUrl = "https://api.openai.com/v1/engines/davinci-codex/completions";
 
     [System.Serializable]
     public class OpenAIResponse
@@ -50,7 +86,7 @@ public class OpenAIManager : MonoBehaviour
             request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + apiKey);
+            request.SetRequestHeader("Authorization", "Bearer " + APIManager.GetOpenAIKey());
 
             yield return request.SendWebRequest();
 
@@ -66,5 +102,5 @@ public class OpenAIManager : MonoBehaviour
                 callback(result);
             }
         }
-    }
+    }*/
 }

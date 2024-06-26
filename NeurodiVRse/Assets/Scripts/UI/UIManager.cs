@@ -13,7 +13,17 @@ public class UIManager : MonoBehaviour
     public void OnSendButtonClicked()
     {
         string userInput = inputField.text;
-        StartCoroutine(openAIManager.GetOpenAIResponse(userInput, UpdateOutputText));
+        openAIManager.AskChatGPT(userInput);
+    }
+
+    private void OnEnable()
+    {
+        openAIManager.OnResponse.AddListener(UpdateOutputText);
+    }
+
+    private void OnDisable()
+    {
+        openAIManager.OnResponse.RemoveListener(UpdateOutputText);
     }
 
     private void UpdateOutputText(string response)
