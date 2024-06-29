@@ -6,8 +6,12 @@ public class TextToSpeech : MonoBehaviour
 {
     private const string ttsApiUrl = "https://api.openai.com/v1/audio/speech";
 
+    public bool npcTalking = false;
+
     public IEnumerator ConvertTextToSpeech(string text, System.Action<AudioClip> callback)
     {
+        npcTalking = true;
+
         string jsonData = JsonUtility.ToJson(new
         {
             input = text,
@@ -28,12 +32,14 @@ public class TextToSpeech : MonoBehaviour
             if (request.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError("Error: " + request.error);
+                npcTalking = false;
             }
             else
             {
                 byte[] audioData = request.downloadHandler.data;
                 AudioClip audioClip = WavUtility.ToAudioClip(audioData);
                 callback(audioClip);
+                npcTalking = false;
             }
         }
     }
