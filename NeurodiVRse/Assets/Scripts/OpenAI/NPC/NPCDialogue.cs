@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class NPCDialogue : MonoBehaviour
 {
-
+    [SerializeField] private GameObject chatUI;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // gpt chat ui
+            chatUI.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            chatUI.SetActive(false);
         }
     }
 }

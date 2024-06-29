@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
-{
+{    
+    [SerializeField] private GameObject canvas;
+
     public InputField inputField;
     public TMP_Text outputText;
     public OpenAIManager openAIManager;
@@ -14,6 +16,10 @@ public class UIManager : MonoBehaviour
     {
         string userInput = inputField.text;
         openAIManager.AskChatGPT(userInput);
+    }
+    public void OnCloseButtonClicked()
+    {
+        canvas.SetActive(false);
     }
 
     private void OnEnable()

@@ -11,20 +11,16 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOverUI.SetActive(true);
-
-        Invoke("LoadVRRestartScene", 3f);
     }
 
     public void Win()
     {
         gameWinUI.SetActive(true);
-
-        Invoke("LoadVRRestartScene", 4f);
     }
 
-    public void PlayGame()
+    public void PlayCafeGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
     }
 
     public void Back()
@@ -37,14 +33,9 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    void LoadVRRestartScene()
-    {
-        SceneManager.LoadScene(3);
-    }
-
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void MainMenu()
