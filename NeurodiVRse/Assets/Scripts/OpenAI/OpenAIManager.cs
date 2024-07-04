@@ -1,105 +1,75 @@
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 using OpenAI;
-using UnityEngine.Events;
 
-public class OpenAIManager : MonoBehaviour
+namespace OpenAI
 {
-    public OnResponseEvent OnResponse;
-
-    [System.Serializable]
-    public class OnResponseEvent : UnityEvent<string> { }
-
-    private OpenAIApi openAI = new OpenAIApi();
-    private List<ChatMessage> messages = new List<ChatMessage>();
-
-    public async void AskChatGPT(string newText)
+    public class OpenAIManager : MonoBehaviour
     {
-        ChatMessage newMessage = new ChatMessage();
-        newMessage.Content = newText;
-        newMessage.Role = "user";
+        public OnResponseEvent OnResponse;
 
-        messages.Add(newMessage);
+        [System.Serializable]
+        public class OnResponseEvent : UnityEvent<string> { }
 
-        CreateChatCompletionRequest request = new CreateChatCompletionRequest();
-        request.Messages = messages;
-        request.Model = "gpt-3.5-turbo";
+        private OpenAIApi openAIApi;
+        private List<ChatMessage> messages = new List<ChatMessage>();
 
-        var response = await openAI.CreateChatCompletion(request);
-
-        if(response.Choices != null && response.Choices.Count > 0)
+        private void Awake()
         {
+            var config = new Configuration();
+            openAIApi = new OpenAIApi(config.ApiKey);
+        }
+
+        public async void AskChatGPT(string newText)
+        {
+            var newMessage = new ChatMessage { Role = "user", Content = newText };
+            messages.Add(newMessage);
+
+            var request = new CreateChatCompletionRequest
+            {
+                Messages = messages,
+                Model = "gpt-3.5-turbo-0613"
+            };
+
+            var response = await openAIApi.CreateChatCompletion(request);
+            if (response == null || response.Choices == null || response.Choices.Count == 0)
+            {
+                Debug.LogError("Failed to get a valid response.");
+                return;
+            }
+
             var chatResponse = response.Choices[0].Message;
             messages.Add(chatResponse);
 
             Debug.Log(chatResponse.Content);
-            
             OnResponse.Invoke(chatResponse.Content);
         }
     }
 
-
-
-    /*private const string apiUrl = "https://api.openai.com/v1/engines/davinci-codex/completions";
-
     [System.Serializable]
-    public class OpenAIResponse
+    public class CreateChatCompletionRequest
     {
-        public string id;
-        public string obj;
-        public long created;
-        public string model;
-        public Choice[] choices;
-        public Usage usage;
+        public string Model;
+        public List<ChatMessage> Messages;
     }
 
     [System.Serializable]
-    public class Choice
+    public class CreateChatCompletionResponse
     {
-        public string text;
-        public int index;
-        public object logprobs;
-        public string finish_reason;
+        public List<ChatChoice> Choices;
     }
 
     [System.Serializable]
-    public class Usage
+    public class ChatMessage
     {
-        public int prompt_tokens;
-        public int completion_tokens;
-        public int total_tokens;
+        public string Role;
+        public string Content;
     }
 
-    public IEnumerator GetOpenAIResponse(string prompt, System.Action<string> callback)
+    [System.Serializable]
+    public class ChatChoice
     {
-        string jsonData = JsonUtility.ToJson(new
-        {
-            prompt = prompt,
-            max_tokens = 150
-        });
-
-        using (UnityWebRequest request = new UnityWebRequest(apiUrl, "POST"))
-        {
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + APIManager.GetOpenAIKey());
-
-            yield return request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Error: " + request.error);
-            }
-            else
-            {
-                string jsonResponse = request.downloadHandler.text;
-                OpenAIResponse response = JsonUtility.FromJson<OpenAIResponse>(jsonResponse);
-                string result = response.choices[0].text.Trim();
-                callback(result);
-            }
-        }
-    }*/
+        public ChatMessage Message;
+    }
 }

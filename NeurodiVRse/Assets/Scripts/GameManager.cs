@@ -18,9 +18,14 @@ public class GameManager : MonoBehaviour
         gameWinUI.SetActive(true);
     }
 
-    public void PlayCafeGame()
+    public void PlayCafeAIGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void PlayCafeScriptedGame()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void Back()

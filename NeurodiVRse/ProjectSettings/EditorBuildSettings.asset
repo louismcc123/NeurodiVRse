@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: e0f95116e3b7bad48acc5855bd2abb57
   - enabled: 1
-    path: Assets/Scenes/Cafe.unity
+    path: Assets/Scenes/CafeLLM.unity
     guid: 4e9fef26e6adb88479ad1b9834a32d94
+  - enabled: 1
+    path: Assets/Scenes/CafeScripted.unity
+    guid: 0544a0cf721e00742bb9dac11f0e275f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}

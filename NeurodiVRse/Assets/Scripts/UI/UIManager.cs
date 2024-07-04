@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using OpenAI;
 
 public class UIManager : MonoBehaviour
-{    
-    [SerializeField] private GameObject canvas;
+{
+    [SerializeField] private GameObject openAICanvas;
+    [SerializeField] private GameObject npcCanvas;
 
     public InputField inputField;
     public TMP_Text outputText;
@@ -19,7 +21,8 @@ public class UIManager : MonoBehaviour
     }
     public void OnCloseButtonClicked()
     {
-        canvas.SetActive(false);
+        openAICanvas.SetActive(false);
+        npcCanvas.SetActive(false);
     }
 
     private void OnEnable()

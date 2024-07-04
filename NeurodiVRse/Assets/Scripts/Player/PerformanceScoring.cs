@@ -35,7 +35,7 @@ public class PerformanceScoring : MonoBehaviour
 
     void CheckEyeContact()
     {
-        if (recordAudio.isTalking) // || textToSpeech.npcTalking)
+        //if (Microphone.isRecording) // || textToSpeech.npcTalking)
         {
             Vector3 directionToNPC = (npc.position - playerCamera.position).normalized;
             float angle = Vector3.Angle(playerCamera.forward, directionToNPC);
