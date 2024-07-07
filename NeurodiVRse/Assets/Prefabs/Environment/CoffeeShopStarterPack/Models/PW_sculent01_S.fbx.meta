@@ -143,5 +143,5 @@ AssetOrigin:
   productId: 160914
   packageName: CoffeeShop Starter Pack
   packageVersion: 1.0
-  assetPath: Assets/CoffeeShopStarterPack/Models/PW_sculent01_S.fbx
+  assetPath: Assets/Prefabs/Environment/CoffeeShopStarterPack/Models/PW_sculent01_S.fbx
   uploadId: 361463

@@ -5,7 +5,7 @@ AssetOrigin:
   productId: 160914
   packageName: CoffeeShop Starter Pack
   packageVersion: 1.0
-  assetPath: Assets/CoffeeShopStarterPack/Test/ScreenShots/PW_espresso_cup.png
+  assetPath: Assets/Prefabs/Environment/CoffeeShopStarterPack/Test/ScreenShots/PW_espresso_cup.png
   uploadId: 361463
 TextureImporter:
   internalIDToNameTable: []
