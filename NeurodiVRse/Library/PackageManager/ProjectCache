@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638560625733969305
+      ticks: 638560639450909484
     m_Hash: 2855457693
   m_LockFileStatus:
     m_FilePath: D:/louis/NeurodiVRse/NeurodiVRse/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638560625733979307
+      ticks: 638560639450909484
     m_Hash: 3490094150
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
@@ -1601,10 +1601,12 @@ m_ResolvedPackages:
     - 4.3.3
     - 4.4.0
     - 4.4.1
+    - 4.5.0
     compatible:
     - 4.3.3
     - 4.4.0
     - 4.4.1
+    - 4.5.0
     recommended: 4.3.3
     deprecated: []
   dependencies:
