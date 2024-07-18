@@ -13,5 +13,52 @@ MonoBehaviour:
   m_Name: Barista
   m_EditorClassIdentifier: 
   RootNode:
-    dialogueText: 
-    responses: []
+    dialogueText: Good morning! Welcome to the NeurodiVRse Cafe. How can I help you
+      today?
+    responses:
+    - responseText: Good morning! I'd like a coffee, please.
+      nextNode:
+        dialogueText: Sure thing! What kind of coffee would you like? We have americano,
+          espresso, latte, cappuccino, and a few other options.
+        responses:
+        - responseText: "I\u2019d like a medium latte, please."
+          nextNode:
+            dialogueText: Great choice! Would you like anything else?
+            responses:
+            - responseText: No, thank you. Just the coffee.
+              nextNode:
+                dialogueText: "No problem. That will be \xA32.50, please. Would you
+                  like to pay with cash or card?"
+                responses:
+                - responseText: Card please
+                  nextNode:
+                    dialogueText: 
+                    responses: []
+                - responseText: Cash please
+                  nextNode:
+                    dialogueText: 
+                    responses: []
+            - responseText: No, just the coffee.
+              nextNode:
+                dialogueText: 
+                responses: []
+            - responseText: No. Just coffee.
+              nextNode:
+                dialogueText: 
+                responses: []
+        - responseText: Just a regular coffee, please.
+          nextNode:
+            dialogueText: 
+            responses: []
+        - responseText: Just coffee.
+          nextNode:
+            dialogueText: 
+            responses: []
+    - responseText: I'd like a coffee, please.
+      nextNode:
+        dialogueText: 
+        responses: []
+    - responseText: Coffee
+      nextNode:
+        dialogueText: 
+        responses: []
