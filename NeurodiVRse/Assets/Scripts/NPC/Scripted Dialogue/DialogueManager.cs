@@ -1,30 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading;
 using TMPro;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance { get; private set; }
-
     public GameObject DialogueParent;
-    public TextMeshProUGUI DialogTitleText, DialogBodyText; 
-    public GameObject responseButtonPrefab; 
-    public Transform responseButtonParent; 
+    public TextMeshProUGUI DialogueTitleText, DialogueBodyText;
+    public GameObject PlayerResponseCanvas; 
+    public Transform responseButtonParent;
+    public GameObject responseButtonPrefab;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         HideDialogue();
     }
 
@@ -32,8 +21,8 @@ public class DialogueManager : MonoBehaviour
     {
         ShowDialogue();
 
-        DialogTitleText.text = title;
-        DialogBodyText.text = node.dialogueText;
+        DialogueTitleText.text = title;
+        DialogueBodyText.text = node.dialogueText;
 
         foreach (Transform child in responseButtonParent)
         {
@@ -44,7 +33,6 @@ public class DialogueManager : MonoBehaviour
         {
             GameObject buttonObj = Instantiate(responseButtonPrefab, responseButtonParent);
             buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = response.responseText;
-
             buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title));
         }
     }
@@ -64,15 +52,17 @@ public class DialogueManager : MonoBehaviour
     public void HideDialogue()
     {
         DialogueParent.SetActive(false);
+        PlayerResponseCanvas.SetActive(false);
     }
 
     private void ShowDialogue()
     {
         DialogueParent.SetActive(true);
+        PlayerResponseCanvas.SetActive(true);
     }
 
     public bool IsDialogueActive()
     {
-        return DialogueParent.activeSelf;
+        return DialogueParent.activeSelf || PlayerResponseCanvas.activeSelf;
     }
 }

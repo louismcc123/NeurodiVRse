@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class NpcScriptedDialogue : MonoBehaviour
 {
-    [SerializeField] private GameObject DialogueCanvas;
     private Actor actor;
+    [SerializeField] private Canvas NPCDialogueCanvas;
 
     private void Awake()
     {
         actor = GetComponent<Actor>();
+        NPCDialogueCanvas.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            DialogueCanvas.SetActive(true);
-            actor.SpeakTo(); 
+            NPCDialogueCanvas.gameObject.SetActive(true);
+            actor.dialogueManager.PlayerResponseCanvas.SetActive(true); 
+            actor.SpeakTo();
         }
     }
 
@@ -25,7 +27,8 @@ public class NpcScriptedDialogue : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            DialogueCanvas.SetActive(false);
+            NPCDialogueCanvas.gameObject.SetActive(false);
+            actor.dialogueManager.PlayerResponseCanvas.SetActive(false); 
         }
     }
 }

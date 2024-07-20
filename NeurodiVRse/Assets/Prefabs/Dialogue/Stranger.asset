@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Stranger
   m_EditorClassIdentifier: 
   RootNode:
-    dialogueText: 
+    dialogueText: hi
     responses: []

@@ -6,9 +6,18 @@ public class Actor : MonoBehaviour
 {
     public string Name;
     public Dialogue Dialogue;
+    public DialogueManager dialogueManager;
+
+    private void Awake()
+    {
+        if (dialogueManager == null)
+        {
+            dialogueManager = GetComponent<DialogueManager>();
+        }
+    }
 
     public void SpeakTo()
     {
-        DialogueManager.Instance.StartDialogue(Name, Dialogue.RootNode);
+        dialogueManager.StartDialogue(Name, Dialogue.RootNode);
     }
 }

@@ -62,3 +62,7 @@ MonoBehaviour:
       nextNode:
         dialogueText: 
         responses: []
+    - responseText: Coffee
+      nextNode:
+        dialogueText: 
+        responses: []
