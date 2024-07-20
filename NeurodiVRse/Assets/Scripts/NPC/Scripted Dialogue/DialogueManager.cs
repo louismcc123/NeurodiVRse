@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject DialogueParent;
     public TextMeshProUGUI DialogTitleText, DialogBodyText; 
     public GameObject responseButtonPrefab; 
-    public Transform responseButtonContainer; 
+    public Transform responseButtonParent; 
 
     private void Awake()
     {
@@ -35,14 +35,14 @@ public class DialogueManager : MonoBehaviour
         DialogTitleText.text = title;
         DialogBodyText.text = node.dialogueText;
 
-        foreach (Transform child in responseButtonContainer)
+        foreach (Transform child in responseButtonParent)
         {
             Destroy(child.gameObject);
         }
 
         foreach (DialogueResponse response in node.responses)
         {
-            GameObject buttonObj = Instantiate(responseButtonPrefab, responseButtonContainer);
+            GameObject buttonObj = Instantiate(responseButtonPrefab, responseButtonParent);
             buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = response.responseText;
 
             buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title));
