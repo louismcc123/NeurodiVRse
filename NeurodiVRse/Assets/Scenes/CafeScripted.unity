@@ -5398,7 +5398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Stranger
-  Dialogue: {fileID: 11400000, guid: 0a86d08f24070a9408964a3c0f575ea1, type: 2}
+  initialDialogueNode: {fileID: 0}
   dialogueManager: {fileID: 978863318}
 --- !u!114 &978863318
 MonoBehaviour:
@@ -5413,11 +5413,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialogueParent: {fileID: 1306217938}
-  DialogueTitleText: {fileID: 150993473}
-  DialogueBodyText: {fileID: 414430903}
-  PlayerResponseCanvas: {fileID: 438487686}
-  responseButtonParent: {fileID: 1620352327}
+  DialogTitleText: {fileID: 0}
+  DialogBodyText: {fileID: 0}
   responseButtonPrefab: {fileID: 4079168201945734549, guid: 34c139637eea5d04390f0aef65756bad, type: 3}
+  responseButtonParent: {fileID: 1620352327}
+  PlayerResponseCanvas: {fileID: 438487686}
+  playerResponseButtonParent: {fileID: 0}
+  AdviceCanvas: {fileID: 0}
+  adviceText: {fileID: 0}
+  finalScoreText: {fileID: 0}
+  playerStats: {fileID: 0}
 --- !u!114 &978863319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6788,6 +6793,7 @@ GameObject:
   - component: {fileID: 1291798433}
   - component: {fileID: 1291798434}
   - component: {fileID: 1291798435}
+  - component: {fileID: 1291798436}
   m_Layer: 0
   m_Name: Barista Setup
   m_TagString: Untagged
@@ -6861,7 +6867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Barista
-  Dialogue: {fileID: 11400000, guid: 5786d8ba3118ae94f94715bf6a25621d, type: 2}
+  initialDialogueNode: {fileID: 0}
   dialogueManager: {fileID: 1291798435}
 --- !u!114 &1291798434
 MonoBehaviour:
@@ -6889,11 +6895,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialogueParent: {fileID: 24217004}
-  DialogueTitleText: {fileID: 62095542}
-  DialogueBodyText: {fileID: 1265181997}
-  PlayerResponseCanvas: {fileID: 438487686}
-  responseButtonParent: {fileID: 1620352327}
+  DialogTitleText: {fileID: 0}
+  DialogBodyText: {fileID: 0}
   responseButtonPrefab: {fileID: 4079168201945734549, guid: 34c139637eea5d04390f0aef65756bad, type: 3}
+  responseButtonParent: {fileID: 1620352327}
+  PlayerResponseCanvas: {fileID: 438487686}
+  playerResponseButtonParent: {fileID: 0}
+  AdviceCanvas: {fileID: 0}
+  adviceText: {fileID: 0}
+  finalScoreText: {fileID: 0}
+  playerStats: {fileID: 0}
+--- !u!114 &1291798436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291798428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e91fef560d2520469dcd03fedd1cdcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1422930342}
+  handTransform: {fileID: 1422930341}
+  coffeeCupPrefab: {fileID: 919132149155446097, guid: 874cc5bc24933b042abbece65c83575d, type: 3}
+  dialogueManager: {fileID: 1291798435}
 --- !u!1 &1300295953
 GameObject:
   m_ObjectHideFlags: 0
@@ -7726,6 +7753,16 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1835725729}
   m_SourcePrefab: {fileID: 100100000, guid: 95bce7fc56774a54dadfbcd2f9342e34, type: 3}
+--- !u!4 &1422930341 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8504309617613441659, guid: 95bce7fc56774a54dadfbcd2f9342e34, type: 3}
+  m_PrefabInstance: {fileID: 1422930340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1422930342 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 95bce7fc56774a54dadfbcd2f9342e34, type: 3}
+  m_PrefabInstance: {fileID: 1422930340}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1460422733
 GameObject:
   m_ObjectHideFlags: 0
