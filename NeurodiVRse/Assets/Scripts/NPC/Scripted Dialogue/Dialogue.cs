@@ -8,21 +8,23 @@ public class Dialogue : ScriptableObject
     public DialogueNode RootNode;
 }
 
-[System.Serializable]
-public class DialogueNode
+[CreateAssetMenu(fileName = "New Dialogue Node", menuName = "Dialogue/Node")]
+public class DialogueNode : ScriptableObject
 {
     public string dialogueText;
     public List<DialogueResponse> responses;
 
-    internal bool IsLastNode()
+    public bool IsLastNode()
     {
-        return responses.Count <= 0;
+        return responses == null || responses.Count == 0;
     }
 }
 
-[System.Serializable]
-public class DialogueResponse
+[CreateAssetMenu(fileName = "New Dialogue Response", menuName = "Dialogue/Response")]
+public class DialogueResponse : ScriptableObject
 {
     public string responseText;
     public DialogueNode nextNode;
+    public int score;
+    public string adviceText;
 }

@@ -11,13 +11,13 @@ public class PerformanceScoring : MonoBehaviour
     public float checkInterval = 1.0f;
     private float timer;
 
-    public RecordAudio recordAudio;
+    //public RecordAudio recordAudio;
     //public TextToSpeech textToSpeech;
     private PlayerStats playerStats;
 
     private void Awake()
     {
-        recordAudio = FindObjectOfType<RecordAudio>();
+        //recordAudio = FindObjectOfType<RecordAudio>();
         //textToSpeech = FindObjectOfType<TextToSpeech>();
         playerStats = FindObjectOfType<PlayerStats>();
     }
@@ -53,7 +53,7 @@ public class PerformanceScoring : MonoBehaviour
 
     void CheckTurnBasedDialogue()
     {
-        if (recordAudio.isTalking) // && textToSpeech.npcTalking)
+        //if (recordAudio.isTalking && textToSpeech.npcTalking)
         { 
             playerStats.SubtactScore(scorePenalty);
             Debug.Log("Player talking over npc! Score penalty applied.");

@@ -6,11 +6,22 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    // Dialogue UI
     public GameObject DialogueParent;
-    public TextMeshProUGUI DialogueTitleText, DialogueBodyText;
     public GameObject PlayerResponseCanvas; 
-    public Transform responseButtonParent;
     public GameObject responseButtonPrefab;
+    public Transform responseButtonParent;
+    public TextMeshProUGUI DialogueTitleText, DialogueBodyText;
+
+    // Scoring
+    public TextMeshProUGUI finalScoreText;
+    private int totalScore = 0;
+
+    // Advice
+    public GameObject AdviceCanvas; 
+    public TextMeshProUGUI adviceText;
+
+    public PlayerStats playerStats;
 
     private void Awake()
     {
@@ -23,6 +34,13 @@ public class DialogueManager : MonoBehaviour
 
         DialogueTitleText.text = title;
         DialogueBodyText.text = node.dialogueText;
+        adviceText.text = ""; 
+        AdviceCanvas.SetActive(false);
+
+        foreach (Transform child in responseButtonParent)
+        {
+            Destroy(child.gameObject);
+        }
 
         foreach (Transform child in responseButtonParent)
         {
@@ -39,20 +57,35 @@ public class DialogueManager : MonoBehaviour
 
     public void SelectResponse(DialogueResponse response, string title)
     {
-        if (!response.nextNode.IsLastNode())
+        totalScore += response.score; 
+        playerStats.SubtactScore(response.score);
+        adviceText.text = response.adviceText;
+        AdviceCanvas.SetActive(true);
+
+        if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
             StartDialogue(title, response.nextNode);
         }
         else
         {
+            DisplayFinalScore(); 
             HideDialogue();
         }
+    }
+
+    public void DisplayFinalScore()
+    {
+        PlayerResponseCanvas.SetActive(false); 
+        finalScoreText.text = "Final Score: " + totalScore + "/100"; 
+        finalScoreText.gameObject.SetActive(true); 
     }
 
     public void HideDialogue()
     {
         DialogueParent.SetActive(false);
         PlayerResponseCanvas.SetActive(false);
+        AdviceCanvas.SetActive(false);
+        finalScoreText.gameObject.SetActive(false); 
     }
 
     private void ShowDialogue()
