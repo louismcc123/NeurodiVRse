@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Ok
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
+  responseText: No, just the latte.
+  nextNode: {fileID: 11400000, guid: a8eab00e43b5ca645a2584eaa07fedee, type: 2}
+  score: 1
+  adviceText: "Adding \u201Cthank you\u201D is polite, even if you don\u2019t want
+    anything else."
