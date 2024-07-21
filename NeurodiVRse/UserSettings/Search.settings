@@ -12,7 +12,7 @@ scopes = {
 	"picker_search_text.0B486DF2" = ""
 	"last_search.0B486DF2" = ""
 	"OpenInspectorPreview.0B486DF2" = "0"
-	"currentGroup.0B486DF2" = null
+	"currentGroup.0B486DF2" = "all"
 }
 providers = {
 	log = {

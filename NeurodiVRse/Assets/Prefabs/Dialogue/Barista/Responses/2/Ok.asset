@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
   m_Name: Ok
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
-  responseText: Just a regular coffee, please.
-  nextNode: {fileID: 11400000, guid: f633367137466c84a9dad5cf1fd78383, type: 2}
+  responseText: A latte.
+  nextNode: {fileID: 11400000, guid: c8108225f33df80489dac5417936d6f3, type: 2}
   score: 1
-  adviceText: Being specific helps. Mention the size and type if possible.
+  adviceText: Make sure to be polite and being specific helps. Mention the size of
+    coffee and say "please" afterwards.

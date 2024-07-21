@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
   m_Name: Bad
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
-  responseText: No
+  responseText: No.
   nextNode: {fileID: 11400000, guid: a8eab00e43b5ca645a2584eaa07fedee, type: 2}
   score: 2
-  adviceText: "Adding \u201Cthank you\u201D is polite, even if you don\u2019t want
-    anything else."
+  adviceText: "It\u2019s good to answer politely, even if you don\u2019t want anything
+    else."

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fb076d74c24f748abaf08a12e1c007, type: 3}
   m_Name: Barista
   m_EditorClassIdentifier: 
-  RootNode: {fileID: 0}
+  RootNode: {fileID: 11400000, guid: 3f6636e14db6af74cb902425813d59ca, type: 2}

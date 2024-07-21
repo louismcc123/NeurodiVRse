@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
   m_Name: 5
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Thank you.
   nextNode: {fileID: 11400000, guid: 2211b5264bb100342a948998428040bd, type: 2}
   score: 0
-  adviceText: Nicely done! Your coffee is on the way and will be with you soon!
+  adviceText: Great job! Your latte is on the way. Now just wait patiently for your
+    coffee to be handed to you.

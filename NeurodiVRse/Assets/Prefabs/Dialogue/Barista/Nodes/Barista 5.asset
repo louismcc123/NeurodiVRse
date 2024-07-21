@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41fb076d74c24f748abaf08a12e1c007, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
   m_Name: Barista 5
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueNode
-  RootNode: {fileID: 0}
+  m_EditorClassIdentifier: 
+  dialogueText: Thank you. Your latte will be ready in just a moment.
+  responses:
+  - {fileID: 11400000, guid: 94e8ea99e63192540946d9a8e8dd232b, type: 2}

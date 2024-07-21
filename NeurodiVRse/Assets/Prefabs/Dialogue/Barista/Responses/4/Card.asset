@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
   m_Name: Card
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Card, please.
   nextNode: {fileID: 11400000, guid: 42eb0201dde9d5a409b574e27598e903, type: 2}
   score: 0
-  adviceText: To pay by card, tap your card on the contactless card machine by the
-    till.
+  adviceText: Pay by card by tapping your card against the contactless card machine
+    by the till.
