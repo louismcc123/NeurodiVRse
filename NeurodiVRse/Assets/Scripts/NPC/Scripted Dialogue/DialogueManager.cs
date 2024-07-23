@@ -66,7 +66,7 @@ public class DialogueManager : MonoBehaviour
     public void SelectResponse(DialogueResponse response, string title)
     {
         totalScore += response.score; 
-        playerStats.SubtactScore(response.score); 
+        playerStats.SubtractScore(response.score); 
         adviceText.text = response.adviceText; 
         AdviceCanvas.SetActive(true); 
 

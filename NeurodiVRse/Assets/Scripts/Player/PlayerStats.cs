@@ -6,11 +6,12 @@ public class PlayerStats : MonoBehaviour
 {
     public float maxScore;
     public float currentScore;
+    public bool hasCoffee;
+
+    private bool isDead;
 
     //public ScoreBar scoreBar;
     public GameManager gameManager;
-
-    private bool isDead;
 
     void Start()
     {
@@ -18,12 +19,14 @@ public class PlayerStats : MonoBehaviour
         currentScore = maxScore;
         //scoreBar.SetSliderMax(maxScore);
         //scoreBar.SetSlider(currentScore);
+
+        hasCoffee = false;
     }
 
-    public void SubtactScore(float amount)
+    public void SubtractScore(float amount)
     {
         Debug.Log($"Subtracting score: {amount}");
-        UpdateScore(amount);
+        UpdateScore(-amount);
     }
 
     /*public void AddHealth(float amount)
@@ -34,7 +37,7 @@ public class PlayerStats : MonoBehaviour
 
     private void UpdateScore(float amount)
     {
-        currentScore -= amount;
+        currentScore += amount;
 
         if (currentScore <= 0 && !isDead)
         {
@@ -43,13 +46,18 @@ public class PlayerStats : MonoBehaviour
             gameObject.SetActive(false);
             gameManager.GameOver();
         }
-        else if (currentScore >= 100)
+        else if (currentScore >= maxScore)
         {
-            currentScore = 100;
+            currentScore = maxScore;
             Debug.Log("Player score reached maximum.");
         }
 
         Debug.Log("Player score adjusted. Current score: " + currentScore);
         //scoreBar.SetSlider(currentScore);
+    }
+
+    public float GetCurrentScore()
+    {
+        return currentScore;
     }
 }

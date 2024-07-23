@@ -42,7 +42,7 @@ public class PerformanceScoring : MonoBehaviour
 
             if (angle > maxAngle)
             {
-                playerStats.SubtactScore(scorePenalty);
+                playerStats.SubtractScore(scorePenalty);
                 Debug.Log("Eye contact not maintained! Score penalty applied.");
 
                 // make npc give verbal queues to say it is rude to not look at them when they are talking
@@ -55,7 +55,7 @@ public class PerformanceScoring : MonoBehaviour
     {
         //if (recordAudio.isTalking && textToSpeech.npcTalking)
         { 
-            playerStats.SubtactScore(scorePenalty);
+            playerStats.SubtractScore(scorePenalty);
             Debug.Log("Player talking over npc! Score penalty applied.");
 
             // make npc give verbal queues to say it is rude to talk over someone else

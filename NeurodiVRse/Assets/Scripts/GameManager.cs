@@ -6,17 +6,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject gameOverUI;
-    public GameObject gameWinUI;
+    public GameObject endGameUI;
+    public GameObject incompleteLevelUI;
 
-    public void GameOver()
-    {
-        gameOverUI.SetActive(true);
-    }
-
-    public void Win()
-    {
-        gameWinUI.SetActive(true);
-    }
+    private Door door;
 
     public void PlayCafeAIGame()
     {
@@ -46,5 +39,21 @@ public class GameManager : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void GameOver()
+    {
+        gameOverUI.SetActive(true);
+    }
+
+    public void EndGame()
+    {
+        endGameUI.SetActive(true);
+    }
+
+    public void Continue()
+    {
+        door.HandleDoorInteraction();
+        incompleteLevelUI.SetActive(false);
     }
 }
