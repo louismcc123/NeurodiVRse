@@ -8,7 +8,7 @@ public class DialogueManager : MonoBehaviour
 {
     // NPC Dialogue
     public GameObject DialogueParent;
-    public TextMeshProUGUI DialogTitleText, DialogBodyText;
+    public TextMeshProUGUI DialogueTitleText, DialogueBodyText;
     public GameObject responseButtonPrefab;
     public Transform responseButtonParent;
     private DialogueNode pausedNode;
@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI finalScoreText;
 
     public PlayerStats playerStats;
+    public BaristaController baristaController;
 
     private void Awake()
     {
@@ -37,8 +38,8 @@ public class DialogueManager : MonoBehaviour
     {
         ShowDialogue();
 
-        DialogTitleText.text = title;
-        DialogBodyText.text = node.dialogueText;
+        DialogueTitleText.text = title;
+        DialogueBodyText.text = node.dialogueText;
         adviceText.text = ""; 
         AdviceCanvas.SetActive(false); 
 
@@ -65,10 +66,10 @@ public class DialogueManager : MonoBehaviour
 
     public void SelectResponse(DialogueResponse response, string title)
     {
-        totalScore += response.score; 
-        playerStats.SubtractScore(response.score); 
-        adviceText.text = response.adviceText; 
-        AdviceCanvas.SetActive(true); 
+        totalScore += response.score;
+        playerStats.SubtractScore(response.score);
+        adviceText.text = response.adviceText;
+        AdviceCanvas.SetActive(true);
 
         if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
@@ -80,7 +81,7 @@ public class DialogueManager : MonoBehaviour
             else if (response.responseText == "Thank you." && title == "Barista 5")
             {
                 PauseDialogue(response.nextNode, title);
-                StartCoroutine(HandleCoffeePreparation());
+                baristaController.StartCoffeePreparation();
             }
             else
             {
@@ -89,7 +90,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            DisplayFinalScore(); 
+            DisplayFinalScore();
             HideDialogue();
         }
     }
@@ -139,45 +140,25 @@ public class DialogueManager : MonoBehaviour
 
     private void TriggerPaymentProcess(string paymentMethod)
     {
-        // Implement the logic to handle card or cash payment
-        // Once the payment is complete, call ResumeDialogue() to continue the dialogue
         if (paymentMethod == "Card, please.")
         {
-            // Handle card payment
+            // instantiate card in players hand
+            // wait for player to touch card reader with card
             Debug.Log("Processing card payment...");
         }
         else if (paymentMethod == "Cash, please.")
         {
-            // Handle cash payment
+            // instantiate cash in players hand
+            // wait for player to place cash on counter or in servers hand
             Debug.Log("Processing cash payment...");
         }
 
-        // Simulate payment completion
-        Invoke("PaymentCompleted", 3.0f); // Simulate a delay for payment processing
+        Invoke("PaymentCompleted", 3.0f);
     }
 
     private void PaymentCompleted()
     {
-        ResumeDialogue();
-    }
-
-    // Method to handle coffee preparation animation and movement
-    private IEnumerator HandleCoffeePreparation()
-    {
-        // Simulate barista moving to the coffee machine
-        Debug.Log("Barista moving to the coffee machine...");
-        yield return new WaitForSeconds(2.0f); // Simulate time to walk to the coffee machine
-
-        // Simulate coffee preparation animation
-        Debug.Log("Preparing coffee...");
-        yield return new WaitForSeconds(3.0f); // Simulate time for coffee preparation
-
-        // Simulate barista returning with the coffee
-        Debug.Log("Barista returning with the coffee...");
-        yield return new WaitForSeconds(2.0f); // Simulate time to walk back
-
-        // Resume the dialogue
-        ResumeDialogue();
+        baristaController.StartTakingPayment();
     }
 
     // Fisher-Yates shuffle algorithm

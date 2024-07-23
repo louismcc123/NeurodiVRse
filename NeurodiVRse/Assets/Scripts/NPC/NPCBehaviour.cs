@@ -11,12 +11,15 @@ public class NPCBehaviour : MonoBehaviour
 
     private bool isPlayerInRange = false;
 
+    public BaristaController baristaController;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform == player)
         {
             isPlayerInRange = true;
             Debug.Log("player in range");
+            baristaController.MoveToWaypoint(1);
         }
     }
 

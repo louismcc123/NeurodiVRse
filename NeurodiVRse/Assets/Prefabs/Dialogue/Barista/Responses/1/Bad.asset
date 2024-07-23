@@ -15,6 +15,6 @@ MonoBehaviour:
   responseText: Coffee
   nextNode: {fileID: 11400000, guid: f633367137466c84a9dad5cf1fd78383, type: 2}
   score: 2
-  adviceText: " It\u2019s polite to respond to a greeting. You could say, \"Good
-    morning,\" or \"Hello,\" before stating your order. Be sure to say \"Please\"
-    and \"Thank you\" when necessary."
+  adviceText: "It\u2019s polite to respond to a greeting. You could say, \"Good morning,\"
+    or \"Hello,\" before stating your order. Be sure to say \"Please\" and \"Thank
+    you\" when necessary."
