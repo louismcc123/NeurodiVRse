@@ -5,7 +5,7 @@ using UnityEngine;
 public class BaristaController : MonoBehaviour
 {
     public Animator animator;
-    public Transform[] waypoint;
+    public Transform[] waypoints;
     public Transform handTransform;
     public GameObject coffeeCupPrefab;
     public ParticleSystem coffeeMachineParticleSystem;
@@ -16,12 +16,10 @@ public class BaristaController : MonoBehaviour
     private int currentWaypoint = 0;
     private bool isMoving = false;
 
-
     public DialogueManager dialogueManager;
 
     private void Update()
     {
-
         if (isMoving)
         {
             MoveTowardsWaypoint();
@@ -30,7 +28,7 @@ public class BaristaController : MonoBehaviour
 
     public void MoveToWaypoint(int waypointIndex)
     {
-        if (waypointIndex < waypoint.Length)
+        if (waypointIndex < waypoints.Length)
         {
             currentWaypoint = waypointIndex;
             isMoving = true;
@@ -43,7 +41,7 @@ public class BaristaController : MonoBehaviour
 
     private void MoveTowardsWaypoint()
     {
-        Transform targetWaypoint = waypoint[currentWaypoint];
+        Transform targetWaypoint = waypoints[currentWaypoint];
         Vector3 direction = (targetWaypoint.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -56,9 +54,19 @@ public class BaristaController : MonoBehaviour
 
             if (currentWaypoint == 1) // till
             {
-                dialogueManager.ResumeDialogue();
+                dialogueManager.OnBaristaAtTill();
             }
         }
+    }
+
+    public bool IsMoving()
+    {
+        return isMoving;
+    }
+
+    public int GetCurrentWaypoint()
+    {
+        return currentWaypoint;
     }
 
     public void StartTakingPayment()
@@ -68,13 +76,9 @@ public class BaristaController : MonoBehaviour
 
     private IEnumerator TakePayment()
     {
-        MoveToWaypoint(1);
-        while (isMoving) yield return null;
         animator.SetTrigger("TakePayment");
-        yield return new WaitForSeconds(2.0f);
-
-        // if player pays then:
-        // dialogueManager.ResumeDialogue();
+        yield return new WaitForSeconds(2.0f); // Adjust based on animation duration
+        dialogueManager.ResumeDialogue();
     }
 
     public void StartCoffeePreparation()
@@ -84,7 +88,7 @@ public class BaristaController : MonoBehaviour
 
     private IEnumerator PrepareCoffee()
     {
-        MoveToWaypoint(3);
+        MoveToWaypoint(2); // Move to coffee machine
         while (isMoving) yield return null;
         animator.SetTrigger("PrepareCoffee");
         if (coffeeMachineParticleSystem != null)
@@ -98,7 +102,7 @@ public class BaristaController : MonoBehaviour
             Instantiate(coffeeCupPrefab, handTransform.position, handTransform.rotation, handTransform);
         }
 
-        MoveToWaypoint(4);
+        MoveToWaypoint(3); // Move to serving area
         while (isMoving) yield return null;
         animator.SetTrigger("ServeCoffee");
         yield return new WaitForSeconds(2.0f); // Adjust based on animation duration

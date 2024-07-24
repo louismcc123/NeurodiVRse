@@ -44,9 +44,13 @@ public class NPCBehaviour : MonoBehaviour
     {
         if (player == null) return;
 
+        if (baristaController.IsMoving() || baristaController.GetCurrentWaypoint() == 2)
+        {
+            return;
+        }
+
         Vector3 direction = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
-        //Debug.Log("NPC turning to face player");
     }
 }

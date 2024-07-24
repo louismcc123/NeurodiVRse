@@ -15,12 +15,12 @@ public class DialogueManager : MonoBehaviour
     private string pausedTitle;
 
     // Player Responses
-    public GameObject PlayerResponseCanvas; 
-    public Transform playerResponseButtonParent; 
+    public GameObject PlayerResponseCanvas;
+    public Transform playerResponseButtonParent;
 
     // Advice
-    public GameObject AdviceCanvas; 
-    public TextMeshProUGUI adviceText; 
+    public GameObject AdviceCanvas;
+    public TextMeshProUGUI adviceText;
 
     // Scoring
     private int totalScore = 0;
@@ -28,6 +28,9 @@ public class DialogueManager : MonoBehaviour
 
     public PlayerStats playerStats;
     public BaristaController baristaController;
+    public GameObject cardPrefab;
+    public Transform playerHandTransform;
+    private GameObject instantiatedCard;
 
     private void Awake()
     {
@@ -40,8 +43,8 @@ public class DialogueManager : MonoBehaviour
 
         DialogueTitleText.text = title;
         DialogueBodyText.text = node.dialogueText;
-        adviceText.text = ""; 
-        AdviceCanvas.SetActive(false); 
+        adviceText.text = "";
+        AdviceCanvas.SetActive(false);
 
         foreach (Transform child in responseButtonParent)
         {
@@ -97,17 +100,17 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayFinalScore()
     {
-        PlayerResponseCanvas.SetActive(false); 
-        finalScoreText.text = "Final Score: " + totalScore; 
-        finalScoreText.gameObject.SetActive(true); 
+        PlayerResponseCanvas.SetActive(false);
+        finalScoreText.text = "Final Score: " + totalScore;
+        finalScoreText.gameObject.SetActive(true);
     }
 
     public void HideDialogue()
     {
         DialogueParent.SetActive(false);
         PlayerResponseCanvas.SetActive(false);
-        AdviceCanvas.SetActive(false); 
-        finalScoreText.gameObject.SetActive(false); 
+        AdviceCanvas.SetActive(false);
+        finalScoreText.gameObject.SetActive(false);
     }
 
     private void ShowDialogue()
@@ -125,7 +128,7 @@ public class DialogueManager : MonoBehaviour
     {
         pausedNode = nextNode;
         pausedTitle = title;
-        HideDialogue(); 
+        HideDialogue();
     }
 
     public void ResumeDialogue()
@@ -142,23 +145,39 @@ public class DialogueManager : MonoBehaviour
     {
         if (paymentMethod == "Card, please.")
         {
-            // instantiate card in players hand
-            // wait for player to touch card reader with card
             Debug.Log("Processing card payment...");
+            InstantiateCard();
         }
         else if (paymentMethod == "Cash, please.")
         {
-            // instantiate cash in players hand
-            // wait for player to place cash on counter or in servers hand
             Debug.Log("Processing cash payment...");
+            // Instantiate cash in player's hand and wait for player to hand cash to barista
         }
+    }
 
-        Invoke("PaymentCompleted", 3.0f);
+    private void InstantiateCard()
+    {
+        if (instantiatedCard == null && cardPrefab != null && playerHandTransform != null)
+        {
+            instantiatedCard = Instantiate(cardPrefab, playerHandTransform.position, playerHandTransform.rotation, playerHandTransform);
+        }
+    }
+
+    public void OnCardTapped()
+    {
+        Destroy(instantiatedCard);
+        PaymentCompleted();
     }
 
     private void PaymentCompleted()
     {
         baristaController.StartTakingPayment();
+    }
+
+    // This method is called when the barista reaches the till
+    public void OnBaristaAtTill()
+    {
+        ResumeDialogue();
     }
 
     // Fisher-Yates shuffle algorithm
