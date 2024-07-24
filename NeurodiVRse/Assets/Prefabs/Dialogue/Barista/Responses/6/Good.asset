@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Good
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Thank you, have a nice day!
+  responseAudio: {fileID: 8300000, guid: bb183443bcf707343b3349b68fe61e04, type: 3}
   nextNode: {fileID: 0}
   score: 0
   adviceText: Amazing! you have successfully bought a coffee and concluded the interaction

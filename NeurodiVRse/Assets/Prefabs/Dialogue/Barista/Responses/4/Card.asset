@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Card
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Card, please.
+  responseAudio: {fileID: 8300000, guid: b7e51b74d20321644861da2e8e053aaf, type: 3}
   nextNode: {fileID: 11400000, guid: 42eb0201dde9d5a409b574e27598e903, type: 2}
   score: 0
   adviceText: Pay by card by tapping your card against the contactless card machine

@@ -9,7 +9,6 @@ public class Door : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private ActivateDoorRay activateDoorRay;
-    [SerializeField] private InputActionReference leftHandActivate;
     [SerializeField] private InputActionReference rightHandActivate;
 
     public GameObject Player;
@@ -32,13 +31,11 @@ public class Door : MonoBehaviour
 
     void OnEnable()
     {
-        leftHandActivate.action.Enable();
         rightHandActivate.action.Enable();
     }
 
     void OnDisable()
     {
-        leftHandActivate.action.Disable();
         rightHandActivate.action.Disable();
     }
 
@@ -46,7 +43,7 @@ public class Door : MonoBehaviour
     {
         if (activateDoorRay != null && activateDoorRay.rayIsActive)
         {
-            if (leftHandActivate.action.triggered || rightHandActivate.action.triggered)
+            if (rightHandActivate.action.triggered)
             {
                 HandleDoorInteraction();
             }

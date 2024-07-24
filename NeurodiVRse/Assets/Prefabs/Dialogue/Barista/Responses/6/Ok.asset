@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ok
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Thanks.
+  responseAudio: {fileID: 8300000, guid: ff44ede27ae4ff244a8b9a0966d9393d, type: 3}
   nextNode: {fileID: 0}
   score: 1
   adviceText: "It\u2019s good to finish the interaction by thanking the person and

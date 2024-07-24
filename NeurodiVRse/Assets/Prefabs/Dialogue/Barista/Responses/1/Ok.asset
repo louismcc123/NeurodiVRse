@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ok
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: I'd like a coffee, please.
+  responseAudio: {fileID: 8300000, guid: 842800f4474f9f847a2324c20e505b14, type: 3}
   nextNode: {fileID: 11400000, guid: f633367137466c84a9dad5cf1fd78383, type: 2}
   score: 1
   adviceText: "It\u2019s polite to respond to a greeting. You could say, \"Good morning,\"

@@ -28,13 +28,21 @@ public class DialogueManager : MonoBehaviour
 
     public PlayerStats playerStats;
     public BaristaController baristaController;
-    public GameObject cardPrefab;
-    public Transform playerHandTransform;
+    public GameObject cardPrefab; 
+    public Transform playerHandTransform; 
     private GameObject instantiatedCard;
+
+    //Audio
+    private AudioSource baristaAudioSource;
+    private AudioSource strangerAudioSource;
+    private AudioSource playerAudioSource; 
 
     private void Awake()
     {
         HideDialogue();
+        baristaAudioSource = gameObject.AddComponent<AudioSource>();
+        strangerAudioSource = gameObject.AddComponent<AudioSource>();
+        playerAudioSource = gameObject.AddComponent<AudioSource>(); 
     }
 
     public void StartDialogue(string title, DialogueNode node)
@@ -45,6 +53,8 @@ public class DialogueManager : MonoBehaviour
         DialogueBodyText.text = node.dialogueText;
         adviceText.text = "";
         AdviceCanvas.SetActive(false);
+
+        PlayNodeAudioClip(node.dialogueAudio);
 
         foreach (Transform child in responseButtonParent)
         {
@@ -72,7 +82,17 @@ public class DialogueManager : MonoBehaviour
         totalScore += response.score;
         playerStats.SubtractScore(response.score);
         adviceText.text = response.adviceText;
-        AdviceCanvas.SetActive(true);
+
+        if (!string.IsNullOrEmpty(response.adviceText))
+        {
+            AdviceCanvas.SetActive(true);
+        }
+        else
+        {
+            AdviceCanvas.SetActive(false);
+        }
+
+        PlayResponseAudioClip(response.responseAudio);
 
         if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
@@ -95,6 +115,26 @@ public class DialogueManager : MonoBehaviour
         {
             DisplayFinalScore();
             HideDialogue();
+        }
+    }
+
+    private void PlayNodeAudioClip(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            baristaAudioSource.clip = clip;
+            baristaAudioSource.Play();
+            strangerAudioSource.clip = clip;
+            strangerAudioSource.Play();
+        }
+    }
+
+    private void PlayResponseAudioClip(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            playerAudioSource.clip = clip;
+            playerAudioSource.Play();
         }
     }
 
@@ -174,7 +214,6 @@ public class DialogueManager : MonoBehaviour
         baristaController.StartTakingPayment();
     }
 
-    // This method is called when the barista reaches the till
     public void OnBaristaAtTill()
     {
         ResumeDialogue();

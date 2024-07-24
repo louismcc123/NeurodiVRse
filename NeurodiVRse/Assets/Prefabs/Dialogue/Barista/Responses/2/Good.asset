@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Good
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: "I\u2019d like a medium latte, please."
+  responseAudio: {fileID: 8300000, guid: 8979cab64e5952542913dc608f3d0130, type: 3}
   nextNode: {fileID: 11400000, guid: c8108225f33df80489dac5417936d6f3, type: 2}
   score: 0
   adviceText: 

@@ -2600,6 +2600,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Custom",
+            "id": "0caa57f1-c231-417f-b314-68fe4b0ed21d",
+            "actions": [
+                {
+                    "name": "DoorAction",
+                    "type": "Button",
+                    "id": "43996a7c-b73c-4c90-8acc-38a5c6d98292",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4a1d1465-f1b7-4f3e-b5b5-5cfa5009ea85",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "DoorAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

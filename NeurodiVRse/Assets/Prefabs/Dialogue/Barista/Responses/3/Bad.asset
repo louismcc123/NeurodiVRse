@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bad
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: No.
+  responseAudio: {fileID: 8300000, guid: 1768b08c78d97344b84ad5e1fd21e8a1, type: 3}
   nextNode: {fileID: 11400000, guid: a8eab00e43b5ca645a2584eaa07fedee, type: 2}
   score: 2
   adviceText: "It\u2019s good to answer politely, even if you don\u2019t want anything

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ok
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: No, just the coffee.
+  responseAudio: {fileID: 8300000, guid: d1ba0db69ded8ff48abebbf8aa32444b, type: 3}
   nextNode: {fileID: 11400000, guid: a8eab00e43b5ca645a2584eaa07fedee, type: 2}
   score: 1
   adviceText: "Adding \u201Cthank you\u201D is polite."

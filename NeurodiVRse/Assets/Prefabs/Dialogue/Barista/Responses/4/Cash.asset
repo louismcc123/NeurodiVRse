@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cash
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Cash, please.
+  responseAudio: {fileID: 8300000, guid: 1d0900152d317da4ab45b61ab19a0cb5, type: 3}
   nextNode: {fileID: 11400000, guid: 42eb0201dde9d5a409b574e27598e903, type: 2}
   score: 0
   adviceText: Pay by cash by handing money to the barista by the till.

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Good
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Hello! I'd like a coffee, please.
+  responseAudio: {fileID: 8300000, guid: f403c29f246336d47b9d4e244890ccea, type: 3}
   nextNode: {fileID: 11400000, guid: f633367137466c84a9dad5cf1fd78383, type: 2}
   score: 0
   adviceText: 

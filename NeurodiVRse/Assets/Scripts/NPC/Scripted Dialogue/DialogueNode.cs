@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +5,7 @@ using UnityEngine;
 public class DialogueNode : ScriptableObject
 {
     public string dialogueText;
+    public AudioClip dialogueAudio; 
     public List<DialogueResponse> responses;
 
     public bool IsLastNode()

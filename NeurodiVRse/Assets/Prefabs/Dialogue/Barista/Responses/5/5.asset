@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 5
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Thank you.
+  responseAudio: {fileID: 8300000, guid: 9b3c217c91f2b2d409e74901f40cffa7, type: 3}
   nextNode: {fileID: 11400000, guid: 2211b5264bb100342a948998428040bd, type: 2}
   score: 0
   adviceText: Great job! Your latte is on the way. Now just wait patiently for your

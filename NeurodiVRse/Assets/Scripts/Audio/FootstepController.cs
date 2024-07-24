@@ -32,7 +32,7 @@ public class FootstepController : MonoBehaviour
 
     private void Update()
     {
-        isWalking = (xrRigTransform.position - lastPosition).magnitude > 0.001f;
+        isWalking = (xrRigTransform.position - lastPosition).magnitude > 0.01f;
         lastPosition = xrRigTransform.position;
 
         if (isWalking)
