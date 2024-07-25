@@ -23,15 +23,46 @@ public class FootstepController : MonoBehaviour
     {
         instance = this;
     }
+
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
+        if (audioSource == null)
+        {
+            Camera mainCamera = Camera.main;
+            if (mainCamera != null)
+            {
+                audioSource = mainCamera.GetComponent<AudioSource>();
+                if (audioSource == null)
+                {
+                    Debug.LogError("AudioSource component is missing on the main camera. Please attach an AudioSource component.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Main camera not found. Please ensure there is a camera tagged as MainCamera in the scene.");
+            }
+        }
+
+        if (xrRigTransform == null)
+        {
+            Debug.LogError("XR Rig Transform is not assigned. Please assign the XR Rig Transform in the inspector.");
+        }
+
         lastPosition = xrRigTransform.position;
     }
 
-
     private void Update()
     {
+        if (audioSource == null || xrRigTransform == null)
+        {
+            return;
+        }
+
         isWalking = (xrRigTransform.position - lastPosition).magnitude > 0.01f;
         lastPosition = xrRigTransform.position;
 
