@@ -1075,6 +1075,17 @@
                 },
                 {
                     "name": "",
+                    "id": "911b06b1-9588-46d7-af70-b595ce862174",
+                    "path": "<XRController>{RightHand}/joystick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "8e383b1a-270f-4c20-819b-89a59cffb498",
                     "path": "<XRController>{LeftHand}/{Primary2DAxis}",
                     "interactions": "",
