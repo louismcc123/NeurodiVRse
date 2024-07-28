@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Barista 3
   m_EditorClassIdentifier: 
   dialogueText: Great choice! Would you like anything else?
+  dialogueAudio: {fileID: 8300000, guid: a6c6e0305bed0e24b891142c5ecc3a80, type: 3}
   responses:
   - {fileID: 11400000, guid: b5a4783450c514c4598505e81a3f22b8, type: 2}
   - {fileID: 11400000, guid: d545a609761419a4093f5751c2fbd686, type: 2}

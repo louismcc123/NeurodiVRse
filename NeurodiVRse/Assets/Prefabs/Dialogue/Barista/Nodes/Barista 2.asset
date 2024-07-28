@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Barista 2
   m_EditorClassIdentifier: 
   dialogueText: No problem! What kind of coffee would you like?
+  dialogueAudio: {fileID: 8300000, guid: 66782811c5a9c6844b3f1f9d14a59e91, type: 3}
   responses:
   - {fileID: 11400000, guid: cc0f1191927fbf8449ce114e1e420b88, type: 2}
   - {fileID: 11400000, guid: d2ffaa6d684ebe74197e855760355903, type: 2}

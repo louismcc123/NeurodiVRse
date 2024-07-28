@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Barista 6
   m_EditorClassIdentifier: 
   dialogueText: Here you go. One medium latte. Enjoy!
+  dialogueAudio: {fileID: 8300000, guid: 3e3487a070f3bb2488e8df35e9e83674, type: 3}
   responses:
   - {fileID: 11400000, guid: 3f543497046472648a7b1cca0861c038, type: 2}
   - {fileID: 11400000, guid: 13b63ecb076a81448a4fee26f1b585c0, type: 2}

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: "Alright. That will be \xA33.50, please. Would you like to pay by
     card or cash?"
+  dialogueAudio: {fileID: 8300000, guid: e179ffec1d1194f469f3fe35979961eb, type: 3}
   responses:
   - {fileID: 11400000, guid: 710e2c98664d7cf4ba2da65714a760e2, type: 2}
   - {fileID: 11400000, guid: feea7dedc6df69747b1ca362cd72239f, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Barista 1
   m_EditorClassIdentifier: 
   dialogueText: Hi there! Welcome to the NeurodiVRse Cafe. How can I help you today?
+  dialogueAudio: {fileID: 8300000, guid: edbfd97604fd6484cbf3899130edc99f, type: 3}
   responses:
   - {fileID: 11400000, guid: 743400b2d6615404596be5c72472c37d, type: 2}
   - {fileID: 11400000, guid: 37be943721073cb43a21d52d0ef7ae77, type: 2}
