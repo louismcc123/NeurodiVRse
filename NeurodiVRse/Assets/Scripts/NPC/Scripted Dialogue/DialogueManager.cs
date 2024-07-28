@@ -26,16 +26,18 @@ public class DialogueManager : MonoBehaviour
     private int totalScore = 0;
     public TextMeshProUGUI finalScoreText;
 
-    public PlayerStats playerStats;
-    public BaristaController baristaController;
-    public GameObject cardPrefab;
+    // Payment
+    public CardManager cardManager;
+    public CashManager cashManager;
     public Transform playerHandTransform;
-    private GameObject instantiatedCard;
 
     // Audio
     private AudioSource baristaAudioSource;
     private AudioSource strangerAudioSource;
     private AudioSource playerAudioSource;
+
+    public PlayerStats playerStats;
+    public BaristaController baristaController;
 
     private void Awake()
     {
@@ -108,10 +110,15 @@ public class DialogueManager : MonoBehaviour
 
         if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
-            if (response.responseText == "Card, please." || response.responseText == "Cash, please.")
+            if (response.responseText == "Card, please.")
             {
                 PauseDialogue(response.nextNode, title);
-                TriggerPaymentProcess(response.responseText);
+                cardManager.InstantiateCard();
+            }
+            else if (response.responseText == "Cash, please.")
+            {
+                PauseDialogue(response.nextNode, title);
+                cashManager.InstantiateCash();
             }
             else if (response.responseText == "Thank you." && title == "Barista 5")
             {
@@ -193,31 +200,15 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void TriggerPaymentProcess(string paymentMethod)
-    {
-        if (paymentMethod == "Card, please.")
-        {
-            Debug.Log("Processing card payment...");
-            InstantiateCard();
-        }
-        else if (paymentMethod == "Cash, please.")
-        {
-            Debug.Log("Processing cash payment...");
-            // Instantiate cash in player's hand and wait for player to hand cash to barista
-        }
-    }
-
-    private void InstantiateCard()
-    {
-        if (instantiatedCard == null && cardPrefab != null && playerHandTransform != null)
-        {
-            instantiatedCard = Instantiate(cardPrefab, playerHandTransform.position, playerHandTransform.rotation, playerHandTransform);
-        }
-    }
-
     public void OnCardTapped()
     {
-        Destroy(instantiatedCard);
+        cardManager.OnCardTapped();
+        PaymentCompleted();
+    }
+
+    public void OnCashHandedOver()
+    {
+        cashManager.OnCashHandedOver();
         PaymentCompleted();
     }
 

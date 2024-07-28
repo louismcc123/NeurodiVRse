@@ -7,12 +7,13 @@ public class BaristaController : MonoBehaviour
     public Animator animator;
     public Transform[] waypoints;
     public Transform handTransform;
-    public GameObject coffeeCupPrefab;
     public ParticleSystem coffeeMachineParticleSystem;
+    public GameObject coffeeCupPrefab;
+    public GameObject cashPrefab;
+    private GameObject paymentTriggerCollider;
 
     public float moveSpeed = 1.0f;
     public float rotationSpeed = 5.0f;
-
     private int currentWaypoint = 0;
     private bool isMoving = false;
 
@@ -52,7 +53,7 @@ public class BaristaController : MonoBehaviour
         {
             isMoving = false;
 
-            if (currentWaypoint == 1) // till
+            if (currentWaypoint == 1) 
             {
                 dialogueManager.OnBaristaAtTill();
             }
@@ -69,6 +70,16 @@ public class BaristaController : MonoBehaviour
         return currentWaypoint;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other == paymentTriggerCollider && other.CompareTag("Cash"))
+        {
+            Debug.Log("Cash handed to the barista");
+            dialogueManager.OnCashHandedOver();
+            StartTakingPayment();
+        }
+    }
+
     public void StartTakingPayment()
     {
         StartCoroutine(TakePayment());
@@ -76,8 +87,7 @@ public class BaristaController : MonoBehaviour
 
     private IEnumerator TakePayment()
     {
-        animator.SetTrigger("TakePayment");
-        yield return new WaitForSeconds(2.0f); // Adjust based on animation duration
+        yield return new WaitForSeconds(2.0f);
         dialogueManager.ResumeDialogue();
     }
 
@@ -88,24 +98,22 @@ public class BaristaController : MonoBehaviour
 
     private IEnumerator PrepareCoffee()
     {
-        MoveToWaypoint(2); // Move to coffee machine
+        MoveToWaypoint(2); 
         while (isMoving) yield return null;
-        animator.SetTrigger("PrepareCoffee");
         if (coffeeMachineParticleSystem != null)
         {
             coffeeMachineParticleSystem.Play();
         }
-        yield return new WaitForSeconds(5.0f); // Adjust based on animation duration
+        yield return new WaitForSeconds(5.0f); 
 
         if (coffeeCupPrefab != null && handTransform != null)
         {
             Instantiate(coffeeCupPrefab, handTransform.position, handTransform.rotation, handTransform);
         }
 
-        MoveToWaypoint(3); // Move to serving area
+        MoveToWaypoint(3);
         while (isMoving) yield return null;
-        animator.SetTrigger("ServeCoffee");
-        yield return new WaitForSeconds(2.0f); // Adjust based on animation duration
+        yield return new WaitForSeconds(2.0f); 
 
         dialogueManager.ResumeDialogue();
     }

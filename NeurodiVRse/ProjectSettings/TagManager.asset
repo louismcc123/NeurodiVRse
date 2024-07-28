@@ -9,6 +9,8 @@ TagManager:
   - Door
   - Right Hand
   - Left Hand
+  - Card
+  - Cash
   layers:
   - Default
   - TransparentFX
