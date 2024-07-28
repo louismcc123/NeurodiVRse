@@ -28,44 +28,48 @@ public class DialogueManager : MonoBehaviour
 
     public PlayerStats playerStats;
     public BaristaController baristaController;
-    public GameObject cardPrefab; 
-    public Transform playerHandTransform; 
+    public GameObject cardPrefab;
+    public Transform playerHandTransform;
     private GameObject instantiatedCard;
 
-    //Audio
+    // Audio
     private AudioSource baristaAudioSource;
     private AudioSource strangerAudioSource;
-    private AudioSource playerAudioSource; 
+    private AudioSource playerAudioSource;
 
     private void Awake()
     {
         HideDialogue();
         baristaAudioSource = gameObject.AddComponent<AudioSource>();
         strangerAudioSource = gameObject.AddComponent<AudioSource>();
-        playerAudioSource = gameObject.AddComponent<AudioSource>(); 
+        playerAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public void StartDialogue(string title, DialogueNode node)
     {
         ShowDialogue();
-
         DialogueTitleText.text = title;
         DialogueBodyText.text = node.dialogueText;
         adviceText.text = "";
         AdviceCanvas.SetActive(false);
 
+        // Play NPC dialogue audio
         PlayNodeAudioClip(node.dialogueAudio);
+        StartCoroutine(DisplayResponsesWithDelay(title, node));
+    }
 
-        foreach (Transform child in responseButtonParent)
-        {
-            Destroy(child.gameObject);
-        }
-
+    private IEnumerator DisplayResponsesWithDelay(string title, DialogueNode node)
+    {
+        // Destroy old buttons
         foreach (Transform child in playerResponseButtonParent)
         {
             Destroy(child.gameObject);
         }
 
+        // Wait for the duration of the dialogue audio or a fixed time before showing responses
+        yield return new WaitForSeconds(node.dialogueAudio != null ? node.dialogueAudio.length : 1f);
+
+        // Shuffle and display responses
         List<DialogueResponse> shuffledResponses = new List<DialogueResponse>(node.responses);
         ShuffleList(shuffledResponses);
 
@@ -92,7 +96,15 @@ public class DialogueManager : MonoBehaviour
             AdviceCanvas.SetActive(false);
         }
 
+        // Play response audio
         PlayResponseAudioClip(response.responseAudio);
+        StartCoroutine(HandleResponseWithDelay(response, title));
+    }
+
+    private IEnumerator HandleResponseWithDelay(DialogueResponse response, string title)
+    {
+        // Wait for the response audio or a fixed time before proceeding
+        yield return new WaitForSeconds(response.responseAudio != null ? response.responseAudio.length : 1f);
 
         if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
@@ -219,7 +231,6 @@ public class DialogueManager : MonoBehaviour
         ResumeDialogue();
     }
 
-    // Fisher-Yates shuffle algorithm
     private void ShuffleList<T>(List<T> list)
     {
         System.Random rng = new System.Random();

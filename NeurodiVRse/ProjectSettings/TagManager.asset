@@ -7,14 +7,16 @@ TagManager:
   - Fluid
   - Anchor
   - Door
+  - Right Hand
+  - Left Hand
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Interactable
   - 
   - 
   - 
