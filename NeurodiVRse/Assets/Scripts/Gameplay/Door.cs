@@ -8,7 +8,7 @@ using TMPro;
 public class Door : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private ActivateDoorRay activateDoorRay;
+    [SerializeField] private RayManager rayManager;
     [SerializeField] private InputActionReference rightHandActivate;
 
     public GameObject Player;
@@ -41,7 +41,7 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (activateDoorRay != null && activateDoorRay.rayIsActive)
+        if (rayManager != null)
         {
             if (rightHandActivate.action.triggered)
             {

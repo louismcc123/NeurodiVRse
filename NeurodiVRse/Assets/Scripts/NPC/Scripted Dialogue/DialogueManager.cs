@@ -9,14 +9,13 @@ public class DialogueManager : MonoBehaviour
     // NPC Dialogue
     public GameObject DialogueParent;
     public TextMeshProUGUI DialogueTitleText, DialogueBodyText;
-    public GameObject responseButtonPrefab;
-    public Transform responseButtonParent;
     private DialogueNode pausedNode;
     private string pausedTitle;
 
     // Player Responses
     public GameObject PlayerResponseCanvas;
     public Transform playerResponseButtonParent;
+    public GameObject responseButtonPrefab;
 
     // Advice
     public GameObject AdviceCanvas;
@@ -55,33 +54,49 @@ public class DialogueManager : MonoBehaviour
         adviceText.text = "";
         AdviceCanvas.SetActive(false);
 
-        // Play NPC dialogue audio
         PlayNodeAudioClip(node.dialogueAudio);
         StartCoroutine(DisplayResponsesWithDelay(title, node));
     }
 
     private IEnumerator DisplayResponsesWithDelay(string title, DialogueNode node)
     {
-        // Destroy old buttons
         foreach (Transform child in playerResponseButtonParent)
         {
             Destroy(child.gameObject);
         }
 
-        // Wait for the duration of the dialogue audio or a fixed time before showing responses
         yield return new WaitForSeconds(node.dialogueAudio != null ? node.dialogueAudio.length : 1f);
 
-        // Shuffle and display responses
         List<DialogueResponse> shuffledResponses = new List<DialogueResponse>(node.responses);
         ShuffleList(shuffledResponses);
 
         foreach (DialogueResponse response in shuffledResponses)
         {
             GameObject buttonObj = Instantiate(responseButtonPrefab, playerResponseButtonParent);
-            buttonObj.GetComponentInChildren<TextMeshProUGUI>().text = response.responseText;
-            buttonObj.GetComponent<Button>().onClick.AddListener(() => SelectResponse(response, title));
+            TextMeshProUGUI responseText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
+
+            if (responseText == null)
+            {
+                Debug.LogError("TextMeshProUGUI component not found in the button prefab.");
+            }
+            else
+            {
+                responseText.text = response.responseText;
+                Debug.Log("Set response text to: " + response.responseText);
+            }
+
+            Button button = buttonObj.GetComponent<Button>();
+            if (button == null)
+            {
+                Debug.LogError("Button component not found in the button prefab.");
+            }
+            else
+            {
+                button.onClick.AddListener(() => SelectResponse(response, title));
+            }
         }
     }
+
 
     public void SelectResponse(DialogueResponse response, string title)
     {
@@ -98,14 +113,12 @@ public class DialogueManager : MonoBehaviour
             AdviceCanvas.SetActive(false);
         }
 
-        // Play response audio
         PlayResponseAudioClip(response.responseAudio);
         StartCoroutine(HandleResponseWithDelay(response, title));
     }
 
     private IEnumerator HandleResponseWithDelay(DialogueResponse response, string title)
     {
-        // Wait for the response audio or a fixed time before proceeding
         yield return new WaitForSeconds(response.responseAudio != null ? response.responseAudio.length : 1f);
 
         if (response.nextNode != null && !response.nextNode.IsLastNode())

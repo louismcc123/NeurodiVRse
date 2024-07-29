@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 9008917539680088317}
   - component: {fileID: 2276307367575332223}
   - component: {fileID: 7916833958574654747}
-  m_Layer: 0
+  - component: {fileID: 4162476131938351183}
+  m_Layer: 6
   m_Name: Cash
   m_TagString: Cash
   m_Icon: {fileID: 0}
@@ -34,7 +35,7 @@ Transform:
   - {fileID: 7514047713962911854}
   - {fileID: 4317146401005959370}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &9008917539680088317
 BoxCollider:
@@ -236,6 +237,19 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
+--- !u!114 &4162476131938351183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2768528169081939020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab7330cfd9d3b3b48bf535fcae15cbde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 30
 --- !u!1 &4528886848368276753
 GameObject:
   m_ObjectHideFlags: 0

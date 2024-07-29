@@ -19,6 +19,14 @@ public class BaristaController : MonoBehaviour
 
     public DialogueManager dialogueManager;
 
+    private void Start()
+    {
+        Debug.Log("BaristaController script started.");
+        MoveToWaypoint(0);
+        Debug.Log("MoveToWaypoint(0)");
+    }
+
+
     private void Update()
     {
         if (isMoving)
@@ -29,14 +37,15 @@ public class BaristaController : MonoBehaviour
 
     public void MoveToWaypoint(int waypointIndex)
     {
-        if (waypointIndex < waypoints.Length)
+        if (waypointIndex >= 0 && waypointIndex < waypoints.Length)
         {
             currentWaypoint = waypointIndex;
             isMoving = true;
+            Debug.Log("Moving to waypoint: " + waypointIndex);
         }
         else
         {
-            Debug.LogError("Waypoint index out of bounds!");
+            Debug.LogError("Waypoint index out of bounds! Index: " + waypointIndex + ", Waypoints length: " + waypoints.Length);
         }
     }
 
@@ -49,11 +58,13 @@ public class BaristaController : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, moveSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, targetWaypoint.position) < 0.1f)
+        float distance = Vector3.Distance(transform.position, targetWaypoint.position);
+        if (distance < 0.1f)
         {
+            Debug.Log("Reached waypoint: " + currentWaypoint);
             isMoving = false;
 
-            if (currentWaypoint == 1) 
+            if (currentWaypoint == 1)
             {
                 dialogueManager.OnBaristaAtTill();
             }
@@ -98,13 +109,13 @@ public class BaristaController : MonoBehaviour
 
     private IEnumerator PrepareCoffee()
     {
-        MoveToWaypoint(2); 
+        MoveToWaypoint(2);
         while (isMoving) yield return null;
         if (coffeeMachineParticleSystem != null)
         {
             coffeeMachineParticleSystem.Play();
         }
-        yield return new WaitForSeconds(5.0f); 
+        yield return new WaitForSeconds(5.0f);
 
         if (coffeeCupPrefab != null && handTransform != null)
         {
@@ -113,7 +124,7 @@ public class BaristaController : MonoBehaviour
 
         MoveToWaypoint(3);
         while (isMoving) yield return null;
-        yield return new WaitForSeconds(2.0f); 
+        yield return new WaitForSeconds(2.0f);
 
         dialogueManager.ResumeDialogue();
     }

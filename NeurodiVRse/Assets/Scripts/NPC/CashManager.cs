@@ -4,14 +4,28 @@ using UnityEngine;
 public class CashManager : MonoBehaviour
 {
     public GameObject cashPrefab;
-    public Transform playerHandTransform;
+    public Transform spawnTransform;
+
     private GameObject instantiatedCash;
 
     public void InstantiateCash()
     {
-        if (instantiatedCash == null && cashPrefab != null && playerHandTransform != null)
+        if (instantiatedCash == null && cashPrefab != null && spawnTransform != null)
         {
-            instantiatedCash = Instantiate(cashPrefab, playerHandTransform.position, playerHandTransform.rotation, playerHandTransform);
+            instantiatedCash = Instantiate(cashPrefab, spawnTransform.position, spawnTransform.rotation);
+
+            Rigidbody rb = instantiatedCash.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.useGravity = false;
+                rb.isKinematic = false;
+            }
+
+            SpinningMoney spinningMoney = instantiatedCash.GetComponent<SpinningMoney>();
+            if (spinningMoney != null)
+            {
+                spinningMoney.enabled = true;
+            }
         }
     }
 
@@ -23,6 +37,9 @@ public class CashManager : MonoBehaviour
     private IEnumerator DestroyCashWithDelay()
     {
         yield return new WaitForSeconds(1.0f);
-        Destroy(instantiatedCash);
+        if (instantiatedCash != null)
+        {
+            Destroy(instantiatedCash);
+        }
     }
 }
