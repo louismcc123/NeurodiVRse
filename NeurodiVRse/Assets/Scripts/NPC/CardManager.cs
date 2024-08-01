@@ -6,9 +6,10 @@ public class CardManager : MonoBehaviour
     public GameObject cardPrefab;
     public Transform spawnTransform;
 
+    public DialogueManager dialogueManager;
+
     private GameObject instantiatedCard;
 
-    private DialogueManager dialogueManager;
 
     public void InstantiateCard()
     {
@@ -33,14 +34,18 @@ public class CardManager : MonoBehaviour
 
     public void OnCardTapped()
     {
-        StartCoroutine(DestroyCardWithDelay());
-        dialogueManager.isPaymentComplete = true;
-        dialogueManager.ResumeDialogue();
-    }
+        if (dialogueManager == null)
+        {
+            Debug.LogError("DialogueManager is not assigned!");
+            return;
+        }
 
-    private IEnumerator DestroyCardWithDelay()
+        dialogueManager.ResumeDialogue();
+        StartCoroutine(DestroyInstantiatedCard());
+    }
+    private IEnumerator DestroyInstantiatedCard()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.1f);
         if (instantiatedCard != null)
         {
             Destroy(instantiatedCard);

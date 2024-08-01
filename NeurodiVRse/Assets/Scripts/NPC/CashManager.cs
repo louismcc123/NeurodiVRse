@@ -6,9 +6,9 @@ public class CashManager : MonoBehaviour
     public GameObject cashPrefab;
     public Transform spawnTransform;
 
-    private GameObject instantiatedCash;
+    public DialogueManager dialogueManager;
 
-    private DialogueManager dialogueManager;
+    private GameObject instantiatedCash;
 
     public void InstantiateCash()
     {
@@ -33,14 +33,19 @@ public class CashManager : MonoBehaviour
 
     public void OnCashHandedOver()
     {
-        StartCoroutine(DestroyCashWithDelay());
-        dialogueManager.isPaymentComplete = true;
+        if (dialogueManager == null)
+        {
+            Debug.LogError("DialogueManager is not assigned!");
+            return;
+        }
+
         dialogueManager.ResumeDialogue();
+        StartCoroutine(DestroyInstantiatedCash());
     }
 
-    private IEnumerator DestroyCashWithDelay()
+    private IEnumerator DestroyInstantiatedCash()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.1f);
         if (instantiatedCash != null)
         {
             Destroy(instantiatedCash);

@@ -30,7 +30,7 @@ public class DialogueManager : MonoBehaviour
     // Payment
     public CardManager cardManager;
     public CashManager cashManager;
-    public bool isPaymentComplete = false;
+    //public bool isPaymentComplete = false;
 
     // Coffee Prep
     public Transform coffeeCupSpawnPosition;
@@ -184,9 +184,16 @@ public class DialogueManager : MonoBehaviour
         if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
             Debug.Log("Transitioning to next node: " + response.nextNode.dialogueText);
-            if (response.responseText == "Card, please." || response.responseText == "Cash, please.")
+
+            if (response.responseText == "Card, please.")
             {
                 PauseDialogue(response.nextNode, title);
+                cardManager.InstantiateCard();
+            }
+            else if (response.responseText == "Cash, please.")
+            {
+                PauseDialogue(response.nextNode, title);
+                cashManager.InstantiateCash();
             }
             else if (response.responseText == "Thank you.")
             {
@@ -299,6 +306,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    /*
     public void OnCardTapped()
     {
         cardManager.OnCardTapped();
@@ -312,7 +320,7 @@ public class DialogueManager : MonoBehaviour
         isPaymentComplete = true;
         ResumeDialogue();
     }
-
+    */
     private void ShuffleList<T>(List<T> list)
     {
         System.Random rng = new System.Random();

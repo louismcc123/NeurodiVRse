@@ -9722,7 +9722,6 @@ MonoBehaviour:
   finalScoreText: {fileID: 943556777}
   cardManager: {fileID: 0}
   cashManager: {fileID: 0}
-  isPaymentComplete: 0
   coffeeCupSpawnPosition: {fileID: 0}
   coffeeCupPrefab: {fileID: 0}
   risingSteam: {fileID: 0}
@@ -12441,7 +12440,6 @@ MonoBehaviour:
   finalScoreText: {fileID: 943556777}
   cardManager: {fileID: 1291798437}
   cashManager: {fileID: 1291798438}
-  isPaymentComplete: 0
   coffeeCupSpawnPosition: {fileID: 106294413}
   coffeeCupPrefab: {fileID: 6905987088780623608, guid: 556e828522c2d664dacf6dde91f68efb, type: 3}
   risingSteam: {fileID: 1029331410}
@@ -12480,6 +12478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 3174607522625009856, guid: d945427a9db67374a8466e46d37fd685, type: 3}
   spawnTransform: {fileID: 510565242}
+  dialogueManager: {fileID: 1291798435}
 --- !u!114 &1291798438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12494,6 +12493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cashPrefab: {fileID: 2768528169081939020, guid: af9af0f94ae1627429d28872b01893b6, type: 3}
   spawnTransform: {fileID: 510565242}
+  dialogueManager: {fileID: 1291798435}
 --- !u!54 &1291798439
 Rigidbody:
   m_ObjectHideFlags: 0
