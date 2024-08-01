@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueResponse
   responseText: Just coffee.
   responseAudio: {fileID: 8300000, guid: 30ad6a36c09c084448d7ce7e719b205b, type: 3}
-  nextNode: {fileID: 11400000, guid: f633367137466c84a9dad5cf1fd78383, type: 2}
+  nextNode: {fileID: 11400000, guid: 4c407187f72cb7143817cb9e89de3966, type: 2}
   score: 2
   adviceText: Try to be specific about what you want. You can say, "I would like
     a regular americano." for example.

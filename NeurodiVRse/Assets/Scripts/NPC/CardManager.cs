@@ -8,6 +8,8 @@ public class CardManager : MonoBehaviour
 
     private GameObject instantiatedCard;
 
+    private DialogueManager dialogueManager;
+
     public void InstantiateCard()
     {
         if (instantiatedCard == null && cardPrefab != null && spawnTransform != null)
@@ -32,6 +34,8 @@ public class CardManager : MonoBehaviour
     public void OnCardTapped()
     {
         StartCoroutine(DestroyCardWithDelay());
+        dialogueManager.isPaymentComplete = true;
+        dialogueManager.ResumeDialogue();
     }
 
     private IEnumerator DestroyCardWithDelay()

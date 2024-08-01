@@ -6,10 +6,10 @@ using UnityEngine.LowLevel;
 public class NPCBehaviour : MonoBehaviour
 {
     public Transform player;
-    //public float speed = 3.0f;
     public float rotationSpeed = 3.0f;
 
     private bool isPlayerInRange = false;
+    private bool hasMovedToWaypoint = false;
 
     public BaristaController baristaController;
 
@@ -19,7 +19,12 @@ public class NPCBehaviour : MonoBehaviour
         {
             isPlayerInRange = true;
             Debug.Log("player in range");
-            baristaController.MoveToWaypoint(1);
+
+            if (!hasMovedToWaypoint)
+            {
+                baristaController.MoveToWaypoint(1);
+                hasMovedToWaypoint = true;
+            }
         }
     }
 

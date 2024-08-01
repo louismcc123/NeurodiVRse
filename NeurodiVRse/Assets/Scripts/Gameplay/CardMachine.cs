@@ -10,12 +10,7 @@ public class CardMachine : MonoBehaviour
         if (other.CompareTag("Card"))
         {
             Debug.Log("Card tapped on the machine");
-            dialogueManager.OnCardTapped();
-
-            if (cardManager != null)
-            {
-                cardManager.OnCardTapped();
-            }
+            cardManager.OnCardTapped();
         }
     }
 }

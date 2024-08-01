@@ -10,7 +10,9 @@ public class DialogueManager : MonoBehaviour
     public GameObject DialogueParent;
     public TextMeshProUGUI DialogueTitleText, DialogueBodyText;
     private DialogueNode pausedNode;
+    private DialogueNode currentDialogueNode;
     private string pausedTitle;
+
 
     // Player Responses
     public GameObject PlayerResponseCanvas;
@@ -28,7 +30,12 @@ public class DialogueManager : MonoBehaviour
     // Payment
     public CardManager cardManager;
     public CashManager cashManager;
-    public Transform playerHandTransform;
+    public bool isPaymentComplete = false;
+
+    // Coffee Prep
+    public Transform coffeeCupSpawnPosition;
+    public GameObject coffeeCupPrefab;
+    public GameObject risingSteam;
 
     // Audio
     private AudioSource baristaAudioSource;
@@ -38,6 +45,9 @@ public class DialogueManager : MonoBehaviour
     public PlayerStats playerStats;
     public BaristaController baristaController;
 
+    private bool isDialogueActive = false;
+    private bool isDialoguePaused = false;
+
     private void Awake()
     {
         HideDialogue();
@@ -45,34 +55,64 @@ public class DialogueManager : MonoBehaviour
         strangerAudioSource = gameObject.AddComponent<AudioSource>();
         playerAudioSource = gameObject.AddComponent<AudioSource>();
     }
-
     public void StartDialogue(string title, DialogueNode node)
     {
+        // Check if the new node is the same as the current node
+        if (currentDialogueNode == node)
+        {
+            Debug.Log("Dialogue is already active for this node. Ignoring StartDialogue call.");
+            return;
+        }
+
+        isDialogueActive = true;
+        isDialoguePaused = false;
+        Debug.Log("Starting dialogue: " + node.dialogueText);
         ShowDialogue();
-        DialogueTitleText.text = title;
         DialogueBodyText.text = node.dialogueText;
+        DialogueTitleText.text = title;  // Set the title text here
         adviceText.text = "";
         AdviceCanvas.SetActive(false);
 
         PlayNodeAudioClip(node.dialogueAudio);
         StartCoroutine(DisplayResponsesWithDelay(title, node));
+
+        // Update the current dialogue node
+        currentDialogueNode = node;
     }
 
     private IEnumerator DisplayResponsesWithDelay(string title, DialogueNode node)
     {
+        // Clear existing buttons
         foreach (Transform child in playerResponseButtonParent)
         {
-            Destroy(child.gameObject);
+            child.gameObject.SetActive(false);
         }
 
+        // Wait for audio to finish if it exists
         yield return new WaitForSeconds(node.dialogueAudio != null ? node.dialogueAudio.length : 1f);
 
+        // Shuffle responses and limit to a maximum of 3
         List<DialogueResponse> shuffledResponses = new List<DialogueResponse>(node.responses);
         ShuffleList(shuffledResponses);
+        int responseCount = Mathf.Min(shuffledResponses.Count, 3); // Limit to 3 responses
 
-        foreach (DialogueResponse response in shuffledResponses)
+        // Instantiate and set up buttons
+        for (int i = 0; i < responseCount; i++)
         {
-            GameObject buttonObj = Instantiate(responseButtonPrefab, playerResponseButtonParent);
+            DialogueResponse response = shuffledResponses[i];
+            GameObject buttonObj;
+
+            // Check if there are inactive buttons to reuse
+            if (i < playerResponseButtonParent.childCount)
+            {
+                buttonObj = playerResponseButtonParent.GetChild(i).gameObject;
+                buttonObj.SetActive(true);
+            }
+            else
+            {
+                buttonObj = Instantiate(responseButtonPrefab, playerResponseButtonParent);
+            }
+
             TextMeshProUGUI responseText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
 
             if (responseText == null)
@@ -92,17 +132,28 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
+                button.onClick.RemoveAllListeners(); // Clear previous listeners
                 button.onClick.AddListener(() => SelectResponse(response, title));
             }
         }
-    }
 
+        // Deactivate any unused buttons
+        for (int i = responseCount; i < playerResponseButtonParent.childCount; i++)
+        {
+            playerResponseButtonParent.GetChild(i).gameObject.SetActive(false);
+        }
+
+        Debug.Log("Responses updated.");
+    }
 
     public void SelectResponse(DialogueResponse response, string title)
     {
         totalScore += response.score;
         playerStats.SubtractScore(response.score);
         adviceText.text = response.adviceText;
+
+        Debug.Log("Response selected: " + response.responseText);
+        Debug.Log("Total Score: " + totalScore);
 
         if (!string.IsNullOrEmpty(response.adviceText))
         {
@@ -119,24 +170,27 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator HandleResponseWithDelay(DialogueResponse response, string title)
     {
-        yield return new WaitForSeconds(response.responseAudio != null ? response.responseAudio.length : 1f);
+        if (response.responseAudio != null)
+        {
+            Debug.Log("Waiting for audio clip to finish: " + response.responseAudio.name);
+            yield return new WaitForSeconds(response.responseAudio.length);
+        }
+        else
+        {
+            Debug.Log("No audio clip, waiting default time.");
+            yield return new WaitForSeconds(1f);
+        }
 
         if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
-            if (response.responseText == "Card, please.")
+            Debug.Log("Transitioning to next node: " + response.nextNode.dialogueText);
+            if (response.responseText == "Card, please." || response.responseText == "Cash, please.")
             {
                 PauseDialogue(response.nextNode, title);
-                cardManager.InstantiateCard();
             }
-            else if (response.responseText == "Cash, please.")
+            else if (response.responseText == "Thank you.")
             {
-                PauseDialogue(response.nextNode, title);
-                cashManager.InstantiateCash();
-            }
-            else if (response.responseText == "Thank you." && title == "Barista 5")
-            {
-                PauseDialogue(response.nextNode, title);
-                baristaController.StartCoffeePreparation();
+                StartCoffeePreparationSequence();
             }
             else
             {
@@ -145,9 +199,39 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Ending dialogue. Displaying final score.");
             DisplayFinalScore();
             HideDialogue();
+            isDialogueActive = false;
+
+            // Reset the current dialogue node
+            currentDialogueNode = null;
         }
+    }
+
+
+    private IEnumerator StartCoffeePreparationSequence()
+    {
+        baristaController.MoveToWaypoint(2);
+        yield return new WaitUntil(() => !baristaController.IsMoving());
+        StartCoroutine(StartCoffeePreparation());
+        yield return new WaitForSeconds(5f);
+        baristaController.MoveToWaypoint(3);
+        yield return new WaitUntil(() => !baristaController.IsMoving());
+        InstantiateCoffeeCup();
+        ResumeDialogue();
+    }
+
+    private IEnumerator StartCoffeePreparation()
+    {
+        risingSteam.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        risingSteam.SetActive(false);
+    }
+
+    private void InstantiateCoffeeCup()
+    {
+        Instantiate(coffeeCupPrefab, coffeeCupSpawnPosition.position, coffeeCupSpawnPosition.rotation);
     }
 
     private void PlayNodeAudioClip(AudioClip clip)
@@ -200,6 +284,7 @@ public class DialogueManager : MonoBehaviour
     {
         pausedNode = nextNode;
         pausedTitle = title;
+        isDialoguePaused = true;
         HideDialogue();
     }
 
@@ -207,6 +292,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (pausedNode != null)
         {
+            isDialoguePaused = false;
             StartDialogue(pausedTitle, pausedNode);
             pausedNode = null;
             pausedTitle = null;
@@ -216,22 +302,14 @@ public class DialogueManager : MonoBehaviour
     public void OnCardTapped()
     {
         cardManager.OnCardTapped();
-        PaymentCompleted();
+        isPaymentComplete = true;
+        ResumeDialogue();
     }
 
     public void OnCashHandedOver()
     {
         cashManager.OnCashHandedOver();
-        PaymentCompleted();
-    }
-
-    private void PaymentCompleted()
-    {
-        baristaController.StartTakingPayment();
-    }
-
-    public void OnBaristaAtTill()
-    {
+        isPaymentComplete = true;
         ResumeDialogue();
     }
 

@@ -8,6 +8,8 @@ public class CashManager : MonoBehaviour
 
     private GameObject instantiatedCash;
 
+    private DialogueManager dialogueManager;
+
     public void InstantiateCash()
     {
         if (instantiatedCash == null && cashPrefab != null && spawnTransform != null)
@@ -32,6 +34,8 @@ public class CashManager : MonoBehaviour
     public void OnCashHandedOver()
     {
         StartCoroutine(DestroyCashWithDelay());
+        dialogueManager.isPaymentComplete = true;
+        dialogueManager.ResumeDialogue();
     }
 
     private IEnumerator DestroyCashWithDelay()
