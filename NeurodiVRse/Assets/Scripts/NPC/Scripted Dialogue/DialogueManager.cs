@@ -137,7 +137,7 @@ public class DialogueManager : MonoBehaviour
 
     public void SelectResponse(DialogueResponse response, string title)
     {
-        totalScore += response.score;
+        playerStats.totalScore += response.score;
         playerStats.SubtractScore(response.score);
         adviceText.text = response.adviceText;
 
@@ -197,10 +197,11 @@ public class DialogueManager : MonoBehaviour
         else
         {
             Debug.Log("Ending dialogue. Displaying final score.");
-            DisplayFinalScore();
             HideDialogue();
             isDialogueActive = false;
             currentDialogueNode = null;
+            playerStats.DisplayFinalScore();
+            this.enabled = false;
         }
     }
 
@@ -244,13 +245,6 @@ public class DialogueManager : MonoBehaviour
             playerAudioSource.clip = clip;
             playerAudioSource.Play();
         }
-    }
-
-    public void DisplayFinalScore()
-    {
-        PlayerResponseCanvas.SetActive(false);
-        finalScoreText.text = "Final Score: " + totalScore;
-        finalScoreText.gameObject.SetActive(true);
     }
 
     private void ShowDialogue()

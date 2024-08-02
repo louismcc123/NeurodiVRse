@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -9,6 +10,9 @@ public class PlayerStats : MonoBehaviour
     public bool hasCoffee;
 
     private bool isDead;
+
+    public TextMeshProUGUI finalScoreText;
+    public int totalScore = 0;
 
     //public ScoreBar scoreBar;
     public GameManager gameManager;
@@ -59,5 +63,11 @@ public class PlayerStats : MonoBehaviour
     public float GetCurrentScore()
     {
         return currentScore;
+    }
+
+    public void DisplayFinalScore()
+    {
+        finalScoreText.text = "Final Score: " + totalScore;
+        finalScoreText.gameObject.SetActive(true);
     }
 }
