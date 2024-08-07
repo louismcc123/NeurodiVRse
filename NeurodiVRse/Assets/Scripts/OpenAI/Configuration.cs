@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
-using OpenAI;
 
-namespace OpenAI
+namespace LLM
 {
     public class Configuration
     {

@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
-using OpenAI;
+using UnityEngine;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace OpenAI
+namespace LLM
 {
     public class OpenAIManager : MonoBehaviour
     {
+        public AICharacter aiCharacter;
         public OnResponseEvent OnResponse;
 
         [System.Serializable]
@@ -18,18 +21,41 @@ namespace OpenAI
         private void Awake()
         {
             var config = new Configuration();
-            openAIApi = new OpenAIApi(config.ApiKey);
+            if (!string.IsNullOrEmpty(config.ApiKey))
+            {
+                openAIApi = new OpenAIApi(config.ApiKey);
+            }
+            else
+            {
+                Debug.LogError("API key is missing.");
+            }
+
+            if (aiCharacter != null)
+            {
+                var introductionMessage = new ChatMessage
+                {
+                    Role = "system",
+                    Content = $"{aiCharacter.introductionText}\nBackground: {aiCharacter.background}\nPersonality Traits: {aiCharacter.personalityTraits}\nBehaviors: {string.Join(", ", aiCharacter.behaviors)}"
+                };
+                messages.Add(introductionMessage);
+            }
         }
 
         public async void AskChatGPT(string newText)
         {
-            var newMessage = new ChatMessage { Role = "user", Content = newText };
+            if (string.IsNullOrWhiteSpace(newText))
+            {
+                Debug.LogWarning("Input text is empty.");
+                return;
+            }
+
+            var newMessage = new ChatMessage { Role = "user", Content = $"{aiCharacter.roleName}: {newText}" };
             messages.Add(newMessage);
 
             var request = new CreateChatCompletionRequest
             {
                 Messages = messages,
-                Model = "gpt-3.5-turbo-0613"
+                Model = "gpt-3.5-turbo"
             };
 
             var response = await openAIApi.CreateChatCompletion(request);

@@ -1,11 +1,11 @@
-using System;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
+using System;
 
-namespace OpenAI
+namespace LLM
 {
     public class OpenAIApi
     {
@@ -42,7 +42,15 @@ namespace OpenAI
                     return null;
                 }
 
-                return JsonConvert.DeserializeObject<CreateChatCompletionResponse>(webRequest.downloadHandler.text);
+                try
+                {
+                    return JsonConvert.DeserializeObject<CreateChatCompletionResponse>(webRequest.downloadHandler.text);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError("Failed to parse response: " + ex.Message);
+                    return null;
+                }
             }
         }
     }

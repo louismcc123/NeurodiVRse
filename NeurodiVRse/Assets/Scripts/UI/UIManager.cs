@@ -1,42 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using OpenAI;
 
-public class UIManager : MonoBehaviour
+namespace LLM
 {
-    [SerializeField] private GameObject openAICanvas;
-    [SerializeField] private GameObject npcCanvas;
-
-    public InputField inputField;
-    public TMP_Text outputText;
-    public OpenAIManager openAIManager;
-
-    public void OnSendButtonClicked()
+    public class UIManager : MonoBehaviour
     {
-        string userInput = inputField.text;
-        openAIManager.AskChatGPT(userInput);
-    }
-    public void OnCloseButtonClicked()
-    {
-        openAICanvas.SetActive(false);
-        npcCanvas.SetActive(false);
-    }
+        [SerializeField] private GameObject openAICanvas;
+        [SerializeField] private GameObject npcCanvas;
 
-    private void OnEnable()
-    {
-        openAIManager.OnResponse.AddListener(UpdateOutputText);
-    }
+        [SerializeField] private GameObject keyboard; 
+        [SerializeField] private TMP_InputField inputField; 
+        [SerializeField] private TMP_Text outputText;
+        [SerializeField] private OpenAIManager openAIManager;
 
-    private void OnDisable()
-    {
-        openAIManager.OnResponse.RemoveListener(UpdateOutputText);
-    }
+        private void OnEnable()
+        {
+            openAIManager.OnResponse.AddListener(UpdateOutputText);
+            inputField.onSelect.AddListener(OnInputFieldSelected); 
+        }
 
-    private void UpdateOutputText(string response)
-    {
-        outputText.text = response;
+        private void OnDisable()
+        {
+            openAIManager.OnResponse.RemoveListener(UpdateOutputText);
+            inputField.onSelect.RemoveListener(OnInputFieldSelected); 
+        }
+
+        public void OnSendButtonClicked()
+        {
+            string userInput = inputField.text;
+            if (string.IsNullOrWhiteSpace(userInput))
+            {
+                Debug.LogWarning("User input is empty.");
+                return;
+            }
+
+            outputText.text = "Loading...";
+            openAIManager.AskChatGPT(userInput);
+        }
+
+        public void OnCloseButtonClicked()
+        {
+            openAICanvas.SetActive(false);
+            npcCanvas.SetActive(false);
+        }
+
+        private void UpdateOutputText(string response)
+        {
+            outputText.text = response;
+        }
+
+        private void OnInputFieldSelected(string text)
+        {
+            keyboard.SetActive(true);
+        }
+
+        public void OnKeyboardCloseButtonClicked()
+        {
+            keyboard.SetActive(false);
+        }
     }
 }
