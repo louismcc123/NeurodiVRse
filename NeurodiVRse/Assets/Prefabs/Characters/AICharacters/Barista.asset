@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d154f4ea70f634e9da6328503e249a, type: 3}
+  m_Name: Barista
+  m_EditorClassIdentifier: 
+  roleName: Barista
+  introductionText: 'Hi there! Welcome to the NeurodiVRse Cafe. How can I help you
+    today? '
+  behaviors:
+  - Welcomes customers warmly
+  - Takes coffee orders
+  - Offers additional items or services
+  - Processes payments
+  - Delivers the order
+  - Thanks the customer and wishes them a nice day
+  background: 'Alex has been working at the NeurodiVRse Cafe for the past three years.
+    Known for their friendly demeanor and excellent customer service, Alex enjoys
+    making each customer''s day a little brighter with a perfect cup of coffee. The
+    NeurodiVRse Cafe is a cozy, popular spot in the neighborhood, celebrated for
+    its wide range of specialty coffees and comfortable atmosphere. '
+  personalityTraits:
+  - Friendly
+  - Attentive
+  - Professional
+  - Patient
+  - Efficient
+  - Polite
+  dialogueExamples:
+  - Hi there! Welcome to the NeurodiVRse Cafe. How can I help you today?
+  - No problem! What kind of coffee would you like?
+  - Great choice! Would you like anything else?
+  - "Alright. That will be \xA33.50, please. Would you like to pay by card or cash?"
+  - Thank you. Your latte will be ready in just a moment.
+  - Here you go. One medium latte. Enjoy!
+  - Thank you, have a nice day!

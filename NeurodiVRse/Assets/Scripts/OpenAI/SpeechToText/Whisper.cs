@@ -4,16 +4,15 @@ using System.Collections;
 using System.IO;
 using UnityEngine.Networking;
 using System;
-using OpenAI;
 
 namespace LLM
 {
-
     public class Whisper : MonoBehaviour
     {
         public Button recordButton;
         public Text responseText;
         public OpenAIManager openAIManager;
+        public AICharacter aiCharacter; // Add this line
         private AudioClip recording;
         private string filePath;
 
@@ -61,8 +60,13 @@ namespace LLM
             {
                 var response = JsonUtility.FromJson<WhisperResponse>(www.downloadHandler.text);
                 responseText.text = response.text;
-                openAIManager.AskChatGPT(response.text);
+                openAIManager.AskChatGPT(aiCharacter, response.text, UpdateResponseText); // Modify this line
             }
+        }
+
+        private void UpdateResponseText(string response)
+        {
+            responseText.text = response;
         }
 
         [Serializable]

@@ -43,7 +43,8 @@ public class DialogueManager : MonoBehaviour
     private AudioSource playerAudioSource;
 
     public PlayerStats playerStats;
-    public BaristaController baristaController;
+    public CharacterController characterController;
+    private Animator animator;
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class DialogueManager : MonoBehaviour
         baristaAudioSource = gameObject.AddComponent<AudioSource>();
         strangerAudioSource = gameObject.AddComponent<AudioSource>();
         playerAudioSource = gameObject.AddComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
     public void StartDialogue(string title, DialogueNode node)
     {
@@ -70,6 +72,7 @@ public class DialogueManager : MonoBehaviour
         AdviceCanvas.SetActive(false);
 
         PlayNodeAudioClip(node.dialogueAudio);
+        animator.SetBool("IsTalking", true);
         StartCoroutine(DisplayResponsesWithDelay(title, node));
 
         currentDialogueNode = node;
@@ -170,6 +173,8 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
+        animator.SetBool("IsTalking", false);
+
         if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
             Debug.Log("Transitioning to next node: " + response.nextNode.dialogueText);
@@ -207,12 +212,12 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator StartCoffeePreparationSequence()
     {
-        baristaController.MoveToWaypoint(2);
-        yield return new WaitUntil(() => !baristaController.IsMoving());
+        characterController.MoveToWaypoint(2);
+        yield return new WaitUntil(() => !characterController.IsMoving());
         StartCoroutine(StartCoffeePreparation());
         yield return new WaitForSeconds(8f);
-        baristaController.MoveToWaypoint(3);
-        yield return new WaitUntil(() => !baristaController.IsMoving());
+        characterController.MoveToWaypoint(3);
+        yield return new WaitUntil(() => !characterController.IsMoving());
         Instantiate(coffeeCupPrefab, coffeeCupSpawnPosition.position, coffeeCupSpawnPosition.rotation);
         Debug.Log("Coffee cup instantiated. now dialogue should resume");
         ResumeDialogue();

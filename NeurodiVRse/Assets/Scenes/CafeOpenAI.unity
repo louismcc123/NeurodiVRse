@@ -51023,7 +51023,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c45963a9c8b80438838f3f2b04cc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiCharacter: {fileID: 0}
   OnResponse:
     m_PersistentCalls:
       m_Calls: []
@@ -51045,6 +51044,7 @@ MonoBehaviour:
   inputField: {fileID: 997209346}
   outputText: {fileID: 1265181997}
   openAIManager: {fileID: 1947801912}
+  aiCharacter: {fileID: 0}
 --- !u!1 &1949444866
 GameObject:
   m_ObjectHideFlags: 0
@@ -61447,7 +61447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!33 &2391403316982230026
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -75448,10 +75448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07da08e469ee1db4f8fdfe08cdcc14be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScore: 100
+  maxScore: 5
   currentScore: 0
   hasCoffee: 0
-  finalScoreText: {fileID: 0}
+  finalScoreText: {fileID: 943556777}
   totalScore: 0
   gameManager: {fileID: 182214990}
 --- !u!4 &8348461865147138702
