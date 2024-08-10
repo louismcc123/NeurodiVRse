@@ -77,7 +77,7 @@ public class CharacterController : MonoBehaviour
     public float rotationSpeed = 5.0f;
     private int currentWaypoint = 0;
     private bool isMoving = false;
-    private bool hasReachedCurrentWaypoint = false; 
+    private bool hasReachedCurrentWaypoint = false;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -113,7 +113,7 @@ public class CharacterController : MonoBehaviour
             currentWaypoint = waypointIndex;
             agent.SetDestination(waypoints[waypointIndex].position);
             isMoving = true;
-            hasReachedCurrentWaypoint = false; // Reset the flag for the new waypoint
+            hasReachedCurrentWaypoint = false;
             animator.SetBool("IsWalking", true);
             Debug.Log(gameObject.name + ": Moving to waypoint: " + waypointIndex);
         }
@@ -131,7 +131,7 @@ public class CharacterController : MonoBehaviour
             {
                 isMoving = false;
                 animator.SetBool("IsWalking", false);
-                hasReachedCurrentWaypoint = true; 
+                hasReachedCurrentWaypoint = true;
                 Debug.Log(gameObject.name + ": Reached waypoint: " + currentWaypoint);
             }
         }
@@ -145,5 +145,10 @@ public class CharacterController : MonoBehaviour
     public int GetCurrentWaypoint()
     {
         return currentWaypoint;
+    }
+
+    public bool HasReachedCurrentWaypoint()
+    {
+        return hasReachedCurrentWaypoint;
     }
 }
