@@ -42,6 +42,7 @@ public class DialogueManager : MonoBehaviour
     private AudioSource strangerAudioSource;
     private AudioSource playerAudioSource;
 
+    // NPC Control
     public PlayerStats playerStats;
     public CharacterController characterController;
     private Animator animator;
@@ -52,19 +53,29 @@ public class DialogueManager : MonoBehaviour
         baristaAudioSource = gameObject.AddComponent<AudioSource>();
         strangerAudioSource = gameObject.AddComponent<AudioSource>();
         playerAudioSource = gameObject.AddComponent<AudioSource>();
-        animator = GetComponent<Animator>();
+
+        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError(gameObject.name + ": Animator component not found on any child GameObject.");
+        }
+        else
+        {
+            animator.applyRootMotion = false;
+        }
     }
+
     public void StartDialogue(string title, DialogueNode node)
     {
         if (currentDialogueNode == node)
         {
-            Debug.Log("Dialogue is already active for this node. Ignoring StartDialogue call.");
+            Debug.Log(gameObject.name + ": Dialogue is already active for this node. Ignoring StartDialogue call.");
             return;
         }
 
         isDialogueActive = true;
         isDialoguePaused = false;
-        Debug.Log("Starting dialogue: " + node.dialogueText);
+        Debug.Log(gameObject.name + ": Starting dialogue: " + node.dialogueText);
         ShowDialogue();
         DialogueBodyText.text = node.dialogueText;
         DialogueTitleText.text = title;
@@ -110,22 +121,22 @@ public class DialogueManager : MonoBehaviour
 
             if (responseText == null)
             {
-                Debug.LogError("TextMeshProUGUI component not found in the button prefab.");
+                Debug.LogError(gameObject.name + ": TextMeshProUGUI component not found in the button prefab.");
             }
             else
             {
                 responseText.text = response.responseText;
-                Debug.Log("Set response text to: " + response.responseText);
+                Debug.Log(gameObject.name + ": Set response text to: " + response.responseText);
             }
 
             Button button = buttonObj.GetComponent<Button>();
             if (button == null)
             {
-                Debug.LogError("Button component not found in the button prefab.");
+                Debug.LogError(gameObject.name + ": Button component not found in the button prefab.");
             }
             else
             {
-                button.onClick.RemoveAllListeners(); 
+                button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() => SelectResponse(response, title));
             }
         }
@@ -135,7 +146,7 @@ public class DialogueManager : MonoBehaviour
             playerResponseButtonParent.GetChild(i).gameObject.SetActive(false);
         }
 
-        Debug.Log("Responses updated.");
+        Debug.Log(gameObject.name + ": Responses updated.");
     }
 
     public void SelectResponse(DialogueResponse response, string title)
@@ -144,8 +155,8 @@ public class DialogueManager : MonoBehaviour
         playerStats.SubtractScore(response.score);
         adviceText.text = response.adviceText;
 
-        Debug.Log("Response selected: " + response.responseText);
-        Debug.Log("Total Score: " + totalScore);
+        Debug.Log(gameObject.name + ": Response selected: " + response.responseText);
+        Debug.Log(gameObject.name + ": Total Score: " + totalScore);
 
         if (!string.IsNullOrEmpty(response.adviceText))
         {
@@ -164,12 +175,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (response.responseAudio != null)
         {
-            Debug.Log("Waiting for audio clip to finish: " + response.responseAudio.name);
+            Debug.Log(gameObject.name + ": Waiting for audio clip to finish: " + response.responseAudio.name);
             yield return new WaitForSeconds(response.responseAudio.length);
         }
         else
         {
-            Debug.Log("No audio clip, waiting default time.");
+            Debug.Log(gameObject.name + ": No audio clip, waiting default time.");
             yield return new WaitForSeconds(1f);
         }
 
@@ -177,22 +188,28 @@ public class DialogueManager : MonoBehaviour
 
         if (response.nextNode != null && !response.nextNode.IsLastNode())
         {
-            Debug.Log("Transitioning to next node: " + response.nextNode.dialogueText);
+            Debug.Log(gameObject.name + ": Transitioning to next node: " + response.nextNode.dialogueText);
 
-            if (response.responseText == "Card, please.")
+            if (gameObject.name == "Barista NPC")
             {
-                PauseDialogue(response.nextNode, title);
-                cardManager.InstantiateCard();
-            }
-            else if (response.responseText == "Cash, please.")
-            {
-                PauseDialogue(response.nextNode, title);
-                cashManager.InstantiateCash();
-            }
-            else if (response.responseText == "Thank you.")
-            {
-                PauseDialogue(response.nextNode, title);
-                StartCoroutine(StartCoffeePreparationSequence());
+                switch (response.responseText)
+                {
+                    case "Card, please.":
+                        PauseDialogue(response.nextNode, title);
+                        cardManager.InstantiateCard();
+                        break;
+                    case "Cash, please.":
+                        PauseDialogue(response.nextNode, title);
+                        cashManager.InstantiateCash();
+                        break;
+                    case "Thank you.":
+                        PauseDialogue(response.nextNode, title);
+                        StartCoroutine(StartCoffeePreparationSequence());
+                        break;
+                    default:
+                        StartDialogue(title, response.nextNode);
+                        break;
+                }
             }
             else
             {
@@ -201,7 +218,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Ending dialogue. Displaying final score.");
+            Debug.Log(gameObject.name + ": Ending dialogue. Displaying final score.");
             HideDialogue();
             isDialogueActive = false;
             currentDialogueNode = null;
@@ -219,13 +236,13 @@ public class DialogueManager : MonoBehaviour
         characterController.MoveToWaypoint(3);
         yield return new WaitUntil(() => !characterController.IsMoving());
         Instantiate(coffeeCupPrefab, coffeeCupSpawnPosition.position, coffeeCupSpawnPosition.rotation);
-        Debug.Log("Coffee cup instantiated. now dialogue should resume");
+        Debug.Log(gameObject.name + ": Coffee cup instantiated. Now dialogue should resume.");
         ResumeDialogue();
     }
 
     private IEnumerator StartCoffeePreparation()
     {
-        Debug.Log("StartCoffeePreparation");
+        Debug.Log(gameObject.name + ": StartCoffeePreparation");
 
         risingSteam.SetActive(true);
         yield return new WaitForSeconds(5f);
@@ -265,6 +282,7 @@ public class DialogueManager : MonoBehaviour
         AdviceCanvas.SetActive(false);
         finalScoreText.gameObject.SetActive(false);
     }
+
     public bool IsDialogueActive()
     {
         return DialogueParent.activeSelf || PlayerResponseCanvas.activeSelf;
@@ -280,13 +298,13 @@ public class DialogueManager : MonoBehaviour
 
     public void ResumeDialogue()
     {
-        Debug.Log("Resume dialogue called");
+        Debug.Log(gameObject.name + ": Resume dialogue called");
 
         if (pausedNode != null)
         {
             isDialoguePaused = false;
             isDialogueActive = true;
-            Debug.Log("Resuming dialogue with node: " + pausedNode.dialogueText);
+            Debug.Log(gameObject.name + ": Resuming dialogue with node: " + pausedNode.dialogueText);
             StartDialogue(pausedTitle, pausedNode);
             pausedNode = null;
             pausedTitle = null;

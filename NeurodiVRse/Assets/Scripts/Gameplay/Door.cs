@@ -70,6 +70,11 @@ public class Door : MonoBehaviour
         }
     }
 
+    public void HandleNPCLeaving()
+    {
+        StartCoroutine(NPCLeaving());
+    }
+
     IEnumerator Opening()
     {
         openAndClose.Play("Opening");
@@ -85,6 +90,20 @@ public class Door : MonoBehaviour
         open = false;
         yield return new WaitForSeconds(.5f);
     }
+    public IEnumerator NPCLeaving()
+    {
+        if (!open)
+        {
+            openAndClose.Play("Opening");
+            openAndClose1.Play("Opening");
+            open = true;
+        }
+        yield return new WaitForSeconds(.5f);
+        openAndClose.Play("Closing");
+        openAndClose1.Play("Closing");
+        open = false;
+    }
+
 
     void EndGame()
     {

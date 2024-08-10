@@ -77,6 +77,7 @@ public class CharacterController : MonoBehaviour
     public float rotationSpeed = 5.0f;
     private int currentWaypoint = 0;
     private bool isMoving = false;
+    private bool hasReachedCurrentWaypoint = false; 
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -84,12 +85,25 @@ public class CharacterController : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+        {
+            Debug.LogError(gameObject.name + ": Animator component not found on any child GameObject.");
+        }
+        else
+        {
+            animator.applyRootMotion = false;
+        }
 
         if (waypoints.Length > 0)
         {
             MoveToWaypoint(0);
         }
+    }
+
+    private void Update()
+    {
+        CheckIfReachedWaypoint();
     }
 
     public void MoveToWaypoint(int waypointIndex)
@@ -99,27 +113,26 @@ public class CharacterController : MonoBehaviour
             currentWaypoint = waypointIndex;
             agent.SetDestination(waypoints[waypointIndex].position);
             isMoving = true;
+            hasReachedCurrentWaypoint = false; // Reset the flag for the new waypoint
             animator.SetBool("IsWalking", true);
-            Debug.Log("Moving to waypoint: " + waypointIndex);
-
-            CheckIfReachedWaypoint();
+            Debug.Log(gameObject.name + ": Moving to waypoint: " + waypointIndex);
         }
         else
         {
-            Debug.LogError("Waypoint index out of bounds! Index: " + waypointIndex + ", Waypoints length: " + waypoints.Length);
+            Debug.LogError(gameObject.name + ": Waypoint index out of bounds! Index: " + waypointIndex + ", Waypoints length: " + waypoints.Length);
         }
     }
 
     private void CheckIfReachedWaypoint()
     {
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        if (!hasReachedCurrentWaypoint && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+            if (!agent.hasPath || agent.velocity.sqrMagnitude <= 0.1f)
             {
                 isMoving = false;
                 animator.SetBool("IsWalking", false);
-
-                Debug.Log("Reached waypoint: " + currentWaypoint);
+                hasReachedCurrentWaypoint = true; 
+                Debug.Log(gameObject.name + ": Reached waypoint: " + currentWaypoint);
             }
         }
     }

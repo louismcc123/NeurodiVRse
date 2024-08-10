@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.LowLevel;
+using UnityEngine.AI;
 
 public class BaristaBehaviour : MonoBehaviour
 {
@@ -13,12 +13,19 @@ public class BaristaBehaviour : MonoBehaviour
 
     public CharacterController characterController;
 
+    private NavMeshAgent agent;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform == player)
         {
             isPlayerInRange = true;
-            Debug.Log("player in range");
+            Debug.Log("Player in range of barista");
 
             if (!hasMovedToWaypoint)
             {
@@ -33,7 +40,7 @@ public class BaristaBehaviour : MonoBehaviour
         if (other.transform == player)
         {
             isPlayerInRange = false;
-            Debug.Log("player out of range");
+            Debug.Log("Player out of range of barista");
         }
     }
 
@@ -47,15 +54,25 @@ public class BaristaBehaviour : MonoBehaviour
 
     private void FacePlayer()
     {
-        if (player == null) return;
+        if (player == null) 
+        { 
+            return;
+        }
 
         if (characterController.IsMoving() || characterController.GetCurrentWaypoint() == 2)
         {
+            Debug.Log("Not facing player because character is moving or waypoint is 2.");
             return;
+        }
+
+        if (agent != null)
+        {
+            agent.updateRotation = false;
         }
 
         Vector3 direction = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
     }
+
 }

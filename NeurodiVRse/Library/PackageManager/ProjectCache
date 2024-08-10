@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638587126060753088
-    m_Hash: 3577010504
+      ticks: 638587379160366298
+    m_Hash: 2203735798
   m_LockFileStatus:
     m_FilePath: D:/louis/NeurodiVRse/NeurodiVRse/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638587126061732165
-    m_Hash: 18850825
+      ticks: 638587379161192477
+    m_Hash: 2462811446
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -22,6 +22,104 @@ m_LocalPackages:
 m_ProjectPath: D:/louis/NeurodiVRse/NeurodiVRse/Packages
 m_EditorVersion: 2023.1.2f1 (e348e726afe7)
 m_ResolvedPackages:
+- packageId: com.atteneder.gltfast@https://github.com/atteneder/glTFast.git
+  testable: 0
+  isDirectDependency: 1
+  version: 6.7.0
+  source: 5
+  resolvedPath: D:\louis\NeurodiVRse\NeurodiVRse\Library\PackageCache\com.atteneder.gltfast@9145e3237c
+  assetPath: Packages/com.atteneder.gltfast
+  name: com.atteneder.gltfast
+  displayName: glTFast
+  author:
+    name: Andreas Atteneder
+    email: andreas.atteneder@gmail.com
+    url: https://pixel.engineer
+  category: 
+  type: library
+  description: Use glTFast to import and export glTF 3D files efficiently at runtime
+    or in the Editor
+  status: 0
+  errors: []
+  versions:
+    all: []
+    compatible: []
+    recommended: 
+    deprecated: []
+  dependencies:
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  - name: com.unity.mathematics
+    version: 1.3.1
+  - name: com.unity.burst
+    version: 1.8.4
+  - name: com.unity.collections
+    version: 1.5.1
+  resolvedDependencies:
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  - name: com.unity.modules.unitywebrequest
+    version: 1.0.0
+  - name: com.unity.mathematics
+    version: 1.3.1
+  - name: com.unity.burst
+    version: 1.8.7
+  - name: com.unity.collections
+    version: 1.5.1
+  - name: com.unity.nuget.mono-cecil
+    version: 1.11.4
+  - name: com.unity.test-framework
+    version: 1.3.7
+  - name: com.unity.ext.nunit
+    version: 2.0.3
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  keywords:
+  - mesh
+  - gltf
+  - asset
+  - format
+  - draco
+  - ktx
+  - basis
+  - universal
+  - basisu
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 9145e3237c34857d0c2cec43c7ee0583e986db38
+    revision: HEAD
+  upmReserved: 
+  assetStore:
+    productId: 
 - packageId: com.srcnalt.openai-unity@https://github.com/srcnalt/OpenAI-Unity.git
   testable: 0
   isDirectDependency: 1
@@ -865,7 +963,7 @@ m_ResolvedPackages:
     version: 15.0.6
   resolvedDependencies:
   - name: com.unity.mathematics
-    version: 1.2.6
+    version: 1.3.1
   - name: com.unity.burst
     version: 1.8.7
   - name: com.unity.render-pipelines.core
@@ -1657,7 +1755,7 @@ m_ResolvedPackages:
   - name: com.unity.modules.jsonserialize
     version: 1.0.0
   - name: com.unity.mathematics
-    version: 1.2.6
+    version: 1.3.1
   - name: com.unity.ugui
     version: 1.0.0
   - name: com.unity.xr.core-utils
@@ -2037,6 +2135,7 @@ m_ResolvedPackages:
     - 1.11.0
     - 1.11.1-exp.1
     - 1.12.0-exp.1
+    - 1.12.0
     compatible:
     - 1.8.1
     - 1.8.2
@@ -2046,6 +2145,7 @@ m_ResolvedPackages:
     - 1.11.0
     - 1.11.1-exp.1
     - 1.12.0-exp.1
+    - 1.12.0
     recommended: 1.8.2
     deprecated: []
   dependencies:
@@ -4558,90 +4658,6 @@ m_ResolvedPackages:
     not access a setter on child control properties."}'
   assetStore:
     productId: 
-- packageId: com.unity.mathematics@1.2.6
-  testable: 0
-  isDirectDependency: 0
-  version: 1.2.6
-  source: 1
-  resolvedPath: D:\louis\NeurodiVRse\NeurodiVRse\Library\PackageCache\com.unity.mathematics@1.2.6
-  assetPath: Packages/com.unity.mathematics
-  name: com.unity.mathematics
-  displayName: Mathematics
-  author:
-    name: 
-    email: 
-    url: 
-  category: 
-  type: asset
-  description: Unity's C# SIMD math library providing vector types and math functions
-    with a shader like syntax.
-  status: 0
-  errors: []
-  versions:
-    all:
-    - 0.0.12-preview.2
-    - 0.0.12-preview.5
-    - 0.0.12-preview.8
-    - 0.0.12-preview.10
-    - 0.0.12-preview.11
-    - 0.0.12-preview.13
-    - 0.0.12-preview.17
-    - 0.0.12-preview.19
-    - 0.0.12-preview.20
-    - 1.0.0-preview.1
-    - 1.0.1
-    - 1.1.0-preview.1
-    - 1.1.0
-    - 1.2.1
-    - 1.2.4
-    - 1.2.5
-    - 1.2.6
-    - 1.3.1
-    - 1.3.2
-    compatible:
-    - 1.2.6
-    - 1.3.1
-    - 1.3.2
-    recommended: 1.2.6
-    deprecated: []
-  dependencies: []
-  resolvedDependencies: []
-  keywords:
-  - unity
-  registry:
-    id: main
-    name: 
-    url: https://packages.unity.com
-    scopes: []
-    isDefault: 1
-    capabilities: 7
-    configSource: 0
-  hideInEditor: 1
-  entitlements:
-    licensingModel: 1
-  isAssetStorePackage: 0
-  datePublishedTicks: 637841876140000000
-  documentationUrl: 
-  hasRepository: 1
-  repository:
-    type: git
-    url: https://github.com/Unity-Technologies/Unity.Mathematics.git
-    revision: f110c8c230d253654afed153569030a587cc7557
-    path: 
-  unityLifecycle:
-    version: 1.2.6
-    nextVersion: 
-    recommendedVersion: 
-    isDeprecated: 0
-    deprecationMessage: 
-  isDeprecated: 0
-  deprecationMessage: 
-  git:
-    hash: 
-    revision: 
-  upmReserved: 
-  assetStore:
-    productId: 
 - packageId: com.unity.ugui@1.0.0
   testable: 0
   isDirectDependency: 0
@@ -5012,7 +5028,7 @@ m_ResolvedPackages:
     version: 1.2.1
   resolvedDependencies:
   - name: com.unity.mathematics
-    version: 1.2.6
+    version: 1.3.1
   keywords: []
   registry:
     id: main
@@ -5207,7 +5223,7 @@ m_ResolvedPackages:
     version: 1.0.0
   resolvedDependencies:
   - name: com.unity.mathematics
-    version: 1.2.6
+    version: 1.3.1
   - name: com.unity.ugui
     version: 1.0.0
   - name: com.unity.modules.ui
@@ -5390,7 +5406,7 @@ m_ResolvedPackages:
   - name: com.unity.render-pipelines.core
     version: 15.0.6
   - name: com.unity.mathematics
-    version: 1.2.6
+    version: 1.3.1
   - name: com.unity.ugui
     version: 1.0.0
   - name: com.unity.modules.ui
@@ -6411,6 +6427,283 @@ m_ResolvedPackages:
     2.0."}'
   assetStore:
     productId: 
+- packageId: com.unity.mathematics@1.3.1
+  testable: 0
+  isDirectDependency: 0
+  version: 1.3.1
+  source: 1
+  resolvedPath: D:\louis\NeurodiVRse\NeurodiVRse\Library\PackageCache\com.unity.mathematics@1.3.1
+  assetPath: Packages/com.unity.mathematics
+  name: com.unity.mathematics
+  displayName: Mathematics
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: assets
+  description: Unity's C# SIMD math library providing vector types and math functions
+    with a shader like syntax.
+  status: 0
+  errors: []
+  versions:
+    all:
+    - 0.0.12-preview.2
+    - 0.0.12-preview.5
+    - 0.0.12-preview.8
+    - 0.0.12-preview.10
+    - 0.0.12-preview.11
+    - 0.0.12-preview.13
+    - 0.0.12-preview.17
+    - 0.0.12-preview.19
+    - 0.0.12-preview.20
+    - 1.0.0-preview.1
+    - 1.0.1
+    - 1.1.0-preview.1
+    - 1.1.0
+    - 1.2.1
+    - 1.2.4
+    - 1.2.5
+    - 1.2.6
+    - 1.3.1
+    - 1.3.2
+    compatible:
+    - 1.2.6
+    - 1.3.1
+    - 1.3.2
+    recommended: 1.2.6
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - unity
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 638265749150000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.com/Unity-Technologies/Unity.Mathematics.git
+    revision: c4f37031a75eb8afb8dfaf5d68fbcce226c70749
+    path: 
+  unityLifecycle:
+    version: 1.2.6
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: '{"changelog":"### Added\n* Added `math.square` to compute the square
+    (x * x).\n* Added `math.orthonormal_basis` to compute an orthonormal basis from
+    a single unit length vector.\n* Added `math.sign` for int, int2, int3 and int4.\n*
+    Added `math.chgsign` for float, float2, float3, and float4.\n* Added `math.Euler`
+    to convert a quaternion to Euler angles.\n* Added `math.angle` to compute the
+    angle between two unit quaternions.\n* Added `math.rotation` to extract a quaternion
+    rotation from a float3x3 (that may have scale).\n* Added `math.mulScale` to scale
+    columns of a float3x3 with scaling coefficients in a float3.\n* Added `math.scaleMul`
+    to scale rows of a float3x3 with scaling coefficients in a float3.\n* Added `AffineTransform`
+    type.\n* Added `PI2`, `PIHALF`, `TAU`, `TODEGREES` and `TORADIANS` constants.\n\n###
+    Changed\n* `asfloat(uint)`, `asuint(float)`, `asint(float)` and other related
+    methods are now faster in mono without Burst. Other methods which use these will
+    see a performance improvement.\n* Modified `quaternion.nlerp` to be branchless.\n*
+    More descriptive parameter names for many methods in `math` class.\n* Made `Il2CppEagerStaticClassConstructionAttribute`
+    internal to avoid conflicts with other definitions outside of the package."}'
+  assetStore:
+    productId: 
+- packageId: com.unity.collections@1.5.1
+  testable: 0
+  isDirectDependency: 0
+  version: 1.5.1
+  source: 1
+  resolvedPath: D:\louis\NeurodiVRse\NeurodiVRse\Library\PackageCache\com.unity.collections@1.5.1
+  assetPath: Packages/com.unity.collections
+  name: com.unity.collections
+  displayName: Collections
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: assets
+  description: A C# collections library providing data structures that can be used
+    in jobs, and optimized by Burst compiler.
+  status: 0
+  errors: []
+  versions:
+    all:
+    - 0.0.9-preview.1
+    - 0.0.9-preview.2
+    - 0.0.9-preview.3
+    - 0.0.9-preview.4
+    - 0.0.9-preview.5
+    - 0.0.9-preview.6
+    - 0.0.9-preview.7
+    - 0.0.9-preview.8
+    - 0.0.9-preview.9
+    - 0.0.9-preview.10
+    - 0.0.9-preview.11
+    - 0.0.9-preview.12
+    - 0.0.9-preview.13
+    - 0.0.9-preview.14
+    - 0.0.9-preview.15
+    - 0.0.9-preview.16
+    - 0.0.9-preview.17
+    - 0.0.9-preview.18
+    - 0.0.9-preview.19
+    - 0.0.9-preview.20
+    - 0.1.0-preview
+    - 0.1.1-preview
+    - 0.2.0-preview.13
+    - 0.3.0-preview.0
+    - 0.4.0-preview.6
+    - 0.5.0-preview.9
+    - 0.5.1-preview.11
+    - 0.5.2-preview.8
+    - 0.6.0-preview.9
+    - 0.7.0-preview.2
+    - 0.7.1-preview.3
+    - 0.8.0-preview.5
+    - 0.9.0-preview.5
+    - 0.9.0-preview.6
+    - 0.11.0-preview.17
+    - 0.12.0-preview.13
+    - 0.14.0-preview.16
+    - 0.15.0-preview.21
+    - 0.17.0-preview.18
+    - 1.0.0-pre.3
+    - 1.0.0-pre.5
+    - 1.0.0-pre.6
+    - 1.1.0
+    - 1.2.3-pre.1
+    - 1.2.3
+    - 1.2.4
+    - 1.3.1
+    - 1.4.0
+    - 1.5.1
+    - 2.1.0-exp.4
+    - 2.1.0-pre.2
+    - 2.1.0-pre.6
+    - 2.1.0-pre.11
+    - 2.1.0-pre.18
+    - 2.1.1
+    - 2.1.4
+    - 2.2.0
+    - 2.2.1
+    - 2.3.0-exp.1
+    - 2.3.0-pre.3
+    - 2.4.0-exp.2
+    - 2.4.0-pre.2
+    - 2.4.0-pre.5
+    - 2.4.0
+    - 2.4.1
+    - 2.4.2
+    - 2.5.0-exp.1
+    - 2.5.0-pre.2
+    compatible:
+    - 1.2.4
+    - 1.3.1
+    - 1.4.0
+    - 1.5.1
+    - 2.1.0-exp.4
+    - 2.1.0-pre.2
+    - 2.1.0-pre.6
+    - 2.1.0-pre.11
+    - 2.1.0-pre.18
+    - 2.1.1
+    - 2.1.4
+    - 2.2.0
+    - 2.2.1
+    - 2.3.0-exp.1
+    - 2.3.0-pre.3
+    - 2.4.0-exp.2
+    - 2.4.0-pre.2
+    - 2.4.0-pre.5
+    - 2.4.0
+    - 2.4.1
+    - 2.4.2
+    - 2.5.0-exp.1
+    - 2.5.0-pre.2
+    recommended: 1.2.4
+    deprecated: []
+  dependencies:
+  - name: com.unity.burst
+    version: 1.6.6
+  - name: com.unity.nuget.mono-cecil
+    version: 1.11.4
+  - name: com.unity.test-framework
+    version: 1.1.31
+  resolvedDependencies:
+  - name: com.unity.burst
+    version: 1.8.7
+  - name: com.unity.mathematics
+    version: 1.3.1
+  - name: com.unity.nuget.mono-cecil
+    version: 1.11.4
+  - name: com.unity.test-framework
+    version: 1.3.7
+  - name: com.unity.ext.nunit
+    version: 2.0.3
+  - name: com.unity.modules.imgui
+    version: 1.0.0
+  - name: com.unity.modules.jsonserialize
+    version: 1.0.0
+  keywords:
+  - dots
+  - collections
+  - unity
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 638259957260000000
+  documentationUrl: https://docs.unity3d.com/Packages/com.unity.collections@1.5/manual/index.html
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/dots.git
+    revision: 5f2d802d0087e92818f1463b9b910916a079012b
+    path: 
+  unityLifecycle:
+    version: 1.2.4
+    nextVersion: 2.1.0-pre.6
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: '{"changelog":"### Changed\n* `UnsafeAppendBuffer` now constrains
+    methods consuming generic parameter `T` to be `unmanaged` instead of `struct`.\n*
+    Updated LICENSE.md\n\n### Fixed\n* `UnsafeAppendBuffer` now safely reads and
+    writes type `T`. Previously, it was possible to make unaligned reads and writes
+    of type `T` which could violate platform architecture alignment requirements."}'
+  assetStore:
+    productId: 
 - packageId: com.unity.searcher@4.9.2
   testable: 0
   isDirectDependency: 0
@@ -6568,5 +6861,75 @@ m_ResolvedPackages:
   upmReserved: '{"changelog":"- Added unique test ID for repeated tests\r\n- Added
     ContainKey and ContainValue constaints for dictionaries\r\n- Fixed unexpected
     null exception when using EmptyConstraint with a null object"}'
+  assetStore:
+    productId: 
+- packageId: com.unity.nuget.mono-cecil@1.11.4
+  testable: 0
+  isDirectDependency: 0
+  version: 1.11.4
+  source: 1
+  resolvedPath: D:\louis\NeurodiVRse\NeurodiVRse\Library\PackageCache\com.unity.nuget.mono-cecil@1.11.4
+  assetPath: Packages/com.unity.nuget.mono-cecil
+  name: com.unity.nuget.mono-cecil
+  displayName: Mono Cecil
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: library
+  description: 'The mono cecil library from https://www.nuget.org/packages/Mono.Cecil/
+
+
+    This
+    package is intended for internal Unity use only. Most Unity users will be better
+    suite using the existing community tooling.
+
+    To avoid assembly clashes, please
+    use this package if you intend to use Mono.Cecil.'
+  status: 0
+  errors: []
+  versions:
+    all:
+    - 1.11.4
+    compatible:
+    - 1.11.4
+    recommended: 1.11.4
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  entitlements:
+    licensingModel: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 1
+  repository:
+    type: git
+    url: https://github.cds.internal.unity3d.com/unity/com.unity.nuget.mono-cecil.git
+    revision: d0133ce672d724694b56bfd20672acf6f8737fec
+    path: 
+  unityLifecycle:
+    version: 1.11.4
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  git:
+    hash: 
+    revision: 
+  upmReserved: 
   assetStore:
     productId: 
