@@ -2606,7 +2606,7 @@
             "id": "0caa57f1-c231-417f-b314-68fe4b0ed21d",
             "actions": [
                 {
-                    "name": "DoorAction",
+                    "name": "A Button",
                     "type": "Button",
                     "id": "43996a7c-b73c-4c90-8acc-38a5c6d98292",
                     "expectedControlType": "Button",
@@ -2623,7 +2623,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Generic XR Controller",
-                    "action": "DoorAction",
+                    "action": "A Button",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

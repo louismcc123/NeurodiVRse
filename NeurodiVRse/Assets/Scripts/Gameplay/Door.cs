@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private RayManager rayManager;
-    [SerializeField] private InputActionReference rightHandActivate;
+    [SerializeField] private InputActionReference aButton;
 
     public GameObject Player;
     public GameObject endGameCanvas;
@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
 
     public Animator openAndClose; 
     public Animator openAndClose1;
-    
+
     private PlayerStats playerStats;
 
     public bool open;
@@ -31,19 +31,19 @@ public class Door : MonoBehaviour
 
     void OnEnable()
     {
-        rightHandActivate.action.Enable();
+        aButton.action.Enable();
     }
 
     void OnDisable()
     {
-        rightHandActivate.action.Disable();
+        aButton.action.Disable();
     }
 
     void Update()
     {
         if (rayManager != null)
         {
-            if (rightHandActivate.action.triggered)
+            if (aButton.action.triggered)
             {
                 HandleDoorInteraction();
             }

@@ -65,7 +65,6 @@ public class CharacterController : MonoBehaviour
     }
 }
 */
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -104,6 +103,7 @@ public class CharacterController : MonoBehaviour
     private void Update()
     {
         CheckIfReachedWaypoint();
+        UpdateAnimator();
     }
 
     public void MoveToWaypoint(int waypointIndex)
@@ -114,7 +114,6 @@ public class CharacterController : MonoBehaviour
             agent.SetDestination(waypoints[waypointIndex].position);
             isMoving = true;
             hasReachedCurrentWaypoint = false;
-            animator.SetBool("IsWalking", true);
             Debug.Log(gameObject.name + ": Moving to waypoint: " + waypointIndex);
         }
         else
@@ -150,5 +149,15 @@ public class CharacterController : MonoBehaviour
     public bool HasReachedCurrentWaypoint()
     {
         return hasReachedCurrentWaypoint;
+    }
+
+    private void UpdateAnimator()
+    {
+        bool shouldBeWalking = isMoving;
+
+        if (animator.GetBool("IsWalking") != shouldBeWalking)
+        {
+            animator.SetBool("IsWalking", shouldBeWalking);
+        }
     }
 }

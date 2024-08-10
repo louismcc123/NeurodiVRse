@@ -6,9 +6,9 @@ public class CashManager : MonoBehaviour
     public GameObject cashPrefab;
     public Transform spawnTransform;
 
-    public DialogueManager dialogueManager;
-
     private GameObject instantiatedCash;
+
+    public BaristaDialogueManager dialogueManager;
 
     public void InstantiateCash()
     {

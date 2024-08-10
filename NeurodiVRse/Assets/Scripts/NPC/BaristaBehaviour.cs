@@ -7,12 +7,10 @@ public class BaristaBehaviour : MonoBehaviour
 {
     public Transform player;
     public float rotationSpeed = 3.0f;
-
-    private bool isPlayerInRange = false;
+    public bool playerInRange = false;
     private bool hasMovedToWaypoint = false;
 
     public CharacterController characterController;
-
     private NavMeshAgent agent;
 
     private void Awake()
@@ -20,35 +18,17 @@ public class BaristaBehaviour : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.transform == player)
+        if (playerInRange)
         {
-            isPlayerInRange = true;
-            Debug.Log("Player in range of barista");
+            FacePlayer();
 
             if (!hasMovedToWaypoint)
             {
                 characterController.MoveToWaypoint(1);
                 hasMovedToWaypoint = true;
             }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform == player)
-        {
-            isPlayerInRange = false;
-            Debug.Log("Player out of range of barista");
-        }
-    }
-
-    private void Update()
-    {
-        if (isPlayerInRange)
-        {
-            FacePlayer();
         }
     }
 
@@ -61,7 +41,7 @@ public class BaristaBehaviour : MonoBehaviour
 
         if (characterController.IsMoving() || characterController.GetCurrentWaypoint() == 2)
         {
-            Debug.Log("Not facing player because character is moving or waypoint is 2.");
+            //Debug.Log("Not facing player because character is moving or waypoint is 2.");
             return;
         }
 
@@ -74,5 +54,4 @@ public class BaristaBehaviour : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
     }
-
 }

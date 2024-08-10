@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CardMachine : MonoBehaviour
 {
-    public DialogueManager dialogueManager;
     public CardManager cardManager;
 
     private void OnTriggerEnter(Collider other)

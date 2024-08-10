@@ -6,10 +6,9 @@ public class CardManager : MonoBehaviour
     public GameObject cardPrefab;
     public Transform spawnTransform;
 
-    public DialogueManager dialogueManager;
-
     private GameObject instantiatedCard;
 
+    public BaristaDialogueManager dialogueManager;
 
     public void InstantiateCard()
     {

@@ -24,13 +24,11 @@ public class LeavingNPCBehaviour : MonoBehaviour
 
     private void Update()
     {
-        // Check if we are at the first waypoint and not already moving
         if (characterController.GetCurrentWaypoint() == 0 && !isMovingToDoor && !characterController.IsMoving())
         {
             StartCoroutine(MoveToDoor());
         }
 
-        // Check if we have reached the second waypoint and not already leaving
         if (characterController.GetCurrentWaypoint() == 1 && !isLeaving && characterController.HasReachedCurrentWaypoint())
         {
             if (doorScript != null)
