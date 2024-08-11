@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject endGameUI;
     public GameObject incompleteLevelUI;
 
-    private Door door;
+    public Door door;
 
     public void PlayCafeAIGame()
     {
