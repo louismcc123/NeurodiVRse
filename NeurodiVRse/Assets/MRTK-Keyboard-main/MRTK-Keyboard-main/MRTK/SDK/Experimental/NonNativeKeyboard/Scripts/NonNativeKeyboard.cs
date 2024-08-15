@@ -83,7 +83,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.UI
         /// be already assigned.
         /// </summary>
         //[Experimental]
-        public TMP_InputField InputField = null;
+        public InputField InputField = null;
 
         /// <summary>
         /// Move the axis slider based on the camera forward and the keyboard plane projection.

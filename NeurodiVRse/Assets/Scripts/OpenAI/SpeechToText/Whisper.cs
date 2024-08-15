@@ -1,78 +1,96 @@
+using OpenAI;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.IO;
-using UnityEngine.Networking;
-using System;
 
-namespace LLM
+namespace SpeechToText
 {
     public class Whisper : MonoBehaviour
     {
-        public Button recordButton;
-        public Text responseText;
-        public OpenAIManager openAIManager;
-        public AICharacter aiCharacter; // Add this line
-        private AudioClip recording;
-        private string filePath;
+        [SerializeField] private Button recordButton;
+        [SerializeField] private Image progressBar;
+        [SerializeField] private Text message;
+        [SerializeField] private Dropdown dropdown;
+
+        private readonly string fileName = "output.wav";
+        private readonly int duration = 5;
+
+        private AudioClip clip;
+        private bool isRecording;
+        private float time;
+        private OpenAIApi openai = new OpenAIApi();
 
         private void Start()
         {
-            recordButton.onClick.AddListener(ToggleRecording);
-        }
-
-        private void ToggleRecording()
-        {
-            if (Microphone.IsRecording(null))
+#if UNITY_WEBGL && !UNITY_EDITOR
+            dropdown.options.Add(new Dropdown.OptionData("Microphone not supported on WebGL"));
+#else
+            foreach (var device in Microphone.devices)
             {
-                Microphone.End(null);
-                SaveRecording();
+                dropdown.options.Add(new Dropdown.OptionData(device));
             }
-            else
+            recordButton.onClick.AddListener(StartRecording);
+            dropdown.onValueChanged.AddListener(ChangeMicrophone);
+
+            var index = PlayerPrefs.GetInt("user-mic-device-index");
+            dropdown.SetValueWithoutNotify(index);
+#endif
+        }
+
+        private void ChangeMicrophone(int index)
+        {
+            PlayerPrefs.SetInt("user-mic-device-index", index);
+        }
+
+        private void StartRecording()
+        {
+            isRecording = true;
+            recordButton.enabled = false;
+
+            var index = PlayerPrefs.GetInt("user-mic-device-index");
+
+#if !UNITY_WEBGL
+            clip = Microphone.Start(dropdown.options[index].text, false, duration, 44100);
+#endif
+        }
+
+        private async void EndRecording()
+        {
+            message.text = "Transcripting...";
+
+#if !UNITY_WEBGL
+            Microphone.End(null);
+#endif
+
+            byte[] data = SaveWav.Save(fileName, clip);
+
+            var req = new CreateAudioTranscriptionsRequest
             {
-                recording = Microphone.Start(null, false, 10, 44100);
-            }
+                FileData = new FileData() { Data = data, Name = "audio.wav" },
+                // File = Application.persistentDataPath + "/" + fileName,
+                Model = "whisper-1",
+                Language = "en"
+            };
+            var res = await openai.CreateAudioTranscription(req);
+
+            progressBar.fillAmount = 0;
+            message.text = res.Text;
+            recordButton.enabled = true;
         }
 
-        private void SaveRecording()
+        private void Update()
         {
-            var fileName = "recording.wav";
-            filePath = Path.Combine(Application.persistentDataPath, fileName);
-            SaveWav.Save(fileName, recording);
-            StartCoroutine(UploadRecording());
-        }
-
-        private IEnumerator UploadRecording()
-        {
-            var config = new Configuration();
-            var www = UnityWebRequest.PostWwwForm("https://api.openai.com/v1/audio/transcriptions", "");
-            www.SetRequestHeader("Authorization", "Bearer " + config.ApiKey);
-            www.uploadHandler = new UploadHandlerFile(filePath);
-            www.downloadHandler = new DownloadHandlerBuffer();
-
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
+            if (isRecording)
             {
-                Debug.LogError(www.error);
-            }
-            else
-            {
-                var response = JsonUtility.FromJson<WhisperResponse>(www.downloadHandler.text);
-                responseText.text = response.text;
-                openAIManager.AskChatGPT(aiCharacter, response.text, UpdateResponseText); // Modify this line
-            }
-        }
+                time += Time.deltaTime;
+                progressBar.fillAmount = time / duration;
 
-        private void UpdateResponseText(string response)
-        {
-            responseText.text = response;
-        }
-
-        [Serializable]
-        public class WhisperResponse
-        {
-            public string text;
+                if (time >= duration)
+                {
+                    time = 0;
+                    isRecording = false;
+                    EndRecording();
+                }
+            }
         }
     }
 }

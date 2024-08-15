@@ -22,11 +22,11 @@ MonoBehaviour:
   - Processes payments
   - Delivers the order
   - Thanks the customer and wishes them a nice day
-  background: 'Alex has been working at the NeurodiVRse Cafe for the past three years.
-    Known for their friendly demeanor and excellent customer service, Alex enjoys
-    making each customer''s day a little brighter with a perfect cup of coffee. The
-    NeurodiVRse Cafe is a cozy, popular spot in the neighborhood, celebrated for
-    its wide range of specialty coffees and comfortable atmosphere. '
+  background: 'The barista has been working at the NeurodiVRse Cafe for the past
+    three years. Known for their friendly demeanor and excellent customer service,
+    they enjoy making each customer''s day a little brighter with a perfect cup of
+    coffee. The NeurodiVRse Cafe is a cozy, popular spot in the neighborhood, celebrated
+    for its wide range of specialty coffees and comfortable atmosphere. '
   personalityTraits:
   - Friendly
   - Attentive

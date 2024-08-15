@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+/*using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using System.Threading.Tasks;
@@ -94,4 +94,55 @@ namespace LLM
     {
         public ChatMessage Message;
     }
-}
+}*/
+
+/*using System.Collections.Generic;
+using UnityEngine.Events;
+using UnityEngine;
+using System;
+using UnityEditor;
+
+namespace LLM
+{
+    public class OpenAIManager : MonoBehaviour
+    {
+        public OnResponseEvent OnResponse;
+        
+        [System.Serializable] 
+        public class OnResponseEvent : UnityEvent<string> { }
+
+        private OpenAIApi openAI;
+        private List<ChatMessage> messages = new List<ChatMessage>();
+
+        private void Awake()
+        {
+            Configuration config = new Configuration();
+            openAI = new OpenAIApi(config);
+        }
+
+        public async void AskChatGPT(AICharacter aiCharacter, string newText, Action<string> callback)
+        {
+            ChatMessage newMessage = new ChatMessage();
+            newMessage.Content = newText;
+            newMessage.Role = "user";
+
+            messages.Add(newMessage);
+
+            CreateChatCompletionRequest request = new CreateChatCompletionRequest();
+            request.Messages = messages;
+            request.Model = "gpt-3.5-turbo";
+
+            var response = await openAI.CreateChatCompletion(request);
+
+            if(response.Choices!=null && response.Choices.Count > 0)
+            {
+                var chatResponse = response.Choices[0].Message;
+                messages.Add(chatResponse);
+
+                Debug.Log(chatResponse.Content);
+
+                OnResponse.Invoke(chatResponse.Content);
+            }
+        }
+    }
+}*/

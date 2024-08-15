@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Microsoft.MixedReality.Toolkit.Experimental.UI;
 
 public class ShowKeyboard : MonoBehaviour
 {
-    private TMP_InputField inputField;
+    private InputField inputField;
     
     void Start()
     {
-        inputField = GetComponent<TMP_InputField>();
-        inputField.onSelect.AddListener(XRGrabInteractableTwoAttach => OpenKeyboard());
+        inputField = GetComponent<InputField>();
+        inputField.onValueChanged.AddListener(value => OpenKeyboard());
     }
 
     public void OpenKeyboard()

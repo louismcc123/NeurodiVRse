@@ -1,6 +1,6 @@
-using UnityEngine;
-using UnityEngine.UI;
+/*using UnityEngine;
 using TMPro;
+using SpeechToText;
 
 namespace LLM
 {
@@ -12,7 +12,8 @@ namespace LLM
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private TMP_Text outputText;
         [SerializeField] private OpenAIManager openAIManager;
-        [SerializeField] private AICharacter aiCharacter; // Add this line
+        [SerializeField] private Whisper whisper;
+        [SerializeField] private AICharacter aiCharacter;
 
         private void OnEnable()
         {
@@ -36,7 +37,13 @@ namespace LLM
             }
 
             outputText.text = "Loading...";
-            openAIManager.AskChatGPT(aiCharacter, userInput, UpdateOutputText); // Modify this line
+
+            openAIManager.AskChatGPT(aiCharacter, userInput, UpdateOutputText);
+        }
+
+        public void OnRecordButtonClicked()
+        {
+            //whisper.ToggleRecording();
         }
 
         public void OnCloseButtonClicked()
@@ -60,4 +67,4 @@ namespace LLM
             keyboard.SetActive(false);
         }
     }
-}
+}*/

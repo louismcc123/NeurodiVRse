@@ -1,35 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+/*using System;
 using System.IO;
+using UnityEngine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace LLM
 {
     public class Configuration
     {
-        public string ApiKey { get; private set; }
+        public Auth Auth { get; }
 
-        public Configuration()
+        /// Used for serializing and deserializing PascalCase request object fields into snake_case format for JSON. Ignores null fields when creating JSON strings.
+        private readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings()
         {
-            var userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            var authPath = Path.Combine(userPath, ".openai/auth.json");
-            if (File.Exists(authPath))
+            NullValueHandling = NullValueHandling.Ignore,
+            ContractResolver = new DefaultContractResolver()
             {
-                var json = File.ReadAllText(authPath);
-                var configData = JsonUtility.FromJson<ConfigData>(json);
-                ApiKey = configData.apiKey;
+                NamingStrategy = new CustomNamingStrategy()
+            }
+        };
+
+        public Configuration(string apiKey = null)
+        {
+            if (apiKey == null)
+            {
+                var userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                var authPath = $"{userPath}/.openai/auth.json";
+
+                if (File.Exists(authPath))
+                {
+                    var json = File.ReadAllText(authPath);
+                    Auth = JsonConvert.DeserializeObject<Auth>(json, jsonSerializerSettings);
+                }
+                else
+                {
+                    Debug.LogError("API Key is null and auth.json does not exist. Please check https://github.com/srcnalt/OpenAI-Unity#saving-your-credentials");
+                }
             }
             else
             {
-                Debug.LogError("Configuration file not found.");
+                Auth = new Auth()
+                {
+                    ApiKey = apiKey,
+                };
             }
         }
-
-        [Serializable]
-        private class ConfigData
-        {
-            public string apiKey;
-        }
     }
-}
+}*/
