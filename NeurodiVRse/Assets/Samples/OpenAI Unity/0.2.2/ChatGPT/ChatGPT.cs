@@ -14,6 +14,8 @@ namespace OpenAI
         [SerializeField] private RectTransform sent;
         [SerializeField] private RectTransform received;
 
+        [SerializeField] private NpcAiDialogue npcAiDialogue;
+
         private float height;
         private OpenAIApi openai = new OpenAIApi();
 
@@ -47,28 +49,22 @@ namespace OpenAI
 
         private void AppendMessage(ChatMessage message)
         {
-            // Clear existing messages from the ScrollRect content
             foreach (Transform child in scroll.content)
             {
                 Destroy(child.gameObject);
             }
 
-            // Log the message being appended
             Debug.Log($"Appending message: {message.Content}");
 
-            // Instantiate the message UI element and set its text
             var item = Instantiate(message.Role == "user" ? sent : received, scroll.content);
             item.GetChild(0).GetChild(0).GetComponent<Text>().text = message.Content;
 
-            // Reset the content height to match the new message
             height = item.sizeDelta.y;
             scroll.content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
 
-            // Rebuild the layout to ensure correct positioning
             LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
             LayoutRebuilder.ForceRebuildLayoutImmediate(item);
 
-            // Scroll to the top to show the new message
             scroll.verticalNormalizedPosition = 1;
 
             Debug.Log($"Message appended. New content height: {height}");
@@ -103,6 +99,7 @@ namespace OpenAI
             inputField.enabled = false;
 
             Debug.Log("Sending request to OpenAI...");
+
             var completionResponse = await openai.CreateChatCompletion(new CreateChatCompletionRequest()
             {
                 Model = "gpt-4o-mini",
@@ -111,6 +108,8 @@ namespace OpenAI
 
             if (completionResponse.Choices != null && completionResponse.Choices.Count > 0)
             {
+                npcAiDialogue.SetNpcTalking(true);
+
                 var message = completionResponse.Choices[0].Message;
                 message.Content = message.Content.Trim();
 
@@ -121,8 +120,12 @@ namespace OpenAI
             }
             else
             {
+                npcAiDialogue.SetNpcTalking(false);
+
                 Debug.LogWarning("No text was generated from this prompt.");
             }
+
+            npcAiDialogue.SetNpcTalking(false);
 
             send.enabled = true;
             enter.enabled = true;
