@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CashPayment : MonoBehaviour
 {
-    public DialogueManager dialogueManager;
     public CashManager cashManager;
 
     private void OnTriggerEnter(Collider other)

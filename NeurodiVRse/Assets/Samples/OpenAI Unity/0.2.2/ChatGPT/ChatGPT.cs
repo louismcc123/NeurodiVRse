@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -29,23 +29,6 @@ namespace OpenAI
             send.onClick.AddListener(SendReply);
             enter.onClick.AddListener(SendReply);
         }
-
-        /*private void AppendMessage(ChatMessage message)
-        {
-            Debug.Log($"Appending message: {message.Content}");
-
-            scroll.content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0);
-
-            var item = Instantiate(message.Role == "user" ? sent : received, scroll.content);
-            item.GetChild(0).GetChild(0).GetComponent<Text>().text = message.Content;
-            item.anchoredPosition = new Vector2(0, -height);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(item);
-            height += item.sizeDelta.y;
-            scroll.content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
-            scroll.verticalNormalizedPosition = 0;
-
-            Debug.Log($"Message appended. New content height: {height}");
-        }*/
 
         private void AppendMessage(ChatMessage message)
         {
@@ -130,6 +113,184 @@ namespace OpenAI
             send.enabled = true;
             enter.enabled = true;
             inputField.enabled = true;
+        }
+    }
+}*/
+
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+
+namespace OpenAI
+{
+    public class ChatGPT : MonoBehaviour
+    {
+        [SerializeField] protected InputField inputField;
+        [SerializeField] protected Button send;
+        [SerializeField] protected Button enter;
+        [SerializeField] protected ScrollRect scroll;
+
+        [SerializeField] protected RectTransform sent;
+        [SerializeField] protected RectTransform received;
+
+        [SerializeField] protected NpcAiDialogue npcAiDialogue;
+        [SerializeField] protected AdviceManager adviceManager;
+
+        [SerializeField] protected GameObject openAICanvas;
+        [SerializeField] protected GameObject npcDialogueCanvas;
+
+        protected float height;
+        protected OpenAIApi openai = new OpenAIApi();
+
+        protected List<ChatMessage> messages = new List<ChatMessage>();
+        protected string prompt = "Act as an NPC in a VR environment. Respond to the user as appropriate for your role. Never break character or say that you are artificial intelligence.";
+
+        private bool isDialoguePaused = false;
+
+        protected virtual void Start()
+        {
+            Debug.Log("ChatGPT script started.");
+
+            send.onClick.AddListener(SendReply);
+            enter.onClick.AddListener(SendReply);
+        }
+
+        protected async void SendReply()
+        {            
+            Debug.Log("SendReply triggered.");
+
+            if (isDialoguePaused)
+            {
+                Debug.Log("Dialogue paused.");
+                return;
+            }
+
+            var newMessage = new ChatMessage()
+            {
+                Role = "user",
+                Content = inputField.text
+            };
+
+            AppendMessage(newMessage);
+            Debug.Log($"User message added: {newMessage.Content}");
+
+            if (messages.Count == 0)
+            {
+                newMessage.Content = prompt + "\n" + inputField.text;
+                Debug.Log("Initial prompt combined with user input.");
+            }
+
+            messages.Add(newMessage);
+            Debug.Log($"Total messages count: {messages.Count}");
+
+            send.enabled = false;
+            enter.enabled = false;
+            inputField.text = "";
+            inputField.enabled = false;
+
+            Debug.Log("Sending request to OpenAI...");
+
+            var completionResponse = await openai.CreateChatCompletion(new CreateChatCompletionRequest()
+            {
+                Model = "gpt-3.5-turbo",
+                Messages = messages
+            });
+
+            if (completionResponse.Choices != null && completionResponse.Choices.Count > 0)
+            {
+                npcAiDialogue.SetNpcTalking(true);
+
+                var message = completionResponse.Choices[0].Message;         
+                message.Content = message.Content.Trim();
+                Debug.Log($"Received response: {message.Content}");
+
+                if (completionResponse.Choices.Count > 1)
+                {
+                    var advice = completionResponse.Choices[1].Message;
+                    advice.Content = advice.Content.Trim();
+                    DisplayAdvice(advice.Content);
+                    Debug.Log($"Received advice: {advice.Content}");
+                }
+                else
+                {
+                    Debug.Log("No advice message received.");
+                }
+
+                Debug.Log($"Received message: {message.Content}");
+
+                HandleResponse(message.Content);
+
+                messages.Add(message);
+                AppendMessage(message);
+            }
+            else
+            {
+                Debug.LogWarning("No text was generated from this prompt.");
+            }
+
+            npcAiDialogue.SetNpcTalking(false);
+
+            send.enabled = true;
+            enter.enabled = true;
+            inputField.enabled = true;
+        }
+
+        protected void AppendMessage(ChatMessage message)
+        {
+            foreach (Transform child in scroll.content)
+            {
+                Destroy(child.gameObject);
+            }
+
+            Debug.Log($"Appending message: {message.Content}");
+
+            var item = Instantiate(message.Role == "user" ? sent : received, scroll.content);
+            item.GetChild(0).GetChild(0).GetComponent<Text>().text = message.Content;
+
+            height = item.sizeDelta.y;
+            scroll.content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(item);
+
+            scroll.verticalNormalizedPosition = 1;
+
+            Debug.Log($"Message appended. New content height: {height}");
+        }
+
+        protected virtual void HandleResponse(string responseContent)
+        {
+
+        }
+
+        private void DisplayAdvice(string adviceContent)
+        {
+            if (!string.IsNullOrEmpty(adviceContent))
+            {
+                adviceManager.DisplayAdvice(adviceContent);
+            }
+        }
+
+        public void PauseDialogue()
+        {
+            isDialoguePaused = true;
+            Debug.Log("Dialogue paused.");
+
+            npcAiDialogue.SetNpcTalking(false);
+
+            openAICanvas.SetActive(false);
+            npcDialogueCanvas.SetActive(false);
+        }
+
+        public void ResumeDialogue()
+        {
+            isDialoguePaused = false;
+            Debug.Log("Dialogue resumed.");
+
+            npcAiDialogue.SetNpcTalking(true);
+
+            openAICanvas.SetActive(true);
+            npcDialogueCanvas.SetActive(true);
         }
     }
 }

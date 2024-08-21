@@ -10,8 +10,8 @@ public class BaristaBehaviour : MonoBehaviour
     public bool playerInRange = false;
     private bool hasMovedToWaypoint = false;
 
-    public CharacterController characterController;
     private NavMeshAgent agent;
+    public CharacterController characterController;
 
     private void Awake()
     {
