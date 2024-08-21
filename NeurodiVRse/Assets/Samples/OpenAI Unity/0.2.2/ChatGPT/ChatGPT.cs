@@ -125,6 +125,8 @@ namespace OpenAI
 {
     public class ChatGPT : MonoBehaviour
     {
+        [SerializeField] protected GameObject openAICanvas;
+        [SerializeField] protected GameObject npcDialogueCanvas;
         [SerializeField] protected InputField inputField;
         [SerializeField] protected Button send;
         [SerializeField] protected Button enter;
@@ -133,11 +135,11 @@ namespace OpenAI
         [SerializeField] protected RectTransform sent;
         [SerializeField] protected RectTransform received;
 
+        [SerializeField] private string npcPrompt;
+
         [SerializeField] protected NpcAiDialogue npcAiDialogue;
         [SerializeField] protected AdviceManager adviceManager;
 
-        [SerializeField] protected GameObject openAICanvas;
-        [SerializeField] protected GameObject npcDialogueCanvas;
 
         protected float height;
         protected OpenAIApi openai = new OpenAIApi();
@@ -150,6 +152,8 @@ namespace OpenAI
         protected virtual void Start()
         {
             Debug.Log("ChatGPT script started.");
+
+            prompt = npcPrompt;
 
             send.onClick.AddListener(SendReply);
             enter.onClick.AddListener(SendReply);
