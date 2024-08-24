@@ -34,6 +34,7 @@ public class TTSBridge : MonoBehaviour
 
         string[] messages = message.Split('.');
         ttsSpeaker.StartCoroutine(ttsSpeaker.SpeakQueuedAsync(messages));
+        OnSpeechComplete();
     }
 
     private void OnSpeechComplete()

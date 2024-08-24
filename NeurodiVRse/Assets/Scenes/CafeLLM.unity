@@ -18864,6 +18864,7 @@ MonoBehaviour:
   openAICanvas: {fileID: 704845196}
   npcDialogueCanvas: {fileID: 936125063}
   inputField: {fileID: 1933390815}
+  keyboard: {fileID: 1793868075}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
   scroll: {fileID: 545093153}
@@ -19016,6 +19017,7 @@ MonoBehaviour:
   openAICanvas: {fileID: 704845196}
   npcDialogueCanvas: {fileID: 395607214}
   inputField: {fileID: 1933390815}
+  keyboard: {fileID: 1793868075}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
   scroll: {fileID: 385889721}
@@ -19402,6 +19404,7 @@ MonoBehaviour:
   openAICanvas: {fileID: 0}
   npcDialogueCanvas: {fileID: 0}
   inputField: {fileID: 1933390815}
+  keyboard: {fileID: 0}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
   scroll: {fileID: 1425051486}
@@ -25456,7 +25459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feebc05311f7734f951e9a6c686d643, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1287707398}
+  player: {fileID: 877075189}
   rotationSpeed: 5
   playerInRange: 0
   characterController: {fileID: 1291798440}
@@ -25634,6 +25637,7 @@ MonoBehaviour:
   openAICanvas: {fileID: 704845196}
   npcDialogueCanvas: {fileID: 401390228}
   inputField: {fileID: 1933390815}
+  keyboard: {fileID: 1793868075}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
   scroll: {fileID: 1425051486}
@@ -27863,6 +27867,7 @@ MonoBehaviour:
   openAICanvas: {fileID: 704845196}
   npcDialogueCanvas: {fileID: 172395011}
   inputField: {fileID: 1933390815}
+  keyboard: {fileID: 1793868075}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
   scroll: {fileID: 607517606}
@@ -71714,7 +71719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &294966540301639361
 GameObject:
   m_ObjectHideFlags: 0
