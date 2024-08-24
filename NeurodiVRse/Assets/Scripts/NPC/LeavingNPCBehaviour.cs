@@ -4,11 +4,14 @@ using System.Collections;
 public class LeavingNPCBehaviour : MonoBehaviour
 {
     public GameObject door;
-    public CharacterController characterController;
 
-    private Door doorScript;
     private bool isMovingToDoor = false;
     private bool isLeaving = false;
+
+    private Door doorScript;
+
+    public CharacterController characterController;
+    public NpcAiDialogue NpcAiDialogue;
 
     private void Awake()
     {
@@ -54,5 +57,31 @@ public class LeavingNPCBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         Destroy(gameObject);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (NpcAiDialogue != null)
+            {
+                NpcAiDialogue.playerInRange = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (NpcAiDialogue != null)
+            {
+                NpcAiDialogue.playerInRange = false;
+            }
+
+            characterController.ResumeMovement();
+            characterController.agent.updateRotation = false;
+        }
     }
 }

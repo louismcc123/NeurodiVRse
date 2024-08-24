@@ -93,7 +93,9 @@ namespace OpenAI
 
         private IEnumerator SayThankYou()
         {
-            npcAiDialogue.SetNpcTalking(true);
+            //npcAiDialogue.SetNpcTalking(true);
+            npcAiDialogue.isNpcTalking = true;
+
             AppendMessage(new ChatMessage { Role = "npc", Content = "Thank you. Your coffee will be ready in just a moment." });
 
             yield return new WaitForSeconds(2f);

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class TypingNPCBehaviour : MonoBehaviour
 {
-    private Animator animator;
     public float typingDuration = 30f; 
     public float idleDuration = 10f;
+
+    private Animator animator;
+    private NpcAiDialogue npcAiDialogue;
 
     private void Awake()
     {
@@ -31,6 +33,29 @@ public class TypingNPCBehaviour : MonoBehaviour
 
             animator.SetBool("IsTyping", false);
             yield return new WaitForSeconds(idleDuration);
+        }
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (npcAiDialogue != null)
+            {
+                npcAiDialogue.playerInRange = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (npcAiDialogue != null)
+            {
+                npcAiDialogue.playerInRange = false;
+            }
         }
     }
 }

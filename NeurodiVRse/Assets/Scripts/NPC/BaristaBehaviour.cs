@@ -22,7 +22,7 @@ public class BaristaBehaviour : MonoBehaviour
     {
         if (playerInRange)
         {
-            FacePlayer();
+            FaceTowardsPlayer();
 
             if (!hasMovedToWaypoint)
             {
@@ -32,7 +32,7 @@ public class BaristaBehaviour : MonoBehaviour
         }
     }
 
-    private void FacePlayer()
+    private void FaceTowardsPlayer()
     {
         if (player == null) 
         { 
@@ -45,13 +45,6 @@ public class BaristaBehaviour : MonoBehaviour
             return;
         }
 
-        if (agent != null)
-        {
-            agent.updateRotation = false;
-        }
-
-        Vector3 direction = (player.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+        characterController.FacePlayer();
     }
 }

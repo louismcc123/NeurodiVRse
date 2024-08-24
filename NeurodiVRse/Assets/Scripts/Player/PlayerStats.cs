@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        maxScore = 100f;
+        maxScore = 5f;
         currentScore = maxScore;
         //scoreBar.SetSliderMax(maxScore);
         //scoreBar.SetSlider(currentScore);

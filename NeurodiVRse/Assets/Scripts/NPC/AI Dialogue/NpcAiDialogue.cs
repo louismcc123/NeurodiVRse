@@ -36,56 +36,65 @@ public class NpcAiDialogue : MonoBehaviour
 {
     [SerializeField] private GameObject openAICanvas;
     [SerializeField] private GameObject NPCSpeechCanvas;
-    //[SerializeField] private BaristaBehaviour baristaBehaviour;
+    [SerializeField] private GameObject interactCanvas;
     [SerializeField] private InputActionReference aButton;
     
-    public Canvas interactCanvas;
     public bool playerInRange = false;
-    private bool isNpcTalking = false;
+    public bool isNpcTalking = false;
 
     private Animator animator;
     private ChatGPT chatGPT;
 
+    public CharacterController characterController;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        if (animator == null)
-        {
-            Debug.LogError(gameObject.name + ": Animator component not found on any child GameObject.");
-        }
-
-        HideInteractCanvas();
+        chatGPT = GetComponent<ChatGPT>();
     }
-    
+
     private void Update()
     {
         if (playerInRange)
         {
+            //Debug.Log(gameObject.name + ": Player is in range.");
+
             if (this.gameObject.name == "Barista NPC")
             {
-                Interaction();
+                Debug.Log("Interacting with Barista NPC.");
+
+                Interact();
             }
             else
             {
                 ShowInteractCanvas();
 
                 if (aButton.action.triggered)
-                {                    
+                {
+                    Debug.Log(gameObject.name + ": A button pressed. Interacting with NPC.");
+
+                    if (this.gameObject.name == "Leaving NPC")
+                    {
+                        characterController.PauseMovement();
+                        characterController.FacePlayer();
+                    }
+
                     HideInteractCanvas();
-                    Interaction();
+                    Interact();
                 }
             }
         }
         else
         {
-            HideInteractCanvas();
-            NPCSpeechCanvas.SetActive(false);
-            openAICanvas.SetActive(false);
+            //Debug.Log(gameObject.name + ": Player is not in range.");
+            EndInteraction();
         }
     }
 
-    private void Interaction()
+    private void Interact()
     {
+        Debug.Log($"{gameObject.name}: Interact called at {Time.time}");
+
         openAICanvas.SetActive(true);
 
         if (isNpcTalking)
@@ -98,27 +107,32 @@ public class NpcAiDialogue : MonoBehaviour
         {
             NPCSpeechCanvas.SetActive(false);
             animator.SetBool("IsTalking", false);
+            Debug.Log(gameObject.name + ": NPC is talking, showing NPCSpeechCanvas.");
+
         }
+    }
+
+    private void EndInteraction()
+    {
+        Debug.Log($"{gameObject.name}: EndInteraction called at {Time.time}");
+
+        HideInteractCanvas();
+        NPCSpeechCanvas.SetActive(false);
+        openAICanvas.SetActive(false);
+        chatGPT.DeactivateNPC();
     }
 
     private void ShowInteractCanvas()
     {
-        if (interactCanvas != null)
-        {
-            interactCanvas.gameObject.SetActive(true);
-        }
+        Debug.Log(gameObject.name + ": Showing interact canvas.");
+
+        interactCanvas.SetActive(true);
     }
 
     private void HideInteractCanvas()
     {
-        if (interactCanvas != null)
-        {
-            interactCanvas.gameObject.SetActive(false);
-        }
-    }
+        //Debug.Log(gameObject.name + ": Hiding interact canvas.");
 
-    public void SetNpcTalking(bool talking)
-    {
-        isNpcTalking = talking;
+        interactCanvas.SetActive(false);
     }
 }

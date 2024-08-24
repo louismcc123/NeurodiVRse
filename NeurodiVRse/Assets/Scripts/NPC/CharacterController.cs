@@ -72,13 +72,15 @@ using UnityEngine.AI;
 
 public class CharacterController : MonoBehaviour
 {
+    public Transform player;
     public Transform[] waypoints;
     public float rotationSpeed = 5.0f;
     private int currentWaypoint = 0;
     private bool isMoving = false;
     private bool hasReachedCurrentWaypoint = false;
 
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
+
     private Animator animator;
 
     private void Awake()
@@ -133,6 +135,39 @@ public class CharacterController : MonoBehaviour
                 hasReachedCurrentWaypoint = true;
                 Debug.Log(gameObject.name + ": Reached waypoint: " + currentWaypoint);
             }
+        }
+    }
+
+    public void FacePlayer()
+    {
+        if (agent != null)
+        {
+            agent.updateRotation = false;
+        }
+
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    public void PauseMovement()
+    {
+        if (isMoving)
+        {
+            agent.isStopped = true;
+            isMoving = false;
+            Debug.Log(gameObject.name + ": Movement paused at waypoint: " + currentWaypoint);
+        }
+    }
+
+    public void ResumeMovement()
+    {
+        if (!isMoving)
+        {
+            agent.isStopped = false; 
+            isMoving = true;
+            Debug.Log(gameObject.name + ": Resuming movement towards waypoint: " + currentWaypoint);
+            agent.SetDestination(waypoints[currentWaypoint].position);
         }
     }
 
