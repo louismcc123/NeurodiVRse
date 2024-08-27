@@ -24847,7 +24847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865edbac6dae9794f8a0fce3e144a458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 877075189}
   waypoints:
   - {fileID: 915855789}
   - {fileID: 1987958916}
@@ -26198,8 +26198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Stranger
-  initialDialogueNode: {fileID: 0}
-  dialogueManager: {fileID: 0}
+  initialDialogueNode: {fileID: 11400000, guid: c2ced77519f78bf44ae9a752e09b9dba, type: 2}
+  dialogueManager: {fileID: 1380370718}
 --- !u!54 &1380370721
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
+  m_Name: How are you
+  m_EditorClassIdentifier: 
+  dialogueText: How are you?
+  dialogueAudio: {fileID: 0}
+  responses:
+  - {fileID: 11400000, guid: 0640bca5d4a6c604bb2f633e6d7b631b, type: 2}
+  - {fileID: 11400000, guid: 8be9a839d0afca44898078e7190dcec3, type: 2}
+  - {fileID: 11400000, guid: ecc246ec0eb607447b114e83334cd742, type: 2}
