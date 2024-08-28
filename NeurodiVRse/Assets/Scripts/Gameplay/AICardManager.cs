@@ -10,7 +10,12 @@ public class AICardManager : MonoBehaviour
 
     private GameObject instantiatedCard;
 
-    [SerializeField] private ChatGPT chatGPT;
+    private BaristaChatGPT baristaChatGPT;
+
+    private void Start()
+    {
+        baristaChatGPT = GetComponent<BaristaChatGPT>();
+    }
 
     public void InstantiateCard()
     {
@@ -35,14 +40,15 @@ public class AICardManager : MonoBehaviour
 
     public void OnCardTapped()
     {
-        if (chatGPT == null)
+        if (baristaChatGPT == null)
         {
             Debug.LogError("ChatGPT is not assigned!");
             return;
         }
 
-        chatGPT.ResumeDialogue();
+        //chatGPT.ResumeDialogue();
         StartCoroutine(DestroyInstantiatedCard());
+        baristaChatGPT.StartCoroutine(baristaChatGPT.SayThankYou());
     }
     private IEnumerator DestroyInstantiatedCard()
     {

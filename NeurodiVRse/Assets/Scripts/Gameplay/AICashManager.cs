@@ -10,7 +10,12 @@ public class AICashManager : MonoBehaviour
 
     private GameObject instantiatedCash;
 
-    [SerializeField] private ChatGPT chatGPT;
+    [SerializeField] private BaristaChatGPT baristaChatGPT;
+
+    private void Start()
+    {
+        baristaChatGPT = GetComponent<BaristaChatGPT>();
+    }
 
     public void InstantiateCash()
     {
@@ -39,14 +44,15 @@ public class AICashManager : MonoBehaviour
 
     public void OnCashHandedOver()
     {
-        if (chatGPT == null)
+        if (baristaChatGPT == null)
         {
             Debug.LogError("ChatGPT is not assigned!");
             return;
         }
 
-        chatGPT.ResumeDialogue();
+        //baristaChatGPT.ResumeDialogue();
         StartCoroutine(DestroyInstantiatedCash());
+        baristaChatGPT.StartCoroutine(baristaChatGPT.SayThankYou());
     }
 
     private IEnumerator DestroyInstantiatedCash()

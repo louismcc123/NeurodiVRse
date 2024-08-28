@@ -79,19 +79,19 @@ namespace OpenAI
         {
             paymentCanvas.SetActive(false);
             cardManager.InstantiateCard();
-            currentState = State.Idle;
-            StartCoroutine(StartCoffeePreparationSequence());
+            currentState = State.AwaitingPayment;
+            //StartCoroutine(StartCoffeePreparationSequence());
         }
 
         private void OnCashSelected()
         {
             paymentCanvas.SetActive(false);
             cashManager.InstantiateCash();
-            currentState = State.Idle;
-            StartCoroutine(StartCoffeePreparationSequence());
+            currentState = State.AwaitingPayment;
+            //StartCoroutine(StartCoffeePreparationSequence());
         }
 
-        private IEnumerator SayThankYou()
+        public IEnumerator SayThankYou()
         {
             //npcAiDialogue.SetNpcTalking(true);
             npcAiDialogue.isNpcTalking = true;
@@ -101,6 +101,8 @@ namespace OpenAI
             yield return new WaitForSeconds(2f);
 
             PauseDialogue();
+
+            StartCoroutine(StartCoffeePreparationSequence());
         }
 
         private IEnumerator StartCoffeePreparationSequence()

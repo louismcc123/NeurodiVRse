@@ -18870,13 +18870,13 @@ MonoBehaviour:
   scroll: {fileID: 545093153}
   sent: {fileID: 8660877164928630359, guid: 53cd26a6eefa5a74086203cd118a04d3, type: 3}
   received: {fileID: 961534450149497043, guid: adc0146c2853ed1418133faaf4379eb1, type: 3}
+  npcAiDialogue: {fileID: 978863318}
+  adviceManager: {fileID: 1742215218}
   npcPrompt: "You are a relaxed coffee lover enjoying some quiet time at the caf\xE9.
     Respond to the user as if you are in a peaceful mood and happy to chat. Offer
     friendly and warm responses, showing that you appreciate the company and are
     open to discussing various topics, from the coffee you're drinking to the ambiance
     of the caf\xE9."
-  npcAiDialogue: {fileID: 978863318}
-  adviceManager: {fileID: 1742215218}
   ttsBridge: {fileID: 1167268494}
 --- !u!114 &978863318
 MonoBehaviour:
@@ -19023,14 +19023,14 @@ MonoBehaviour:
   scroll: {fileID: 385889721}
   sent: {fileID: 8660877164928630359, guid: 53cd26a6eefa5a74086203cd118a04d3, type: 3}
   received: {fileID: 961534450149497043, guid: adc0146c2853ed1418133faaf4379eb1, type: 3}
+  npcAiDialogue: {fileID: 980113133}
+  adviceManager: {fileID: 1742215218}
   npcPrompt: "You are a focused freelancer working on your laptop while enjoying
     a coffee. Respond to the user as if you are deeply engrossed in your work but
     willing to give short, courteous responses. If asked about your work, briefly
     explain that you are working on a project and appreciate the caf\xE9\u2019s environment
     for its conducive atmosphere. Indicate that you prefer not to be disturbed unless
     necessary."
-  npcAiDialogue: {fileID: 980113133}
-  adviceManager: {fileID: 1742215218}
   ttsBridge: {fileID: 1167268494}
 --- !u!114 &980113135
 MonoBehaviour:
@@ -19410,9 +19410,9 @@ MonoBehaviour:
   scroll: {fileID: 1425051486}
   sent: {fileID: 8660877164928630359, guid: 53cd26a6eefa5a74086203cd118a04d3, type: 3}
   received: {fileID: 961534450149497043, guid: adc0146c2853ed1418133faaf4379eb1, type: 3}
-  npcPrompt: 
   npcAiDialogue: {fileID: 0}
   adviceManager: {fileID: 0}
+  npcPrompt: 
   ttsBridge: {fileID: 0}
 --- !u!1 &1023942244
 GameObject:
@@ -25606,7 +25606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cashPrefab: {fileID: 2768528169081939020, guid: af9af0f94ae1627429d28872b01893b6, type: 3}
   spawnTransform: {fileID: 510565242}
-  chatGPT: {fileID: 1291798448}
+  baristaChatGPT: {fileID: 0}
 --- !u!114 &1291798447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25621,7 +25621,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 3174607522625009856, guid: d945427a9db67374a8466e46d37fd685, type: 3}
   spawnTransform: {fileID: 510565242}
-  chatGPT: {fileID: 1291798448}
 --- !u!114 &1291798448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25643,13 +25642,13 @@ MonoBehaviour:
   scroll: {fileID: 1425051486}
   sent: {fileID: 8660877164928630359, guid: 53cd26a6eefa5a74086203cd118a04d3, type: 3}
   received: {fileID: 961534450149497043, guid: adc0146c2853ed1418133faaf4379eb1, type: 3}
+  npcAiDialogue: {fileID: 1291798445}
+  adviceManager: {fileID: 1742215218}
   npcPrompt: You are a barista at a cafe called Neurodiverse Cafe. Respond to the
     user as appropriate for this character. Do not break character or indicate that
     you are an artificial intelligence. When appropriate (for example, after the
     customer has made their order), tell them the cost of the items and ask them
     if they would like to pay by card or cash.
-  npcAiDialogue: {fileID: 1291798445}
-  adviceManager: {fileID: 1742215218}
   ttsBridge: {fileID: 1167268494}
   cardManager: {fileID: 1291798447}
   cashManager: {fileID: 1291798446}
@@ -27873,13 +27872,13 @@ MonoBehaviour:
   scroll: {fileID: 607517606}
   sent: {fileID: 8660877164928630359, guid: 53cd26a6eefa5a74086203cd118a04d3, type: 3}
   received: {fileID: 961534450149497043, guid: adc0146c2853ed1418133faaf4379eb1, type: 3}
+  npcAiDialogue: {fileID: 1380370725}
+  adviceManager: {fileID: 1742215218}
   npcPrompt: "You are a person about to leave the caf\xE9, focused on texting on
     your phone. Respond to the user with brief and distracted replies, as you're
     preoccupied with finishing your text messages. Show that you are in a hurry and
     provide short answers, indicating that you\u2019re on your way out and not available
     for a lengthy conversation."
-  npcAiDialogue: {fileID: 1380370725}
-  adviceManager: {fileID: 1742215218}
   ttsBridge: {fileID: 1167268494}
 --- !u!1001 &1381704495
 PrefabInstance:

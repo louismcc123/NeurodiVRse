@@ -17,15 +17,13 @@ namespace OpenAI
         [SerializeField] protected Button send;
         [SerializeField] protected Button enter;
         [SerializeField] protected ScrollRect scroll;
-
         [SerializeField] protected RectTransform sent;
         [SerializeField] protected RectTransform received;
-
-        [SerializeField] private string npcPrompt;
 
         [Header("NPC AI Dialogue")]
         [SerializeField] protected NpcAiDialogue npcAiDialogue;
         [SerializeField] protected AdviceManager adviceManager;
+        [SerializeField] private string npcPrompt;
 
         [Header("TTS Integration")]
         [SerializeField] private TTSBridge ttsBridge;
@@ -49,7 +47,11 @@ namespace OpenAI
         {
             Debug.Log("ChatGPT script started.");
 
-            prompt = npcPrompt;
+            if (!string.IsNullOrEmpty(npcPrompt))
+            {
+                prompt = npcPrompt;
+            }
+
             inputField.enabled = true;
 
             send.onClick.AddListener(SendReply);
