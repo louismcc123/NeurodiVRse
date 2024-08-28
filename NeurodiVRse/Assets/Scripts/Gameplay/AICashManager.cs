@@ -10,7 +10,7 @@ public class AICashManager : MonoBehaviour
 
     private GameObject instantiatedCash;
 
-    [SerializeField] private BaristaChatGPT baristaChatGPT;
+    private BaristaChatGPT baristaChatGPT;
 
     private void Start()
     {

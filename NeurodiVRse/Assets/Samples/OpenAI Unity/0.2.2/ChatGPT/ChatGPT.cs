@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 using System;
 
@@ -16,9 +17,7 @@ namespace OpenAI
         [SerializeField] protected GameObject keyboard;
         [SerializeField] protected Button send;
         [SerializeField] protected Button enter;
-        [SerializeField] protected ScrollRect scroll;
-        [SerializeField] protected RectTransform sent;
-        [SerializeField] protected RectTransform received;
+        [SerializeField] protected TextMeshProUGUI messageText;
 
         [Header("NPC AI Dialogue")]
         [SerializeField] protected NpcAiDialogue npcAiDialogue;
@@ -74,8 +73,8 @@ namespace OpenAI
                 Content = inputField.text
             };
 
-            AppendMessage(newMessage);
-            Debug.Log($"User message added: {newMessage.Content}");
+            //AppendMessage(newMessage);
+            //Debug.Log($"User message added: {newMessage.Content}");
 
             if (messages.Count == 0)
             {
@@ -147,27 +146,11 @@ namespace OpenAI
         protected void AppendMessage(ChatMessage message)
         {
             npcAiDialogue.isNpcTalking = true;
-
-            foreach (Transform child in scroll.content)
-            {
-                Destroy(child.gameObject);
-            }
+            messageText.text = string.Empty;
+            messageText.text = message.Content;
 
             Debug.Log($"Appending message: {message.Content}");
-
-            var item = Instantiate(message.Role == "user" ? sent : received, scroll.content);
-            item.GetChild(0).GetChild(0).GetComponent<Text>().text = message.Content;
-
-            height = item.sizeDelta.y;
-            scroll.content.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
-
-            LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(item);
-
-            scroll.verticalNormalizedPosition = 1;
-
-            Debug.Log($"Message appended. New content height: {height}");
-            //npcAiDialogue.isNpcTalking = false;
+            Debug.Log($"TextMeshProUGUI Content: {messageText.text}");
         }
 
         protected virtual void HandleResponse(string responseContent)

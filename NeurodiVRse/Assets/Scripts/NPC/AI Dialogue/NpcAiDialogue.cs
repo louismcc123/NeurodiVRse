@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class NpcAiDialogue : MonoBehaviour
 {
     [SerializeField] private GameObject openAICanvas;
-    [SerializeField] private GameObject NPCSpeechCanvas;
+    [SerializeField] private GameObject NPCDialogueCanvas;
     [SerializeField] private GameObject interactCanvas;
     [SerializeField] private InputActionReference aButton;
     
@@ -62,6 +62,8 @@ public class NpcAiDialogue : MonoBehaviour
             //Debug.Log(gameObject.name + ": Player is not in range.");
             EndInteraction();
         }
+
+        UpdateTalking();
     }
 
     private void Interact()
@@ -72,22 +74,7 @@ public class NpcAiDialogue : MonoBehaviour
         chatGPT.ActivateNPC();
         openAICanvas.SetActive(true);
 
-        if (isNpcTalking)
-        {
-            //Debug.Log(gameObject.name + ": NPC is talking, showing NPCSpeechCanvas.");
-
-            NPCSpeechCanvas.SetActive(true);
-            animator.SetBool("IsTalking", true);
-
-            StartCoroutine(StopTalkingAfterDelay(8f));
-        }
-        else
-        {
-            NPCSpeechCanvas.SetActive(false);
-            animator.SetBool("IsTalking", false);
-            //Debug.Log(gameObject.name + ": NPC isnt talking, hiding NPCSpeechCanvas.");
-
-        }
+        UpdateTalking();
     }
 
     private void EndInteraction()
@@ -95,7 +82,7 @@ public class NpcAiDialogue : MonoBehaviour
         //Debug.Log($"{gameObject.name}: EndInteraction called at {Time.time}");
         isInteracting = false;
         HideInteractCanvas();
-        NPCSpeechCanvas.SetActive(false);
+        NPCDialogueCanvas.SetActive(false);
         openAICanvas.SetActive(false);
         chatGPT.DeactivateNPC();
         chatGPT.enabled = false;
@@ -115,6 +102,24 @@ public class NpcAiDialogue : MonoBehaviour
         interactCanvas.SetActive(false);
     }
 
+    public void UpdateTalking()
+    {
+        if (isNpcTalking)
+        {
+            // Debug.Log(gameObject.name + ": NPC is talking, showing NPCSpeechCanvas.");
+            NPCDialogueCanvas.SetActive(true);
+            animator.SetBool("IsTalking", true);
+
+            StartCoroutine(StopTalkingAfterDelay(8f));
+        }
+        else
+        {
+            NPCDialogueCanvas.SetActive(false);
+            animator.SetBool("IsTalking", false);
+            // Debug.Log(gameObject.name + ": NPC isn't talking, hiding NPCSpeechCanvas.");
+        }
+    }
+
     private IEnumerator StopTalkingAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -122,7 +127,6 @@ public class NpcAiDialogue : MonoBehaviour
         //Debug.Log(gameObject.name + ": NPC finished talking, hiding NPCSpeechCanvas.");
 
         isNpcTalking = false;
-        NPCSpeechCanvas.SetActive(false);
-        animator.SetBool("IsTalking", false);
+        UpdateTalking();
     }
 }
