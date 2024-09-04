@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
+  m_Name: Deadlines are overrated!
+  m_EditorClassIdentifier: 
+  responseText: Deadlines are overrated!
+  responseAudio: {fileID: 8300000, guid: 2a56657e89c1988428aec48ab2938045, type: 3}
+  nextNode: {fileID: 11400000, guid: 27fe1ab183316a24b952c24663537a79, type: 2}
+  score: 2
+  adviceText: This trivializes his work and may be seen as disrespectful.

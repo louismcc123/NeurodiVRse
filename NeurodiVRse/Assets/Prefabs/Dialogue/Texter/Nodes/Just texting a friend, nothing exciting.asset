@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
+  m_Name: Just texting a friend, nothing exciting
+  m_EditorClassIdentifier: 
+  dialogueText: Just texting a friend, nothing exciting.
+  dialogueAudio: {fileID: 0}
+  responses:
+  - {fileID: 11400000, guid: bf7931ec44beffc4ba182d8679285ae3, type: 2}
+  - {fileID: 11400000, guid: fdc41a3029f56354e9604370b82caec4, type: 2}
+  - {fileID: 11400000, guid: 06807ad4552e71249b8f18c7e2dbb77e, type: 2}

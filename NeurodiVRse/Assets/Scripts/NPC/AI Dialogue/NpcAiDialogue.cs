@@ -1,3 +1,4 @@
+using Meta.WitAi.TTS.Utilities;
 using OpenAI;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,20 +11,40 @@ public class NpcAiDialogue : MonoBehaviour
     [SerializeField] private GameObject NPCDialogueCanvas;
     [SerializeField] private GameObject interactCanvas;
     [SerializeField] private InputActionReference aButton;
-    
+
     public bool playerInRange = false;
     public bool isNpcTalking = false;
     private bool isInteracting = false;
 
+    [SerializeField] private TTSSpeaker ttsSpeaker;
+
     private Animator animator;
     private ChatGPT chatGPT;
-
+    
     public CharacterController characterController;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         chatGPT = GetComponent<ChatGPT>();
+    }
+
+    private void OnEnable()
+    {
+        // Subscribe to the TTSSpeaker's OnPlaybackCompleteEvent
+        if (ttsSpeaker != null)
+        {
+            ttsSpeaker.OnPlaybackCompleteEvent += HandlePlaybackComplete;
+        }
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from the TTSSpeaker's OnPlaybackCompleteEvent
+        if (ttsSpeaker != null)
+        {
+            ttsSpeaker.OnPlaybackCompleteEvent -= HandlePlaybackComplete;
+        }
     }
 
     private void Update()
@@ -110,7 +131,7 @@ public class NpcAiDialogue : MonoBehaviour
             NPCDialogueCanvas.SetActive(true);
             animator.SetBool("IsTalking", true);
 
-            StartCoroutine(StopTalkingAfterDelay(8f));
+            //StartCoroutine(StopTalkingAfterDelay(8f));
         }
         else
         {
@@ -120,12 +141,19 @@ public class NpcAiDialogue : MonoBehaviour
         }
     }
 
-    private IEnumerator StopTalkingAfterDelay(float delay)
+    /*private IEnumerator StopTalkingAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
 
         //Debug.Log(gameObject.name + ": NPC finished talking, hiding NPCSpeechCanvas.");
 
+        isNpcTalking = false;
+        UpdateTalking();
+    }*/
+
+    private void HandlePlaybackComplete()
+    {
+        // Called when the TTSSpeaker finishes speaking
         isNpcTalking = false;
         UpdateTalking();
     }

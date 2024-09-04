@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hello! How are you
   m_EditorClassIdentifier: 
   responseText: Hello! How are you?
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: cf7b0c7cac453244cb3b56a046346128, type: 3}
   nextNode: {fileID: 11400000, guid: 0bdba1ab15bf314479434e5ac9abb1ec, type: 2}
   score: 0
   adviceText: 

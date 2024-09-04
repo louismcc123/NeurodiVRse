@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: I'm doing well, thanks. What you up to today
   m_EditorClassIdentifier: 
   responseText: "I\u2019m doing well, thanks. What you up to today?"
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: 2b21b09d83ec76e4fb8774deb47ac0ec, type: 3}
   nextNode: {fileID: 11400000, guid: 01babcbffa281be44ab2fd33f11f5017, type: 2}
   score: 0
   adviceText: 

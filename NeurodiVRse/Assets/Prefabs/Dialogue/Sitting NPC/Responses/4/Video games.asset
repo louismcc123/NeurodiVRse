@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Video games
   m_EditorClassIdentifier: 
   responseText: Video games
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: 0e88be4c9ef18a34993374e75c7ac621, type: 3}
   nextNode: {fileID: 11400000, guid: b2451731f0437f044a53402bd40baedc, type: 2}
   score: 0
   adviceText: 

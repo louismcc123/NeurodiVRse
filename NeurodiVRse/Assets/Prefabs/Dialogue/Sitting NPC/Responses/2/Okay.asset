@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Okay
   m_EditorClassIdentifier: 
   responseText: Okay.
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: 1214c9b59e6e1ec4a941bb849d47d202, type: 3}
   nextNode: {fileID: 11400000, guid: ff1d9610ccdcf354f8a3e11d32fd170b, type: 2}
   score: 2
   adviceText: You could keep the conversation flowing by adding more detail or asking

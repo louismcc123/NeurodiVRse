@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hiya
   m_EditorClassIdentifier: 
   dialogueText: Hiya!
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 9d3baa439caaba042b3268fabc16f6d1, type: 3}
   responses:
   - {fileID: 11400000, guid: a27caaa19fa60b345aaa375e6058f4c3, type: 2}
   - {fileID: 11400000, guid: 1e88f808644efbf44abae51dba198f27, type: 2}

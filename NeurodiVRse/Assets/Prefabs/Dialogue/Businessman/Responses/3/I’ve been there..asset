@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
+  m_Name: "I\u2019ve been there."
+  m_EditorClassIdentifier: 
+  responseText: "I\u2019ve been there. "
+  responseAudio: {fileID: 8300000, guid: 2e4c689935588b4408452a761af15735, type: 3}
+  nextNode: {fileID: 11400000, guid: 27fe1ab183316a24b952c24663537a79, type: 2}
+  score: 1
+  adviceText: "This is relatable but doesn\u2019t add much support."

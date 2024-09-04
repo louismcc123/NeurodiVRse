@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
+  m_Name: Hey, how's it going
+  m_EditorClassIdentifier: 
+  responseText: Hey, how's it going?
+  responseAudio: {fileID: 8300000, guid: f55e4a2c440a54247a257ac88b9a7f8d, type: 3}
+  nextNode: {fileID: 11400000, guid: 4ff5fd164a46c2440ad67c8a5e72d7de, type: 2}
+  score: 0
+  adviceText: 

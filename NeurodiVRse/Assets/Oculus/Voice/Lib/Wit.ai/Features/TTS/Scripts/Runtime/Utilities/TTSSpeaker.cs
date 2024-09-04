@@ -40,7 +40,9 @@ namespace Meta.WitAi.TTS.Utilities
         public string AppendedText;
 
         [Header("Load Settings")]
-        [Tooltip("Optional TTSService reference to be used for text-to-speech loading.  If missing, it will check the component.  If that is also missing then it will use the current singleton")]
+        [Tooltip("Optional TTSService reference to be used for text-to-speech loading. " +
+            "If missing, it will check the component. " +
+            "If that is also missing then it will use the current singleton")]
         [SerializeField] private TTSService _ttsService;
         public TTSService TTSService
         {
@@ -1511,6 +1513,11 @@ namespace Meta.WitAi.TTS.Utilities
         #endregion
 
         #region PLAYBACK EVENTS
+
+        // Define the delegate and event for playback completion
+        public delegate void PlaybackCompleteHandler();
+        public event PlaybackCompleteHandler OnPlaybackCompleteEvent;
+
         // Log comment with request
         protected virtual void LogRequestData(string comment, TTSSpeakerRequestData requestData, bool warning = false)
         {
@@ -1680,6 +1687,9 @@ namespace Meta.WitAi.TTS.Utilities
         protected virtual void OnPlaybackComplete(TTSSpeakerRequestData requestData)
         {
             LogRequestData("Playback Complete", requestData);
+
+            // Notify listeners of playback completion
+            OnPlaybackCompleteEvent?.Invoke();
 
             // Speaker playback events
             Events?.OnTextPlaybackFinished?.Invoke(requestData.ClipData?.textToSpeak);

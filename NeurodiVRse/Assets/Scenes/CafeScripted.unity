@@ -19478,7 +19478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Stranger
-  initialDialogueNode: {fileID: 0}
+  initialDialogueNode: {fileID: 11400000, guid: c2ced77519f78bf44ae9a752e09b9dba, type: 2}
   dialogueManager: {fileID: 978863318}
 --- !u!114 &978863318
 MonoBehaviour:
@@ -19577,7 +19577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Stranger
-  initialDialogueNode: {fileID: 0}
+  initialDialogueNode: {fileID: 11400000, guid: 73199c76a3d9a4e40be2656407f7296d, type: 2}
   dialogueManager: {fileID: 980113125}
 --- !u!65 &980113129
 BoxCollider:
@@ -26198,7 +26198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Stranger
-  initialDialogueNode: {fileID: 11400000, guid: c2ced77519f78bf44ae9a752e09b9dba, type: 2}
+  initialDialogueNode: {fileID: 11400000, guid: aacabac05f75a3a4ab23406f92bab001, type: 2}
   dialogueManager: {fileID: 1380370718}
 --- !u!54 &1380370721
 Rigidbody:

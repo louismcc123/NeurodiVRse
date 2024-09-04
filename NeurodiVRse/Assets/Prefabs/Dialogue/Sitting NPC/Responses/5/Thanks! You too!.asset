@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
   m_Name: Thanks! You too!
   m_EditorClassIdentifier: 
-  responseText: 
-  responseAudio: {fileID: 0}
+  responseText: Thanks! You too!
+  responseAudio: {fileID: 8300000, guid: c79870c1690e84240840e020bd149e63, type: 3}
   nextNode: {fileID: 0}
   score: 0
   adviceText: Good job! This response is polite and acknowledges the end of the conversation

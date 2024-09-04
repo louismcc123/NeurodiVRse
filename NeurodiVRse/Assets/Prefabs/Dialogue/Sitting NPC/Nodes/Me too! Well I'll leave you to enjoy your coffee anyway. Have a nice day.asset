@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: "Me too! Well I\u2019ll leave you to enjoy your coffee anyway. Have
     a nice day!"
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: acb045adfa9a33b4dbd2d5728cb14554, type: 3}
   responses:
   - {fileID: 11400000, guid: 63be7dd7f4afc6645836d4f8adf1fb6a, type: 2}
   - {fileID: 11400000, guid: 8715ddfc38f2ada4181b795b8561553f, type: 2}

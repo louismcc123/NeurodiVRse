@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
+  m_Name: Hey
+  m_EditorClassIdentifier: 
+  responseText: Hey.
+  responseAudio: {fileID: 8300000, guid: dc0fcb7f1f761d440a2cb3f0f108b1d2, type: 3}
+  nextNode: {fileID: 11400000, guid: e81f197e120b04c4e80013e28910c11b, type: 2}
+  score: 1
+  adviceText: You could expand on this by asking how they are.

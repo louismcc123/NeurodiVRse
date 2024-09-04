@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hello
   m_EditorClassIdentifier: 
   responseText: Hello
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: 7e08824034e5493478f52108ec999e9d, type: 3}
   nextNode: {fileID: 11400000, guid: eb1327d0a9b598b469c84755140ff37f, type: 2}
   score: 1
   adviceText: A more enthusiastic greeting can help set a positive tone for the interaction.

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bye
   m_EditorClassIdentifier: 
   responseText: Bye.
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: 2d89bf98831be9344be31c5bfdbdccef, type: 3}
   nextNode: {fileID: 0}
   score: 1
   adviceText: Offer a more polite farewell to make the interaction feel more complete

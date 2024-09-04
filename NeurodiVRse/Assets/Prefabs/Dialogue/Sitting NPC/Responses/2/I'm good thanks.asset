@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: I'm good thanks
   m_EditorClassIdentifier: 
   responseText: I'm good thanks.
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: d069f297f920af04dadc084fca49f476, type: 3}
   nextNode: {fileID: 11400000, guid: ff1d9610ccdcf354f8a3e11d32fd170b, type: 2}
   score: 1
   adviceText: You could keep the conversation flowing by adding more detail or asking

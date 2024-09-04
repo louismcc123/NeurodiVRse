@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: What kind of things do you enjoy
   m_EditorClassIdentifier: 
   dialogueText: What kind of things do you enjoy?
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: a43f4e53a7e5e084dbbb11a63eb682c4, type: 3}
   responses:
   - {fileID: 11400000, guid: 2a49cf276e8c12e43b0d31eaa73fb253, type: 2}
   - {fileID: 11400000, guid: af45bccedade756498887220c848409a, type: 2}

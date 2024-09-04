@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
+  m_Name: You look busy.
+  m_EditorClassIdentifier: 
+  responseText: You look busy.
+  responseAudio: {fileID: 8300000, guid: b7ac041c04ed80b4d9aeba80efe9ec22, type: 3}
+  nextNode: {fileID: 11400000, guid: 7f291722be63de74c9a3ef0d7ecc508b, type: 2}
+  score: 2
+  adviceText: This acknowledges his focus but might come off as a bit blunt.

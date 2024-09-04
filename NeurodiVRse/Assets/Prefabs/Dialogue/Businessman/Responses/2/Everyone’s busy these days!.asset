@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b931fb134b43d34ebb87c02546dad98, type: 3}
+  m_Name: "Everyone\u2019s busy these days!"
+  m_EditorClassIdentifier: 
+  responseText: "Everyone\u2019s busy these days!"
+  responseAudio: {fileID: 8300000, guid: bb3c0ee116db1be46b2d450481b0cfa0, type: 3}
+  nextNode: {fileID: 11400000, guid: e6ff37550330f6f4f9522dcbf8f76b25, type: 2}
+  score: 2
+  adviceText: This response dismisses his workload and can seem unsympathetic.

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Not much
   m_EditorClassIdentifier: 
   responseText: Not much.
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: 48b060a2e0a243841b50d2c3100c6536, type: 3}
   nextNode: {fileID: 11400000, guid: ff1d9610ccdcf354f8a3e11d32fd170b, type: 2}
   score: 1
   adviceText: Add more detail about your plans or interests to keep the conversation

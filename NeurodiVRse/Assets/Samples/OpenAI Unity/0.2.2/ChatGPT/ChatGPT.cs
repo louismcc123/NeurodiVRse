@@ -30,7 +30,6 @@ namespace OpenAI
         [Header("Events")]
         public static Action<string> onChatGPTMessageReceived;
 
-        protected float height;
         protected OpenAIApi openai = new OpenAIApi();
 
         protected List<ChatMessage> messages = new List<ChatMessage>();
@@ -38,9 +37,8 @@ namespace OpenAI
 
         public static Action<string> onChatGPTMessageRecieved;
 
-        private bool isDialoguePaused = false;
-        private static ChatGPT activeNPC;
-
+        protected bool isDialoguePaused = false;
+        protected static ChatGPT activeNPC;
 
         protected virtual void Start()
         {

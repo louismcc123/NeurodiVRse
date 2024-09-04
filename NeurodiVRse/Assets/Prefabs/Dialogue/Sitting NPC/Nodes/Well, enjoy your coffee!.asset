@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Well, enjoy your coffee!
   m_EditorClassIdentifier: 
   dialogueText: Well, enjoy your coffee!
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: aa8fd3c5ec652c6438b7c91b39c1002d, type: 3}
   responses: []

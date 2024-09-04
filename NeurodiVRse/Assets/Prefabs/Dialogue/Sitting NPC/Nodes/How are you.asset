@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: How are you
   m_EditorClassIdentifier: 
   dialogueText: How are you?
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 554aeaf70e085ac46ad480f19a1bc8f9, type: 3}
   responses:
   - {fileID: 11400000, guid: 0640bca5d4a6c604bb2f633e6d7b631b, type: 2}
   - {fileID: 11400000, guid: 8be9a839d0afca44898078e7190dcec3, type: 2}

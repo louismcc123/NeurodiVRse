@@ -17894,6 +17894,7 @@ GameObject:
   - component: {fileID: 978863317}
   - component: {fileID: 978863319}
   - component: {fileID: 978863320}
+  - component: {fileID: 978863321}
   m_Layer: 0
   m_Name: Sitting NPC
   m_TagString: Untagged
@@ -17963,6 +17964,7 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerInRange: 0
   isNpcTalking: 0
+  ttsSpeaker: {fileID: 0}
   characterController: {fileID: 0}
 --- !u!114 &978863319
 MonoBehaviour:
@@ -17998,6 +18000,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &978863321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978863312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e8d8fc975953f47bc519d9c4e2a309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &980113124
 GameObject:
   m_ObjectHideFlags: 0
@@ -18012,6 +18026,7 @@ GameObject:
   - component: {fileID: 980113134}
   - component: {fileID: 980113133}
   - component: {fileID: 980113135}
+  - component: {fileID: 980113136}
   m_Layer: 0
   m_Name: Businessman NPC
   m_TagString: Untagged
@@ -18089,6 +18104,7 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerInRange: 0
   isNpcTalking: 0
+  ttsSpeaker: {fileID: 0}
   characterController: {fileID: 0}
 --- !u!114 &980113134
 MonoBehaviour:
@@ -18131,6 +18147,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NpcAiDialogue: {fileID: 980113133}
+--- !u!114 &980113136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980113124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e8d8fc975953f47bc519d9c4e2a309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &986020526
 GameObject:
   m_ObjectHideFlags: 0
@@ -23965,6 +23993,7 @@ GameObject:
   - component: {fileID: 1291798448}
   - component: {fileID: 1291798447}
   - component: {fileID: 1291798446}
+  - component: {fileID: 1291798449}
   m_Layer: 0
   m_Name: Barista NPC
   m_TagString: Untagged
@@ -24114,6 +24143,7 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerInRange: 0
   isNpcTalking: 0
+  ttsSpeaker: {fileID: 0}
   characterController: {fileID: 1291798440}
 --- !u!114 &1291798446
 MonoBehaviour:
@@ -24179,6 +24209,18 @@ MonoBehaviour:
   cardButton: {fileID: 1646188713}
   cashButton: {fileID: 201261163}
   characterController: {fileID: 1291798440}
+--- !u!114 &1291798449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291798428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e8d8fc975953f47bc519d9c4e2a309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1297324695
 GameObject:
   m_ObjectHideFlags: 0
@@ -26033,6 +26075,7 @@ GameObject:
   - component: {fileID: 1380370724}
   - component: {fileID: 1380370726}
   - component: {fileID: 1380370725}
+  - component: {fileID: 1380370728}
   m_Layer: 0
   m_Name: Leaving NPC
   m_TagString: Untagged
@@ -26157,6 +26200,7 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerInRange: 0
   isNpcTalking: 0
+  ttsSpeaker: {fileID: 0}
   characterController: {fileID: 1380370717}
 --- !u!114 &1380370726
 MonoBehaviour:
@@ -26208,6 +26252,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1380370728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380370715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e8d8fc975953f47bc519d9c4e2a309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1381704495
 PrefabInstance:
   m_ObjectHideFlags: 0

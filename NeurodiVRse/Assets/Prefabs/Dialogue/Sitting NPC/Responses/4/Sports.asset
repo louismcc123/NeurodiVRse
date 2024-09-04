@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sports
   m_EditorClassIdentifier: 
   responseText: Sports
-  responseAudio: {fileID: 0}
+  responseAudio: {fileID: 8300000, guid: 472aef3b87da07d4393d2c811ab0033b, type: 3}
   nextNode: {fileID: 11400000, guid: b2451731f0437f044a53402bd40baedc, type: 2}
   score: 0
   adviceText: 
