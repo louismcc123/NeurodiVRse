@@ -11090,7 +11090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &704845197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17946,6 +17946,7 @@ MonoBehaviour:
     open to discussing various topics, from the coffee you're drinking to the ambiance
     of the caf\xE9."
   ttsBridge: {fileID: 1167268494}
+  voicePreset: 8
 --- !u!114 &978863318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18134,6 +18135,7 @@ MonoBehaviour:
     for its conducive atmosphere. Indicate that you prefer not to be disturbed unless
     necessary."
   ttsBridge: {fileID: 1167268494}
+  voicePreset: 2
 --- !u!114 &980113135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24200,6 +24202,7 @@ MonoBehaviour:
     (for example, after the customer has made their order), tell them the cost of
     the items and ask them if they would like to pay by card or cash.
   ttsBridge: {fileID: 1167268494}
+  voicePreset: 9
   cardManager: {fileID: 1291798447}
   cashManager: {fileID: 1291798446}
   coffeeCupSpawnPosition: {fileID: 106294413}
@@ -26229,6 +26232,7 @@ MonoBehaviour:
     provide short answers, indicating that you\u2019re on your way out and not available
     for a lengthy conversation."
   ttsBridge: {fileID: 1167268494}
+  voicePreset: 5
 --- !u!136 &1380370727
 CapsuleCollider:
   m_ObjectHideFlags: 0

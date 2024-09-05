@@ -26,12 +26,12 @@ namespace OpenAI
 
         [Header("TTS Integration")]
         [SerializeField] private TTSBridge ttsBridge;
+        [SerializeField] private VoicePreset voicePreset;
 
         [Header("Events")]
         public static Action<string> onChatGPTMessageReceived;
 
         protected OpenAIApi openai = new OpenAIApi();
-
         protected List<ChatMessage> messages = new List<ChatMessage>();
         protected string prompt = "Act as an NPC in a VR environment. Respond to the user as appropriate for your role. Never break character or say that you are artificial intelligence.";
 
@@ -169,6 +169,16 @@ namespace OpenAI
             }
 
             activeNPC = this;
+
+            if (ttsBridge != null)
+            {
+                ttsBridge.SetVoicePreset(voicePreset.ToString());
+            }
+            else
+            {
+                Debug.LogWarning($"{gameObject.name} is missing ttsBridge.");
+            }
+
             Debug.Log($"{gameObject.name}: NPC activated.");
         }
 

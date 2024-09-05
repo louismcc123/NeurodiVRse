@@ -18,7 +18,6 @@ public class ConversationStats : MonoBehaviour
     public float averageLLMConversationTime => llmCount > 0 ? totalLLMConversationTime / llmCount : 0f;
     public float averageLLMScore => llmCount > 0 ? totalLLMScore / llmCount : 0f;
 
-    // Call this method when a scripted conversation ends
     public void RecordScriptedConversation(float conversationTime, float score)
     {
         totalScriptedConversationTime += conversationTime;
@@ -26,7 +25,6 @@ public class ConversationStats : MonoBehaviour
         scriptedCount++;
     }
 
-    // Call this method when an LLM conversation ends
     public void RecordLLMConversation(float conversationTime, float score)
     {
         totalLLMConversationTime += conversationTime;
@@ -34,7 +32,6 @@ public class ConversationStats : MonoBehaviour
         llmCount++;
     }
 
-    // Optionally, reset all data
     public void ResetStatistics()
     {
         totalScriptedConversationTime = 0f;
@@ -46,7 +43,6 @@ public class ConversationStats : MonoBehaviour
         llmCount = 0;
     }
 
-    // Log the current statistics
     public void LogStatistics()
     {
         Debug.Log($"Scripted Average Conversation Time: {averageScriptedConversationTime} seconds");

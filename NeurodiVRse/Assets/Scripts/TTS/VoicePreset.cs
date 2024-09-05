@@ -1,0 +1,19 @@
+public enum VoicePreset
+{
+    CAEL,
+    CAM,
+    CARL,
+    CHARLIE,
+    CODY,
+    CONNOR,
+    COOPER,
+    PROSPECTOR,
+    RAILEY,
+    REBECCA,
+    REMI,
+    RUBY,
+    VAMPIRE,
+    COLIN,
+    ROSIE,
+    CUSTOM
+}

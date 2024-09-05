@@ -26,6 +26,19 @@ public class TTSBridge : MonoBehaviour
         ChatGPT.onChatGPTMessageReceived -= Speak;
     }
 
+    public void SetVoicePreset(string presetVoiceID)
+    {
+        if (ttsSpeaker != null && !string.IsNullOrEmpty(presetVoiceID))
+        {
+            ttsSpeaker.presetVoiceID = presetVoiceID;
+            Debug.Log($"Voice preset changed to {presetVoiceID} for active NPC.");
+        }
+        else
+        {
+            Debug.LogWarning("TTS Speaker is null or presetVoiceID is invalid.");
+        }
+    }
+
     private void Speak(string message)
     {
         sendButton.gameObject.SetActive(false);
