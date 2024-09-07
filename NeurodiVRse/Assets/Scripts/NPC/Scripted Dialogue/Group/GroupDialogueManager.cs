@@ -12,10 +12,14 @@ public class GroupDialogueManager : MonoBehaviour
     public GameObject responseButtonPrefab;
 
     [Header("Dialogue Data")]
-    public List<GroupDialogueNode> dialogueSequence;
+    public List<GroupDialogueSequence> dialogueSequences;
+    private int currentSequenceIndex = 0;
     private int currentDialogueIndex = 0;
-
     private bool isDialogueActive = false;
+    private bool isDialoguePaused = false;
+
+    public List<NPCBehaviours> npcBehaviours;
+    [SerializeField] private Transform player;
 
     private void Start()
     {
@@ -24,7 +28,7 @@ public class GroupDialogueManager : MonoBehaviour
 
     public void StartGroupDialogue()
     {
-        if (dialogueSequence.Count > 0)
+        if (dialogueSequences.Count > 0 && !isDialogueActive)
         {
             isDialogueActive = true;
             ShowDialogue();
@@ -32,58 +36,85 @@ public class GroupDialogueManager : MonoBehaviour
         }
     }
 
+    public void StopGroupDialogue()
+    {
+        isDialogueActive = false;
+        isDialoguePaused = true;
+        HideDialogue();
+    }
+
+    public void ResumeDialogue()
+    {
+        if (isDialoguePaused)
+        {
+            isDialoguePaused = false;
+            ShowDialogue();
+            DisplayNextDialogue();
+        }
+    }
+
     private void DisplayNextDialogue()
     {
-        if (currentDialogueIndex >= dialogueSequence.Count)
+        if (!isDialogueActive)
         {
-            EndDialogue();
             return;
         }
 
-        GroupDialogueNode node = dialogueSequence[currentDialogueIndex];
-        UpdateCanvasForCurrentDialogueNode(node);
-        DisplayResponses(node);
-    }
+        GroupDialogueSequence currentSequence = dialogueSequences[currentSequenceIndex];
 
-    private void UpdateCanvasForCurrentDialogueNode(GroupDialogueNode node)
-    {
-        // Deactivate all NPC canvases if needed
-        foreach (var canvas in FindObjectsOfType<GameObject>()) // Find all canvases in scene
+        if (currentDialogueIndex >= currentSequence.nodes.Count)
         {
-            if (canvas.CompareTag("NPCDialogueCanvas"))
+            ShowPlayerResponses(currentSequence);
+            return;
+        }
+
+        GroupDialogueNode currentNode = currentSequence.nodes[currentDialogueIndex];
+
+        TriggerNodeDialogue(currentNode);
+
+        foreach (var npc in npcBehaviours)
+        {
+            if (npc.transform != currentNode.actor.character)
             {
-                canvas.SetActive(false);
+                npc.FaceSpeaker(currentNode.actor.character);
             }
         }
 
-        // Activate the canvas for the speaking NPC
-        if (node.NPCDialogueCanvas != null)
-        {
-            node.NPCDialogueCanvas.SetActive(true);
-
-            // Update the UI elements on the canvas
-            var titleText = node.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
-            var bodyText = node.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
-
-            titleText.text = "NPC"; // Set the title or use a specific title if needed
-            bodyText.text = node.dialogueText;
-        }
+        PlayDialogueAudio(currentNode);
     }
 
-    private void DisplayResponses(GroupDialogueNode node)
+    private void TriggerNodeDialogue(GroupDialogueNode node)
     {
+        node.actor.NPCDialogueCanvas.SetActive(true);
+
+        var titleText = node.actor.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
+        var bodyText = node.actor.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
+
+        titleText.text = node.actor.Name; // Use actor's Name for the title
+        bodyText.text = node.dialogueText;
+
+        node.StartTalking();
+    }
+
+    private void ShowPlayerResponses(GroupDialogueSequence sequence)
+    {
+        foreach (var npc in npcBehaviours)
+        {
+            npc.FaceSpeaker(player);
+        }
+
         foreach (Transform child in playerResponseButtonParent)
         {
             child.gameObject.SetActive(false);
         }
 
-        List<DialogueResponse> shuffledResponses = new List<DialogueResponse>(node.responses);
+        List<GroupDialogueResponse> shuffledResponses = new List<GroupDialogueResponse>(sequence.responses);
         ShuffleList(shuffledResponses);
         int responseCount = Mathf.Min(shuffledResponses.Count, 3);
 
         for (int i = 0; i < responseCount; i++)
         {
-            DialogueResponse response = shuffledResponses[i];
+            GroupDialogueResponse response = shuffledResponses[i];
             GameObject buttonObj = Instantiate(responseButtonPrefab, playerResponseButtonParent);
             TextMeshProUGUI responseText = buttonObj.GetComponentInChildren<TextMeshProUGUI>();
             Button button = buttonObj.GetComponent<Button>();
@@ -93,25 +124,34 @@ public class GroupDialogueManager : MonoBehaviour
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => OnResponseSelected(response));
         }
-
-        for (int i = responseCount; i < playerResponseButtonParent.childCount; i++)
-        {
-            playerResponseButtonParent.GetChild(i).gameObject.SetActive(false);
-        }
     }
 
-    private void OnResponseSelected(DialogueResponse response)
+    private void OnResponseSelected(GroupDialogueResponse response)
     {
-        // Process the selected response
+        currentSequenceIndex = response.nextSequence;
+        currentDialogueIndex = 0;
+        DisplayNextDialogue();
+    }
+
+    private void HandlePlaybackComplete(GroupDialogueNode node)
+    {
+        node.StopTalking();
         currentDialogueIndex++;
         DisplayNextDialogue();
     }
 
-    private void EndDialogue()
+    private void PlayDialogueAudio(GroupDialogueNode node)
     {
-        HideDialogue();
-        isDialogueActive = false;
-        currentDialogueIndex = 0;
+        if (node.dialogueAudio != null)
+        {
+            node.actor.audioSource.clip = node.dialogueAudio;
+            node.actor.audioSource.Play();
+            HandlePlaybackComplete(node);
+        }
+        else
+        {
+            HandlePlaybackComplete(node);
+        }
     }
 
     private void ShowDialogue()
@@ -121,7 +161,7 @@ public class GroupDialogueManager : MonoBehaviour
 
     private void HideDialogue()
     {
-        foreach (var canvas in FindObjectsOfType<GameObject>()) // Find all canvases in scene
+        foreach (var canvas in FindObjectsOfType<GameObject>())
         {
             if (canvas.CompareTag("NPCDialogueCanvas"))
             {
