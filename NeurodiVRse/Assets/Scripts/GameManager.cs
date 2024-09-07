@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     public Door door;
 
-    public void PlayCafeAIGame()
+    public void PlayCafeLLMGame()
     {
         SceneManager.LoadScene(1);
     }
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    public void PlayPartyAIGame()
+    public void PlayPartyLLMGame()
     {
         SceneManager.LoadScene(3);
     }
