@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bb3024f025736044b87723144b220a0, type: 3}
   m_Name: Hi, can I help you with something
   m_EditorClassIdentifier: 
   dialogueText: Hi, can I help you with something?
   dialogueAudio: {fileID: 0}
   responses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 6711e5e852a94994d85f6b379a41585a, type: 2}
+  - {fileID: 11400000, guid: e003e5b43ba852b4abb3ce41ddd236dd, type: 2}
+  - {fileID: 11400000, guid: 3910fbafa95d8bb44b416f87f309047a, type: 2}

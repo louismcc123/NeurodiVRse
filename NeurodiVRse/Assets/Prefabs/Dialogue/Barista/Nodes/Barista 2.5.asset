@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bb3024f025736044b87723144b220a0, type: 3}
   m_Name: Barista 2.5
   m_EditorClassIdentifier: 
-  dialogueText: No problem! What kind of coffee would you like?
+  dialogueText: 'No problem! What kind of coffee would you like? '
   dialogueAudio: {fileID: 8300000, guid: 66782811c5a9c6844b3f1f9d14a59e91, type: 3}
   responses:
   - {fileID: 11400000, guid: 3d5852e4ab2a2c046b2e808bb7106817, type: 2}
+  - {fileID: 11400000, guid: d2ffaa6d684ebe74197e855760355903, type: 2}

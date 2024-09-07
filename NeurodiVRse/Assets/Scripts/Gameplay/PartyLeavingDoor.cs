@@ -24,7 +24,6 @@ public class PartyLeavingDoor : MonoBehaviour
             float dist = Vector3.Distance(Player.position, transform.position);
             if (dist < 3)
             {
-                print("UI is now showing");
                 leaveCanvas.SetActive(true);
             }
         }

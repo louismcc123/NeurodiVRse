@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bb3024f025736044b87723144b220a0, type: 3}
   m_Name: Not really, but thanks.
   m_EditorClassIdentifier: 
   dialogueText: Not really, but thanks.
   dialogueAudio: {fileID: 0}
   responses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 529c4e0b8e4744147bc434f93643fa56, type: 2}

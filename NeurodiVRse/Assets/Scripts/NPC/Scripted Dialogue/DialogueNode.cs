@@ -4,9 +4,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Dialogue Node", menuName = "Dialogue/Node")]
 public class DialogueNode : ScriptableObject
 {
-    public string dialogueText;
+    public string dialogueText; 
     public AudioClip dialogueAudio; 
-    public List<DialogueResponse> responses;
+    public List<DialogueResponse> responses; 
 
     public bool IsLastNode()
     {

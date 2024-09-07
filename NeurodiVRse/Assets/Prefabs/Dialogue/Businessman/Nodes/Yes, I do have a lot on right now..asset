@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bb3024f025736044b87723144b220a0, type: 3}
   m_Name: Yes, I do have a lot on right now.
   m_EditorClassIdentifier: 
   dialogueText: Yes, I do have a lot on right now.
   dialogueAudio: {fileID: 0}
   responses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: afa8294d0965712419cbedb2f3f2430d, type: 2}
+  - {fileID: 11400000, guid: 6c8e65d9c0208b247870caa769c50622, type: 2}
+  - {fileID: 11400000, guid: 7ee3606858e9df04e91dd00171c6911b, type: 2}

@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bb3024f025736044b87723144b220a0, type: 3}
   m_Name: I appreciate that. Anything else
   m_EditorClassIdentifier: 
-  dialogueText: I appreciate that. Anything else?
+  dialogueText: ' I appreciate that. Anything else?'
   dialogueAudio: {fileID: 0}
   responses:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: e5fbcdcacb759014b852999f8f5fa277, type: 2}
+  - {fileID: 11400000, guid: 54e327612cb8ead4ea12041fa418de1c, type: 2}
+  - {fileID: 11400000, guid: 5628025341d034b428f3926725559f51, type: 2}

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fa7e491670c7e84bad719915ef2207d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bb3024f025736044b87723144b220a0, type: 3}
   m_Name: Hiya
   m_EditorClassIdentifier: 
-  dialogueText: Hiya!
+  dialogueText: Hiya.
   dialogueAudio: {fileID: 8300000, guid: 9d3baa439caaba042b3268fabc16f6d1, type: 3}
   responses:
   - {fileID: 11400000, guid: a27caaa19fa60b345aaa375e6058f4c3, type: 2}
