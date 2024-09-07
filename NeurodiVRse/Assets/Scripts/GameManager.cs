@@ -21,6 +21,16 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    public void PlayPartyAIGame()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void PlayPartyScriptedGame()
+    {
+        SceneManager.LoadScene(4);
+    }
+
     public void Back()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

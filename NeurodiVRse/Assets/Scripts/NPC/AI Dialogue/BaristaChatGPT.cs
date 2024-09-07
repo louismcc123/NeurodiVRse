@@ -68,11 +68,9 @@ namespace OpenAI
 
         private bool IsRequestingPayment(string response)
         {
-            return response.Contains("pay", System.StringComparison.OrdinalIgnoreCase)
-                || response.Contains("card", System.StringComparison.OrdinalIgnoreCase)
+            return response.Contains("card", System.StringComparison.OrdinalIgnoreCase)
                 || response.Contains("cash", System.StringComparison.OrdinalIgnoreCase)
-                || response.Contains("payment", System.StringComparison.OrdinalIgnoreCase)
-                || response.Contains("money", System.StringComparison.OrdinalIgnoreCase);
+                || response.Contains("£", System.StringComparison.OrdinalIgnoreCase);
         }
 
         private void OnCardSelected()
