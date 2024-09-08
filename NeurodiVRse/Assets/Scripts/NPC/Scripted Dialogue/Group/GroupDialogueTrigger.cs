@@ -23,7 +23,7 @@ public class GroupDialogueTrigger : MonoBehaviour
                 }
                 else
                 {
-                    groupDialogueManager.ResumeDialogue();
+                    groupDialogueManager.ResumeGroupDialogue();
                 }
             }
         }
@@ -39,7 +39,7 @@ public class GroupDialogueTrigger : MonoBehaviour
 
             if (groupDialogueManager != null)
             {
-                groupDialogueManager.StopGroupDialogue();
+                groupDialogueManager.PauseGroupDialogue();
             }
         }
     }

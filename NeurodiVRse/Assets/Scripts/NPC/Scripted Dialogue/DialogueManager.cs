@@ -27,14 +27,14 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI adviceText;
 
     [Header("Scoring")]
-    private int totalScore = 0;
+    public PlayerStats playerStats;
     public TextMeshProUGUI finalScoreText;
+    private int totalScore = 0;
 
     [Header("Audio")]
     private AudioSource playerAudioSource;
 
     [Header("NPC Control")]
-    public PlayerStats playerStats;
     public CharacterController characterController;
     private Animator animator;
 

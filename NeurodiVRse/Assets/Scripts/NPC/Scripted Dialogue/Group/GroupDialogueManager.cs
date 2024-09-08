@@ -6,22 +6,33 @@ using UnityEngine.UI;
 
 public class GroupDialogueManager : MonoBehaviour
 {
+    [Header("NPC Dialogue")]
+    public List<GroupDialogueSequence> dialogueSequences;
+    private int currentSequenceIndex = 0;
+    private int currentDialogueIndex = 0;
+    private int pausedSequenceIndex = -1;
+    private int pausedDialogueIndex = -1;
+    private bool isDialogueActive = false;
+    private bool isDialoguePaused = false;
+
     [Header("Player Dialogue")]
     public GameObject PlayerResponseCanvas;
     public Transform playerResponseButtonParent;
     public GameObject responseButtonPrefab;
 
-    [Header("Dialogue Data")]
-    public List<GroupDialogueSequence> dialogueSequences;
-    private int currentSequenceIndex = 0;
-    private int currentDialogueIndex = 0;
-    private bool isDialogueActive = false;
-    private bool isDialoguePaused = false;
+    [Header("Advice")]
+    public GameObject AdviceCanvas;
+    public TextMeshProUGUI adviceText;
 
-    public List<NPCBehaviours> npcBehaviours;
+    [Header("Scoring")]
+    private int totalScore = 0;
+    public TextMeshProUGUI finalScoreText;
+    public PlayerStats playerStats;
+
     [SerializeField] private Transform player;
+    public List<NPCBehaviours> npcBehaviours;
 
-    private void Start()
+    private void Awake()
     {
         HideDialogue();
     }
@@ -30,27 +41,51 @@ public class GroupDialogueManager : MonoBehaviour
     {
         if (dialogueSequences.Count > 0 && !isDialogueActive)
         {
+            if (dialogueSequences[currentSequenceIndex].completed)
+            {
+                Debug.Log("Dialogue has already been completed.");
+                return;
+            }
+
             isDialogueActive = true;
             ShowDialogue();
             DisplayNextDialogue();
         }
     }
 
-    public void StopGroupDialogue()
+    public void PauseGroupDialogue()
     {
-        isDialogueActive = false;
-        isDialoguePaused = true;
-        HideDialogue();
+        if (isDialogueActive)
+        {
+            isDialoguePaused = true;
+            isDialogueActive = false;
+            HideDialogue();
+            pausedSequenceIndex = currentSequenceIndex;
+            pausedDialogueIndex = currentDialogueIndex;
+        }
     }
 
-    public void ResumeDialogue()
+
+    public void ResumeGroupDialogue()
     {
         if (isDialoguePaused)
         {
             isDialoguePaused = false;
+            isDialogueActive = true;
             ShowDialogue();
+            currentSequenceIndex = pausedSequenceIndex;
+            currentDialogueIndex = pausedDialogueIndex;
             DisplayNextDialogue();
         }
+    }
+
+
+    public void EndGroupDialogue()
+    {
+        HideDialogue();
+        isDialogueActive = false;
+        dialogueSequences[currentSequenceIndex].completed = true;
+        playerStats.DisplayFinalScore();
     }
 
     private void DisplayNextDialogue()
@@ -90,7 +125,7 @@ public class GroupDialogueManager : MonoBehaviour
         var titleText = node.actor.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
         var bodyText = node.actor.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
 
-        titleText.text = node.actor.Name; // Use actor's Name for the title
+        titleText.text = node.actor.Name;
         bodyText.text = node.dialogueText;
 
         node.StartTalking();
@@ -163,7 +198,7 @@ public class GroupDialogueManager : MonoBehaviour
     {
         foreach (var canvas in FindObjectsOfType<GameObject>())
         {
-            if (canvas.CompareTag("NPCDialogueCanvas"))
+            if (canvas.CompareTag("NPC Dialogue Canvas"))
             {
                 canvas.SetActive(false);
             }

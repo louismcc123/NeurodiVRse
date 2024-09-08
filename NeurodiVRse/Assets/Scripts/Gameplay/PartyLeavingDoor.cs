@@ -1,27 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class PartyLeavingDoor : MonoBehaviour
 {
     public GameObject leaveCanvas;
-    public Transform Player;
+    public Transform player;
 
-    private XRGrabInteractable grabInteractable;
+    private XRSimpleInteractable interactable;
 
     void Start()
     {
-        grabInteractable = GetComponent<XRGrabInteractable>();
-        grabInteractable.selectEntered.AddListener(OnSelectEnter);
+        interactable = GetComponent<XRSimpleInteractable>();
+
+        if (interactable != null)
+        {
+            interactable.onSelectEntered.AddListener(OnSelectEnter);
+            //interactable.onActivate.AddListener(OnActivate);
+        }
+
         leaveCanvas.SetActive(false);
     }
 
-    private void OnSelectEnter(SelectEnterEventArgs args)
+    private void OnEnable()
     {
-        if (Player)
+        if (interactable != null)
         {
-            float dist = Vector3.Distance(Player.position, transform.position);
+            interactable.onSelectEntered.AddListener(OnSelectEnter);
+            //interactable.onActivate.AddListener(OnActivate);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (interactable != null)
+        {
+            interactable.onSelectEntered.RemoveListener(OnSelectEnter);
+            //interactable.onActivate.RemoveListener(OnActivate);
+        }
+    }
+
+    private void OnSelectEnter(XRBaseInteractor interactor)
+    {
+        if (player)
+        {
+            float dist = Vector3.Distance(player.position, transform.position);
             if (dist < 3)
             {
                 leaveCanvas.SetActive(true);
@@ -31,9 +56,10 @@ public class PartyLeavingDoor : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (grabInteractable != null)
+        if (interactable != null)
         {
-            grabInteractable.selectEntered.RemoveListener(OnSelectEnter);
+            interactable.onSelectEntered.RemoveListener(OnSelectEnter);
+            //interactable.onActivate.RemoveListener(OnActivate);
         }
     }
 }
