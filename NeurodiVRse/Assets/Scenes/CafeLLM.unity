@@ -563,7 +563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 30553423}
   m_Layer: 0
-  m_Name: Cafe NPCs
+  m_Name: NPCs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18243,7 +18243,7 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerInRange: 0
   isNpcTalking: 0
-  ttsSpeaker: {fileID: 0}
+  ttsSpeaker: {fileID: 1416634613}
   characterController: {fileID: 0}
 --- !u!114 &978863319
 MonoBehaviour:
@@ -18383,7 +18383,7 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerInRange: 0
   isNpcTalking: 0
-  ttsSpeaker: {fileID: 0}
+  ttsSpeaker: {fileID: 1416634613}
   characterController: {fileID: 0}
 --- !u!114 &980113134
 MonoBehaviour:
@@ -24419,7 +24419,7 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerInRange: 0
   isNpcTalking: 0
-  ttsSpeaker: {fileID: 0}
+  ttsSpeaker: {fileID: 1416634613}
   characterController: {fileID: 1291798440}
 --- !u!114 &1291798446
 MonoBehaviour:
@@ -26505,7 +26505,7 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   playerInRange: 0
   isNpcTalking: 0
-  ttsSpeaker: {fileID: 0}
+  ttsSpeaker: {fileID: 1416634613}
   characterController: {fileID: 1380370717}
 --- !u!114 &1380370726
 MonoBehaviour:

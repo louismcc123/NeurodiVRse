@@ -9,8 +9,8 @@ namespace OpenAI
     public class ChatGPT : MonoBehaviour
     {
         [Header("Canvas References")]
-        [SerializeField] private GameObject openAICanvas;
-        [SerializeField] private GameObject npcDialogueCanvas;
+        [SerializeField] protected GameObject openAICanvas;
+        [SerializeField] protected GameObject npcDialogueCanvas;
 
         [Header("UI Elements")]
         [SerializeField] protected InputField inputField;
@@ -57,11 +57,8 @@ namespace OpenAI
 
         protected async void SendReply()
         {
-            Debug.Log($"SendReply triggered at {Time.time}");
-
             if (isDialoguePaused || activeNPC != this)
             {
-                Debug.Log($"isDialoguePaused || activeNPC != this at {Time.time}");
                 return;
             }
 
@@ -71,24 +68,18 @@ namespace OpenAI
                 Content = inputField.text
             };
 
-            //AppendMessage(newMessage);
-            //Debug.Log($"User message added: {newMessage.Content}");
-
             if (messages.Count == 0)
             {
                 newMessage.Content = prompt + "\n" + inputField.text;
-                Debug.Log("Initial prompt combined with user input.");
             }
 
             messages.Add(newMessage);
-            Debug.Log($"Total messages count: {messages.Count}");
-
             send.enabled = false;
             enter.enabled = false;
             inputField.text = "";
             inputField.enabled = false;
             keyboard.SetActive(false);
-            npcAiDialogue.isNpcTalking = true;
+            SetNpcTalking(true);
 
             Debug.Log("Sending request to OpenAI...");
 
@@ -143,12 +134,11 @@ namespace OpenAI
 
         protected void AppendMessage(ChatMessage message)
         {
-            npcAiDialogue.isNpcTalking = true;
+            SetNpcTalking(true);
             messageText.text = string.Empty;
             messageText.text = message.Content;
 
             Debug.Log($"Appending message: {message.Content}");
-            Debug.Log($"TextMeshProUGUI Content: {messageText.text}");
         }
 
         protected virtual void HandleResponse(string responseContent)
@@ -189,7 +179,7 @@ namespace OpenAI
                 activeNPC = null;
             }
 
-            //Debug.Log($"{gameObject.name}: NPC deactivated.");
+            Debug.Log($"{gameObject.name}: NPC deactivated.");
         }
 
         private void DisplayAdvice(string adviceContent)
@@ -203,23 +193,30 @@ namespace OpenAI
         public void PauseDialogue()
         {
             isDialoguePaused = true;
-            Debug.Log($"Dialogue paused at {Time.time}");
+            Debug.Log($"Dialogue paused.");
 
-            npcAiDialogue.isNpcTalking = false;
-
-            openAICanvas.SetActive(false);
-            npcDialogueCanvas.SetActive(false);
+            SetNpcTalking(false);
+            SetCanvasActive(false);
         }
 
         public void ResumeDialogue()
         {
             isDialoguePaused = false;
-            Debug.Log($"Dialogue resumed at {Time.time}");
+            Debug.Log($"Dialogue resumed.");
 
-            npcAiDialogue.isNpcTalking = true;
+            SetNpcTalking(true);
+            SetCanvasActive(true);
+        }
 
-            openAICanvas.SetActive(true);
-            npcDialogueCanvas.SetActive(true);
+        protected void SetCanvasActive(bool isActive)
+        {
+            openAICanvas.SetActive(isActive);
+            npcDialogueCanvas.SetActive(isActive);
+        }
+
+        protected void SetNpcTalking(bool isTalking)
+        {
+            npcAiDialogue.isNpcTalking = isTalking;
         }
     }
 }
