@@ -18,13 +18,6 @@ namespace OpenAI
 
         public CharacterController characterController;
 
-        private enum State 
-        { 
-            Idle, AwaitingPayment, PreparingCoffee
-        }
-
-        private State currentState = State.Idle;
-
         protected override void Start()
         {
             base.Start();
@@ -35,34 +28,10 @@ namespace OpenAI
         
         protected override void HandleResponse(string responseContent)
         {
-            /*if (responseContent.Contains("Card, please"))
-            {
-                currentState = State.AwaitingPayment;
-                cardManager.InstantiateCard();
-            }
-            else if (responseContent.Contains("Cash, please"))
-            {
-                currentState = State.AwaitingPayment;
-                cashManager.InstantiateCash();
-            }
-            else if (responseContent.Contains("Thank you"))
-            {
-                StartCoroutine(StartCoffeePreparationSequence());
-            }
-            else
-            {
-                currentState = State.Idle;
-            }*/
-
             if (IsRequestingPayment(responseContent))
             {
-                currentState = State.AwaitingPayment;
                 PauseDialogue();
                 paymentCanvas.SetActive(true);
-            }
-            else
-            {
-                currentState = State.Idle;
             }
         }
 
@@ -77,7 +46,6 @@ namespace OpenAI
         {
             paymentCanvas.SetActive(false);
             cardManager.InstantiateCard();
-            currentState = State.AwaitingPayment;
             //StartCoroutine(StartCoffeePreparationSequence());
         }
 
@@ -85,13 +53,11 @@ namespace OpenAI
         {
             paymentCanvas.SetActive(false);
             cashManager.InstantiateCash();
-            currentState = State.AwaitingPayment;
             //StartCoroutine(StartCoffeePreparationSequence());
         }
 
         public IEnumerator SayThankYou()
         {
-            //npcAiDialogue.SetNpcTalking(true);
             npcAiDialogue.isNpcTalking = true;
 
             AppendMessage(new ChatMessage { Role = "npc", Content = "Thank you. Your coffee will be ready in just a moment." });
@@ -105,8 +71,6 @@ namespace OpenAI
 
         private IEnumerator StartCoffeePreparationSequence()
         {
-            currentState = State.PreparingCoffee;
-
             characterController.MoveToWaypoint(2);
             yield return new WaitUntil(() => !characterController.IsMoving());
 
@@ -120,7 +84,6 @@ namespace OpenAI
             Debug.Log(gameObject.name + ": Coffee cup instantiated.");
 
             ResumeDialogue();
-            currentState = State.Idle;
         }
 
         private IEnumerator StartCoffeePreparation()

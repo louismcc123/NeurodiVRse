@@ -25,10 +25,10 @@ public class GroupDialogueManager : MonoBehaviour
     public GameObject AdviceCanvas;
     public TextMeshProUGUI adviceText;
 
-    [Header("Scoring")]
+    /*[Header("Scoring")]
     private int totalScore = 0;
-    //public TextMeshProUGUI finalScoreText;
-    public PlayerStats playerStats;
+    public TextMeshProUGUI finalScoreText;
+    public PlayerStats playerStats;*/
 
     [SerializeField] private Transform player;
     public List<GroupActor> groupActors;
@@ -124,7 +124,7 @@ public class GroupDialogueManager : MonoBehaviour
         HideDialogue();
         isDialogueActive = false;
         dialogueSequences[currentSequenceIndex].completed = true;
-        playerStats.DisplayFinalScore();
+        //playerStats.DisplayFinalScore();
     }
 
     private void DisplayNextDialogue()

@@ -13,7 +13,6 @@ public class DialogueManager : MonoBehaviour
     private DialogueNode pausedNode;
     private DialogueNode currentDialogueNode;
     private string pausedTitle;
-    private bool isDialogueActive = false;
     private bool isDialoguePaused = false;
     private bool isConversationFinished = false;
 
@@ -62,7 +61,6 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        isDialogueActive = true;
         isDialoguePaused = false;
         isConversationFinished = false;
         Debug.Log(gameObject.name + ": Starting dialogue: " + node.dialogueText);
@@ -83,7 +81,6 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         HideDialogue();
-        isDialogueActive = false;
         isConversationFinished = true;
         currentDialogueNode = null;
         animator.SetBool("IsTalking", false);
@@ -255,7 +252,6 @@ public class DialogueManager : MonoBehaviour
         if (pausedNode != null)
         {
             isDialoguePaused = false;
-            isDialogueActive = true;
             Debug.Log(gameObject.name + ": Resuming dialogue with node: " + pausedNode.dialogueText);
             StartDialogue(pausedTitle, pausedNode);
             pausedNode = null;
