@@ -20,13 +20,15 @@ public class NpcAiDialogue : MonoBehaviour
 
     private Animator animator;
     private ChatGPT chatGPT;
-    
+    private LeavingNPCBehaviour leavingNPCBehaviour;
+
     public CharacterController characterController;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         chatGPT = GetComponent<ChatGPT>();
+        leavingNPCBehaviour = GetComponent<LeavingNPCBehaviour>();
     }
 
     private void OnEnable()
@@ -59,8 +61,10 @@ public class NpcAiDialogue : MonoBehaviour
 
                 if (aButton.action.triggered)
                 {
-                    if (this.gameObject.name == "Leaving NPC")
+                    if (leavingNPCBehaviour != null)
                     {
+                        isInteracting = true;
+                        leavingNPCBehaviour.DeactivatePhone();
                         characterController.PauseMovement();
                         characterController.FacePlayer();
                     }
@@ -70,8 +74,13 @@ public class NpcAiDialogue : MonoBehaviour
                 }
             }
         }
-        else if(!playerInRange && isInteracting)
+        else if (!playerInRange && isInteracting)
         {
+            if (leavingNPCBehaviour != null)
+            {
+                leavingNPCBehaviour.ActivatePhone();
+            }
+
             EndInteraction();
         }
 

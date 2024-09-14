@@ -4881,10 +4881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 02b04e46f2cbc104284decd10aeac7fa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 703151239}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 02b04e46f2cbc104284decd10aeac7fa, type: 3}
       insertIndex: -1
@@ -18835,7 +18832,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 288421142}
+    m_TransformParent: {fileID: 1380370723}
     m_Modifications:
     - target: {fileID: 463835053371953216, guid: 9c993bdd1f0fb3e4da5b61dabec5fbb3, type: 3}
       propertyPath: m_RootOrder
@@ -18851,7 +18848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 463835053371953216, guid: 9c993bdd1f0fb3e4da5b61dabec5fbb3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2500001
+      value: 1.2500002
       objectReference: {fileID: 0}
     - target: {fileID: 463835053371953216, guid: 9c993bdd1f0fb3e4da5b61dabec5fbb3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18902,6 +18899,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c993bdd1f0fb3e4da5b61dabec5fbb3, type: 3}
+--- !u!1 &1026383110 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3535473601529558972, guid: 9c993bdd1f0fb3e4da5b61dabec5fbb3, type: 3}
+  m_PrefabInstance: {fileID: 1026383109}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1029331410 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1475368415682648, guid: efe021d4c307b5449b8121d46791cf95, type: 3}
@@ -26469,6 +26471,7 @@ Transform:
   m_Children:
   - {fileID: 288421142}
   - {fileID: 314402410}
+  - {fileID: 703151239}
   m_Father: {fileID: 30553423}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -26485,6 +26488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 843577171}
+  phone: {fileID: 1026383110}
   characterController: {fileID: 1380370717}
   NpcAiDialogue: {fileID: 1380370725}
 --- !u!114 &1380370725

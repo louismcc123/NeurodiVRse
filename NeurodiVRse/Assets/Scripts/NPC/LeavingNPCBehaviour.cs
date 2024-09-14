@@ -4,6 +4,7 @@ using System.Collections;
 public class LeavingNPCBehaviour : MonoBehaviour
 {
     public GameObject door;
+    public GameObject phone;
 
     private bool isMovingToDoor = false;
     private bool isLeaving = false;
@@ -43,6 +44,16 @@ public class LeavingNPCBehaviour : MonoBehaviour
         }
     }
 
+    public void DeactivatePhone()
+    {
+        phone.SetActive(false);
+    }
+
+    public void ActivatePhone()
+    {
+        phone.SetActive(true);
+    }
+
     private IEnumerator MoveToDoor()
     {
         isMovingToDoor = true;
@@ -58,7 +69,6 @@ public class LeavingNPCBehaviour : MonoBehaviour
 
         Destroy(gameObject);
     }
-
 
     private void OnTriggerEnter(Collider other)
     {

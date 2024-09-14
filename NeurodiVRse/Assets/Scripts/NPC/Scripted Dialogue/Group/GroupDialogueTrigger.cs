@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroupDialogueTrigger : MonoBehaviour
 {
-    private float timePlayerExited = -1f;
+    private float timePlayerExited = -Mathf.Infinity;
     public float resumeTimeThreshold = 5f;
 
     public GroupDialogueManager groupDialogueManager;
@@ -13,16 +13,17 @@ public class GroupDialogueTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //npcBehaviours.playerInRange = true;
-
+            Debug.Log("Player in range");
             if (groupDialogueManager != null)
             {
                 if (Time.time - timePlayerExited > resumeTimeThreshold)
                 {
+                    Debug.Log("Starting new group dialogue.");
                     groupDialogueManager.StartGroupDialogue();
                 }
                 else
                 {
+                    Debug.Log("Resuming group dialogue.");
                     groupDialogueManager.ResumeGroupDialogue();
                 }
             }
@@ -33,7 +34,7 @@ public class GroupDialogueTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //npcBehaviours.playerInRange = false;
+            Debug.Log("Player no longer in range");
 
             timePlayerExited = Time.time;
 

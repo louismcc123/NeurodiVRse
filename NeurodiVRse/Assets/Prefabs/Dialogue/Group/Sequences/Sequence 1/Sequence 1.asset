@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: Sequence 1
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: eb61195fe2e8c4f47b4dfe573fad47ad, type: 2}
+  - {fileID: 11400000, guid: 4c602bced6913fb4aa3a9d9c50250441, type: 2}
+  - {fileID: 11400000, guid: afc44f009b6129f43848ddd7982ce8c9, type: 2}
+  responses:
+  - {fileID: 11400000, guid: ab0c93c697832b24e987e1dcccc712a7, type: 2}
+  - {fileID: 11400000, guid: 8b8cef2f725677d45807967a9996cc47, type: 2}
+  - {fileID: 11400000, guid: 6aee6c7ecb601b9499e6c1c6661c714e, type: 2}
+  completed: 0

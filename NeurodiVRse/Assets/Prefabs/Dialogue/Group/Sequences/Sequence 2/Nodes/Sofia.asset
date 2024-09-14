@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4981bb661119914f9c588731f428d3a, type: 3}
-  m_Name: Ethan Node 1
+  m_Name: Sofia
   m_EditorClassIdentifier: 
-  NPCDialogueCanvas: {fileID: 0}
-  responses: []
-  dialogueText: Hey Louis
+  dialogueText: "It is! I\u2019ve seen some events like that while travelling. The
+    atmosphere is electric, though I\u2019m more into photography than gaming."
   dialogueAudio: {fileID: 0}
+  actor: {fileID: 0}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class GroupDialogueManager : MonoBehaviour
 {
@@ -26,19 +27,38 @@ public class GroupDialogueManager : MonoBehaviour
 
     [Header("Scoring")]
     private int totalScore = 0;
-    public TextMeshProUGUI finalScoreText;
+    //public TextMeshProUGUI finalScoreText;
     public PlayerStats playerStats;
 
     [SerializeField] private Transform player;
-    public List<NPCBehaviours> npcBehaviours;
+    public List<GroupActor> groupActors;
 
     private void Awake()
     {
+        foreach (var actor in groupActors)
+        {
+            if (actor == null)
+            {
+                Debug.LogError("One or more actors are not assigned in the groupActors list.");
+            }
+            else
+            {
+                Debug.Log($"Actor initialized: {actor.Name}");
+            }
+        }
+        
+        if (dialogueSequences == null || dialogueSequences.Count == 0)
+        {
+            Debug.LogError("Dialogue sequences not initialized or empty.");
+        }
+        
         HideDialogue();
     }
 
     public void StartGroupDialogue()
     {
+        Debug.Log("StartGroupDialogue called. Dialogue sequences count: " + dialogueSequences.Count);
+
         if (dialogueSequences.Count > 0 && !isDialogueActive)
         {
             if (dialogueSequences[currentSequenceIndex].completed)
@@ -49,12 +69,19 @@ public class GroupDialogueManager : MonoBehaviour
 
             isDialogueActive = true;
             ShowDialogue();
+            Debug.Log("Displaying next dialogue.");
             DisplayNextDialogue();
+        }
+        else
+        {
+            Debug.LogWarning("No dialogue sequences available or dialogue is already active.");
         }
     }
 
     public void PauseGroupDialogue()
     {
+        Debug.Log("PauseGroupDialogue called.");
+
         if (isDialogueActive)
         {
             isDialoguePaused = true;
@@ -62,23 +89,35 @@ public class GroupDialogueManager : MonoBehaviour
             HideDialogue();
             pausedSequenceIndex = currentSequenceIndex;
             pausedDialogueIndex = currentDialogueIndex;
+            Debug.Log($"Dialogue paused. Sequence Index: {pausedSequenceIndex}, Dialogue Index: {pausedDialogueIndex}");
+        }
+        else
+        {
+            Debug.LogWarning("Dialogue is not active, cannot pause.");
         }
     }
 
-
     public void ResumeGroupDialogue()
     {
+        Debug.Log("ResumeGroupDialogue called.");
+
         if (isDialoguePaused)
         {
+            Debug.Log("Dialogue is paused. Resuming dialogue.");
+
             isDialoguePaused = false;
             isDialogueActive = true;
             ShowDialogue();
             currentSequenceIndex = pausedSequenceIndex;
             currentDialogueIndex = pausedDialogueIndex;
+            Debug.Log($"Resuming dialogue. Sequence Index: {currentSequenceIndex}, Dialogue Index: {currentDialogueIndex}");
             DisplayNextDialogue();
         }
+        else
+        {
+            Debug.LogWarning("Dialogue is not paused, cannot resume.");
+        }
     }
-
 
     public void EndGroupDialogue()
     {
@@ -90,53 +129,137 @@ public class GroupDialogueManager : MonoBehaviour
 
     private void DisplayNextDialogue()
     {
+        Debug.Log("Entering DisplayNextDialogue.");
+
         if (!isDialogueActive)
         {
+            Debug.LogWarning("Dialogue is not active.");
+            return;
+        }
+
+        if (dialogueSequences == null || dialogueSequences.Count == 0)
+        {
+            Debug.LogError("Dialogue sequences are null or empty.");
+            return;
+        }
+
+        if (currentSequenceIndex >= dialogueSequences.Count || currentSequenceIndex < 0)
+        {
+            Debug.LogError($"Invalid sequence index: {currentSequenceIndex}");
             return;
         }
 
         GroupDialogueSequence currentSequence = dialogueSequences[currentSequenceIndex];
+        Debug.Log($"Displaying next dialogue. Current sequence index: {currentSequenceIndex}, Dialogue index: {currentDialogueIndex}");
 
-        if (currentDialogueIndex >= currentSequence.nodes.Count)
+        if (currentSequence == null)
         {
+            Debug.LogError("Current sequence is null.");
+            return;
+        }
+
+        if (currentDialogueIndex < 0 || currentDialogueIndex >= currentSequence.nodes.Count)
+        {
+            Debug.LogError($"Invalid dialogue index: {currentDialogueIndex}");
+            return;
+        }
+
+        if (currentDialogueIndex >= currentSequence.nodes.Count || currentDialogueIndex < 0)
+        {
+            Debug.LogWarning("Current dialogue index out of range.");
             ShowPlayerResponses(currentSequence);
             return;
         }
 
         GroupDialogueNode currentNode = currentSequence.nodes[currentDialogueIndex];
-
-        TriggerNodeDialogue(currentNode);
-
-        foreach (var npc in npcBehaviours)
+        if (currentNode == null)
         {
-            if (npc.transform != currentNode.actor.character)
-            {
-                npc.FaceSpeaker(currentNode.actor.character);
-            }
+            Debug.LogError("Current node is null.");
+            return;
         }
 
+        Debug.Log($"Processing node: {currentNode.name}");
+        //AssignActorToNode(currentNode);
+        TriggerNodeDialogue(currentNode);
+        MakeNPCsFaceSpeaker(currentNode.actor.character);
         PlayDialogueAudio(currentNode);
     }
 
+    /*private void AssignActorToNode(GroupDialogueNode node)
+    {
+        Debug.Log($"Assigning actor for node: {node.dialogueText}");
+
+        if (node == null)
+        {
+            Debug.LogError("Node is null!");
+            return;
+        }
+
+        if (node.actor == null)
+        {
+            Debug.LogError("Node's actor is null!");
+            return;
+        }
+
+        foreach (var actor in groupActors)
+        {
+            if (actor.Name == node.actor.Name)
+            {
+                node.actor = actor.GetComponent<GroupActor>();
+                Debug.Log($"Actor assigned: {node.actor.Name}");
+                break;
+            }
+        }
+    }*/
+
     private void TriggerNodeDialogue(GroupDialogueNode node)
     {
-        node.actor.NPCDialogueCanvas.SetActive(true);
+        HideDialogue();
 
-        var titleText = node.actor.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
-        var bodyText = node.actor.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
+        if (node.actor != null)
+        {
+            node.actor.NPCDialogueCanvas.SetActive(true);
 
-        titleText.text = node.actor.Name;
-        bodyText.text = node.dialogueText;
+            var titleText = node.actor.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
+            var bodyText = node.actor.NPCDialogueCanvas.GetComponentInChildren<TextMeshProUGUI>();
 
-        node.StartTalking();
+            titleText.text = node.actor.Name;
+            bodyText.text = node.dialogueText;
+
+            NPCBehaviours npcBehaviours = node.actor.GetComponent<NPCBehaviours>();
+            if (npcBehaviours != null)
+            {
+                npcBehaviours.StartTalking();
+            }
+            else
+            {
+                Debug.LogError("NPCBehaviours component is missing on the actor's GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Node's actor is null!");
+        }
+    }
+
+    private void MakeNPCsFaceSpeaker(Transform speaker)
+    {
+        foreach (var actor in groupActors)
+        {
+            if (actor.transform != speaker)
+            {
+                NPCBehaviours npcBehaviours = actor.GetComponent<NPCBehaviours>();
+                if (npcBehaviours != null)
+                {
+                    npcBehaviours.FaceSpeaker(speaker);
+                }
+            }
+        }
     }
 
     private void ShowPlayerResponses(GroupDialogueSequence sequence)
     {
-        foreach (var npc in npcBehaviours)
-        {
-            npc.FaceSpeaker(player);
-        }
+        MakeNPCsFaceSpeaker(player);
 
         foreach (Transform child in playerResponseButtonParent)
         {
@@ -170,7 +293,8 @@ public class GroupDialogueManager : MonoBehaviour
 
     private void HandlePlaybackComplete(GroupDialogueNode node)
     {
-        node.StopTalking();
+        Debug.Log($"Playback complete for node: {node.dialogueText}");
+        node.actor.GetComponent<NPCBehaviours>().StopTalking();
         currentDialogueIndex++;
         DisplayNextDialogue();
     }
@@ -179,29 +303,30 @@ public class GroupDialogueManager : MonoBehaviour
     {
         if (node.dialogueAudio != null)
         {
+            Debug.Log($"Playing audio for node: {node.dialogueText}");
             node.actor.audioSource.clip = node.dialogueAudio;
             node.actor.audioSource.Play();
             HandlePlaybackComplete(node);
         }
         else
         {
+            Debug.Log("No audio for this dialogue node.");
             HandlePlaybackComplete(node);
         }
     }
 
     private void ShowDialogue()
     {
+        Debug.Log("Showing dialogue.");
         PlayerResponseCanvas.SetActive(true);
     }
 
     private void HideDialogue()
     {
-        foreach (var canvas in FindObjectsOfType<GameObject>())
+        Debug.Log("Hiding dialogue.");
+        foreach (var actor in groupActors)
         {
-            if (canvas.CompareTag("NPC Dialogue Canvas"))
-            {
-                canvas.SetActive(false);
-            }
+            actor.NPCDialogueCanvas.SetActive(false);
         }
         PlayerResponseCanvas.SetActive(false);
     }

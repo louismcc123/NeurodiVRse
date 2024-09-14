@@ -10,10 +10,12 @@ public class NPCBehaviours : MonoBehaviour
 
     private Transform currentTarget;
     private NavMeshAgent agent;
+    private Animator animator;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void FaceSpeaker(Transform target)
@@ -38,6 +40,22 @@ public class NPCBehaviours : MonoBehaviour
         if (agent != null)
         {
             agent.updateRotation = true;
+        }
+    }
+
+    public void StartTalking()
+    {
+        if (this.animator != null)
+        {
+            this.animator.SetBool("IsTalking", true);
+        }
+    }
+
+    public void StopTalking()
+    {
+        if (this.animator != null)
+        {
+            this.animator.SetBool("IsTalking", false);
         }
     }
 }
