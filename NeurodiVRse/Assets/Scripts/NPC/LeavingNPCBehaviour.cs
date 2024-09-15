@@ -12,7 +12,7 @@ public class LeavingNPCBehaviour : MonoBehaviour
     private Door doorScript;
 
     public CharacterController characterController;
-    public NpcAiDialogue NpcAiDialogue;
+    public AIDialogueController NpcAiDialogue;
 
     private void Awake()
     {

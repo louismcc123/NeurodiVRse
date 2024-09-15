@@ -2942,50 +2942,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154467048}
   m_Mesh: {fileID: 4300000, guid: 53050a2a2cbdf45b38e0b675faa6f583, type: 3}
---- !u!1 &157148469
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 157148470}
-  - component: {fileID: 157148471}
-  m_Layer: 0
-  m_Name: OpenAI Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &157148470
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157148469}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1491224542}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &157148471
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157148469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1c45963a9c8b80438838f3f2b04cc03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &159360736
 GameObject:
   m_ObjectHideFlags: 0
@@ -8116,7 +8072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d6a776a04fe7f4e989c2a1c26ffae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NpcAiDialogue: {fileID: 1291798445}
+  aiDialogueController: {fileID: 1291798445}
   baristaBehaviour: {fileID: 1291798430}
 --- !u!1 &510565241
 GameObject:
@@ -18207,19 +18163,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openAICanvas: {fileID: 704845196}
-  npcDialogueCanvas: {fileID: 909137373}
   inputField: {fileID: 1933390815}
   keyboard: {fileID: 1793868075}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
+  npcDialogueCanvas: {fileID: 909137373}
   messageText: {fileID: 831793869}
-  npcAiDialogue: {fileID: 978863318}
-  adviceManager: {fileID: 1742215218}
   npcPrompt: "You are a relaxed coffee lover enjoying some quiet time at the caf\xE9.
     Respond to the user as if you are in a peaceful mood and happy to chat. Offer
     friendly and warm responses, showing that you appreciate the company and are
     open to discussing various topics, from the coffee you're drinking to the ambiance
     of the caf\xE9."
+  adviceManager: {fileID: 1742215218}
   ttsBridge: {fileID: 1167268494}
   voicePreset: 8
 --- !u!114 &978863318
@@ -18395,20 +18350,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openAICanvas: {fileID: 704845196}
-  npcDialogueCanvas: {fileID: 91470622}
   inputField: {fileID: 1933390815}
   keyboard: {fileID: 1793868075}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
+  npcDialogueCanvas: {fileID: 91470622}
   messageText: {fileID: 868728473}
-  npcAiDialogue: {fileID: 980113133}
-  adviceManager: {fileID: 1742215218}
   npcPrompt: "You are a focused freelancer working on your laptop while enjoying
     a coffee. Respond to the user as if you are deeply engrossed in your work but
     willing to give short, courteous responses. If asked about your work, briefly
     explain that you are working on a project and appreciate the caf\xE9\u2019s environment
     for its conducive atmosphere. Indicate that you prefer not to be disturbed unless
     necessary."
+  adviceManager: {fileID: 1742215218}
   ttsBridge: {fileID: 1167268494}
   voicePreset: 2
 --- !u!114 &980113135
@@ -24464,19 +24418,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openAICanvas: {fileID: 704845196}
-  npcDialogueCanvas: {fileID: 401390228}
   inputField: {fileID: 1933390815}
   keyboard: {fileID: 1793868075}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
+  npcDialogueCanvas: {fileID: 401390228}
   messageText: {fileID: 1265181997}
-  npcAiDialogue: {fileID: 1291798445}
-  adviceManager: {fileID: 1742215218}
   npcPrompt: You are a barista at a cafe called Neurodiverse Cafe based in the United
     Kingdom. Respond to the user as appropriate for this character. Do not break
     character or indicate that you are an artificial intelligence. When appropriate
     (for example, after the customer has made their order), tell them the cost of
     the items and ask them if they would like to pay by card or cash.
+  adviceManager: {fileID: 1742215218}
   ttsBridge: {fileID: 1167268494}
   voicePreset: 9
   cardManager: {fileID: 1291798447}
@@ -26524,19 +26477,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openAICanvas: {fileID: 704845196}
-  npcDialogueCanvas: {fileID: 314402409}
   inputField: {fileID: 1933390815}
   keyboard: {fileID: 1793868075}
   send: {fileID: 1088608508}
   enter: {fileID: 1782622581}
+  npcDialogueCanvas: {fileID: 314402409}
   messageText: {fileID: 252978752}
-  npcAiDialogue: {fileID: 1380370725}
-  adviceManager: {fileID: 1742215218}
   npcPrompt: "You are a person about to leave the caf\xE9, focused on texting on
     your phone. Respond to the user with brief and distracted replies, as you're
     preoccupied with finishing your text messages. Show that you are in a hurry and
     provide short answers, indicating that you\u2019re on your way out and not available
     for a lengthy conversation."
+  adviceManager: {fileID: 1742215218}
   ttsBridge: {fileID: 1167268494}
   voicePreset: 5
 --- !u!136 &1380370727
@@ -29142,7 +29094,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 182214989}
-  - {fileID: 157148470}
   - {fileID: 1742215217}
   - {fileID: 2137483940}
   - {fileID: 1178357066}

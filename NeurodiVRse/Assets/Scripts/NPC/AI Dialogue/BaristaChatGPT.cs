@@ -7,6 +7,7 @@ namespace OpenAI
 {
     public class BaristaChatGPT : ChatGPT
     {
+        [Header("Barista Specific")]
         [SerializeField] private AICardManager cardManager;
         [SerializeField] private AICashManager cashManager;
         [SerializeField] private Transform coffeeCupSpawnPosition;
@@ -58,7 +59,7 @@ namespace OpenAI
 
         public IEnumerator SayThankYou()
         {
-            npcAiDialogue.isNpcTalking = true;
+            aiDialogueController.isNpcTalking = true;
 
             AppendMessage(new ChatMessage { Role = "npc", Content = "Thank you. Your coffee will be ready in just a moment." });
 

@@ -8,7 +8,7 @@ public class TypingNPCBehaviour : MonoBehaviour
     public float idleDuration = 10f;
 
     private Animator animator;
-    private NpcAiDialogue npcAiDialogue;
+    private AIDialogueController npcAiDialogue;
 
     private void Awake()
     {

@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/CafeScripted.unity
+- path: Assets/Scenes/PartyLMM.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

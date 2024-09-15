@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AIBaristaTrigger : MonoBehaviour
 {
-    public NpcAiDialogue NpcAiDialogue;
+    public AIDialogueController aiDialogueController;
     public BaristaBehaviour baristaBehaviour;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (NpcAiDialogue != null)
+            if (aiDialogueController != null)
             {
-                NpcAiDialogue.playerInRange = true;
+                aiDialogueController.playerInRange = true;
             }
             if (baristaBehaviour != null)
             {
@@ -26,9 +26,9 @@ public class AIBaristaTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (NpcAiDialogue != null)
+            if (aiDialogueController != null)
             {
-                NpcAiDialogue.playerInRange = false;
+                aiDialogueController.playerInRange = false;
             }
             if (baristaBehaviour != null)
             {

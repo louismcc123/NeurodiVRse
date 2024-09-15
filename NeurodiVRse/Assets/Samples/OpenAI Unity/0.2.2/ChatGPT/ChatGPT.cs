@@ -8,24 +8,23 @@ namespace OpenAI
 {
     public class ChatGPT : MonoBehaviour
     {
-        [Header("Canvas References")]
+        [Header("Player Dialogue")]
         [SerializeField] protected GameObject openAICanvas;
-        [SerializeField] protected GameObject npcDialogueCanvas;
-
-        [Header("UI Elements")]
         [SerializeField] protected InputField inputField;
         [SerializeField] protected GameObject keyboard;
         [SerializeField] protected Button send;
         [SerializeField] protected Button enter;
-        [SerializeField] protected TextMeshProUGUI messageText;
 
-        [Header("NPC AI Dialogue")]
-        [SerializeField] protected NpcAiDialogue npcAiDialogue;
-        [SerializeField] protected AdviceManager adviceManager;
+        [Header("NPC Dialogue")]
+        [SerializeField] protected GameObject npcDialogueCanvas;
+        [SerializeField] protected TextMeshProUGUI messageText;
         [SerializeField] private string npcPrompt;
 
+        [Header("Advice Management")]
+        [SerializeField] protected AdviceManager adviceManager;
+
         [Header("TTS Integration")]
-        [SerializeField] private TTSBridge ttsBridge;
+        [SerializeField] protected TTSBridge ttsBridge;
         [SerializeField] private VoicePreset voicePreset;
 
         [Header("Events")]
@@ -34,8 +33,9 @@ namespace OpenAI
         protected OpenAIApi openai = new OpenAIApi();
         protected List<ChatMessage> messages = new List<ChatMessage>();
         protected string prompt = "Act as an NPC in a VR environment. Respond to the user as appropriate for your role. Never break character or say that you are artificial intelligence.";
+        protected string maxMessageLengthinstruction = "Limit the length of your responses so that they are never more than 150 characters. ";
 
-        public static Action<string> onChatGPTMessageRecieved;
+        protected AIDialogueController aiDialogueController;
 
         protected bool isDialoguePaused = false;
         protected static ChatGPT activeNPC;
@@ -53,12 +53,17 @@ namespace OpenAI
 
             send.onClick.AddListener(SendReply);
             enter.onClick.AddListener(SendReply);
+
+            aiDialogueController = GetComponent<AIDialogueController>();
         }
 
-        protected async void SendReply()
+        protected virtual async void SendReply()
         {
+            Debug.Log("SendReply method called.");
+
             if (isDialoguePaused || activeNPC != this)
             {
+                Debug.Log("Dialogue is paused or the active NPC is different. Reply not sent.");
                 return;
             }
 
@@ -68,9 +73,11 @@ namespace OpenAI
                 Content = inputField.text
             };
 
+            Debug.Log($"New player message: {newMessage.Content}");
+
             if (messages.Count == 0)
             {
-                newMessage.Content = prompt + "\n" + inputField.text;
+                newMessage.Content = prompt + "\n" + inputField.text + maxMessageLengthinstruction;
             }
 
             messages.Add(newMessage);
@@ -100,8 +107,8 @@ namespace OpenAI
                 if (!string.IsNullOrEmpty(filteredContent))
                 {
                     HandleResponse(filteredContent);
-                    messages.Add(new ChatMessage { Role = "assistant", Content = filteredContent });
-                    AppendMessage(new ChatMessage { Role = "assistant", Content = filteredContent });
+                    messages.Add(new ChatMessage { Role = "npc", Content = filteredContent });
+                    AppendMessage(new ChatMessage { Role = "npc", Content = filteredContent });
 
                     onChatGPTMessageReceived?.Invoke(filteredContent);
                 }
@@ -143,7 +150,7 @@ namespace OpenAI
 
         protected virtual void HandleResponse(string responseContent)
         {
-
+            Debug.Log($"Handling response: {responseContent}");
         }
 
         private string FilterInstructionalText(string content)
@@ -196,7 +203,8 @@ namespace OpenAI
             Debug.Log($"Dialogue paused.");
 
             SetNpcTalking(false);
-            SetCanvasActive(false);
+            npcDialogueCanvas.SetActive(false);
+            openAICanvas.SetActive(false);
         }
 
         public void ResumeDialogue()
@@ -205,18 +213,11 @@ namespace OpenAI
             Debug.Log($"Dialogue resumed.");
 
             SetNpcTalking(true);
-            SetCanvasActive(true);
         }
 
-        protected void SetCanvasActive(bool isActive)
+        protected virtual void SetNpcTalking(bool isTalking)
         {
-            openAICanvas.SetActive(isActive);
-            npcDialogueCanvas.SetActive(isActive);
-        }
-
-        protected void SetNpcTalking(bool isTalking)
-        {
-            npcAiDialogue.isNpcTalking = isTalking;
+            aiDialogueController.isNpcTalking = isTalking;
         }
     }
 }

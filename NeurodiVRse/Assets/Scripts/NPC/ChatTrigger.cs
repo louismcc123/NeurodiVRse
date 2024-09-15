@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChatTrigger : MonoBehaviour
 {
-    public NpcAiDialogue NpcAiDialogue;
+    public AIDialogueController NpcAiDialogue;
 
     private void OnTriggerEnter(Collider other)
     {

@@ -39,7 +39,7 @@ public class TTSBridge : MonoBehaviour
         }
     }
 
-    private void Speak(string message)
+    public void Speak(string message)
     {
         sendButton.gameObject.SetActive(false);
         recordButton.gameObject.SetActive(false);

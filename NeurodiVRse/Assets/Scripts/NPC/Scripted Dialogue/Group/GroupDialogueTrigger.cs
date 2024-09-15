@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class GroupDialogueTrigger : MonoBehaviour
 {
+    [SerializeField] private GameObject instructionCanvas;
+    
     private float timePlayerExited = -Mathf.Infinity;
     public float resumeTimeThreshold = 5f;
 
+    private MeshRenderer meshRenderer;
+
     public GroupDialogueManager groupDialogueManager;
+
+    private void Awake()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player in range");
+
+            meshRenderer.enabled = false;
+            instructionCanvas.SetActive(false);
+
             if (groupDialogueManager != null)
             {
                 if (Time.time - timePlayerExited > resumeTimeThreshold)
@@ -42,6 +55,9 @@ public class GroupDialogueTrigger : MonoBehaviour
             {
                 groupDialogueManager.PauseGroupDialogue();
             }
+
+            meshRenderer.enabled = true;
+            instructionCanvas.SetActive(true);
         }
     }
 }
