@@ -10,7 +10,7 @@ public class AIDialogueController : MonoBehaviour
     [SerializeField] private GameObject openAICanvas;
     [SerializeField] private GameObject NPCDialogueCanvas;
     [SerializeField] private GameObject interactCanvas;
-    [SerializeField] private InputActionReference aButton;
+    [SerializeField] private InputActionReference interact;
 
     public bool playerInRange = false;
     public bool isNpcTalking = false;
@@ -20,6 +20,7 @@ public class AIDialogueController : MonoBehaviour
 
     private Animator animator;
     private ChatGPT chatGPT;
+    //private CafeChatGPT cafeChatGPT;
     private LeavingNPCBehaviour leavingNPCBehaviour;
 
     public CharacterController characterController;
@@ -59,7 +60,7 @@ public class AIDialogueController : MonoBehaviour
             {
                 ShowInteractCanvas();
 
-                if (aButton.action.triggered)
+                if (interact.action.triggered )
                 {
                     if (leavingNPCBehaviour != null)
                     {

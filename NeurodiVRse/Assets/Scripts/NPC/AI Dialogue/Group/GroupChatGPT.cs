@@ -32,21 +32,21 @@ public class GroupChatGPT : ChatGPT
 
     protected override async void SendReply()
     {
-        if (isDialoguePaused)
+        if (isDialoguePaused || activeNPC != this)
         {
-            Debug.Log("Dialogue is paused. Reply not sent.");
+            Debug.Log("Dialogue is paused or the active NPC is different. Reply not sent.");
             return;
         }
 
-        groupConversationManager.NotifyConversationUpdate(this);
+        //groupConversationManager.NotifyConversationUpdate(this);
 
-        GroupChatGPT activeNPC = groupConversationManager.GetActiveNPC();
+        /*GroupChatGPT activeNPC = groupConversationManager.GetActiveNPC();
 
         if (activeNPC != this)
         {
             Debug.Log($"{gameObject.name} is not the active NPC. Reply not sent.");
             return;
-        }
+        }*/
 
         var newMessage = new ChatMessage()
         {
@@ -151,7 +151,7 @@ public class GroupChatGPT : ChatGPT
     {
         Debug.Log($"{gameObject.name} received message from {sender.gameObject.name}: {messageContent}");
 
-        if (isHandlingMessage || isDialoguePaused || activeNPC != this)
+        if (isHandlingMessage || isDialoguePaused)// || activeNPC != this)
         {
             return;
         }
@@ -175,18 +175,18 @@ public class GroupChatGPT : ChatGPT
         messages.Add(new ChatMessage { Role = "assistant", Content = greeting });
         onChatGPTMessageReceived?.Invoke(greeting);
 
-        groupConversationManager.NotifyConversationUpdate(this);
+        //groupConversationManager.NotifyConversationUpdate(this);
         groupConversationManager.NotifyNPCsToFaceSpeaker();
         GreetingPlayed(true);
     }
 
-    public override void ResumeDialogue()
+    /*public override void ResumeDialogue()
     {
         isDialoguePaused = false;
         openAICanvas.SetActive(true);
         SetNpcTalking(true);
         ActivateNPC();
-    }
+    }*/
 
     public override void SetNpcTalking(bool isTalking)
     {

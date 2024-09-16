@@ -85,6 +85,7 @@ namespace OpenAI
             Debug.Log(gameObject.name + ": Coffee cup instantiated.");
 
             ResumeDialogue();
+            openAICanvas.SetActive(true);
         }
 
         private IEnumerator StartCoffeePreparation()

@@ -32,8 +32,11 @@ namespace OpenAI
 
         protected OpenAIApi openai = new OpenAIApi();
         protected List<ChatMessage> messages = new List<ChatMessage>();
-        protected string prompt = "Act as an NPC in a VR environment. Respond to the user as appropriate for your role. Never break character or say that you are artificial intelligence.";
-        protected string maxMessageLengthinstruction = "Limit the length of your responses so that they are never more than 100 characters. ";
+        protected string prompt = "Act as an NPC in a VR environment. " +
+            "Respond to the user as appropriate for your role. " +
+            "Never break character or say that you are artificial intelligence.";
+        protected string maxMessageLengthinstruction = "Limit the length of your " +
+            "responses so that they are never more than 100 characters. ";
 
         protected AIDialogueController aiDialogueController;
 
@@ -157,11 +160,6 @@ namespace OpenAI
 
         public void ActivateNPC()
         {
-            if (activeNPC != null && activeNPC != this)
-            {
-                activeNPC.DeactivateNPC();
-            }
-
             activeNPC = this;
 
             if (ttsBridge != null)

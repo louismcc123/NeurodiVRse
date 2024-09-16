@@ -49,19 +49,8 @@ public class GroupConversationManager : MonoBehaviour
 
     public void BeginGroupDialogue()
     {
-        foreach (var npc in npcList)
-        {
-            npc.DeactivateNPC();
-        }
-
         activeNPC = npcList[0];
-
-        if (activeNPC == null)
-        {
-            Debug.LogError("Active NPC is null. Cannot begin group dialogue.");
-            return;
-        }
-
+        ChooseRandomNPC();
         playerResponded = false;
 
         if (!greetingPlayed)
@@ -91,8 +80,8 @@ public class GroupConversationManager : MonoBehaviour
             }
             else
             {
-            ChooseNextSpeaker();
-            BeginGroupDialogue();
+                ChooseNextSpeaker();
+                BeginGroupDialogue();
             }
 
             yield return new WaitForSeconds(1f);
@@ -127,7 +116,7 @@ public class GroupConversationManager : MonoBehaviour
         }
     }
 
-    public void NotifyConversationUpdate(GroupChatGPT newActiveNPC)
+    /*public void NotifyConversationUpdate(GroupChatGPT newActiveNPC)
     {
         foreach (var npc in npcList)
         {
@@ -140,26 +129,10 @@ public class GroupConversationManager : MonoBehaviour
         activeNPC = newActiveNPC;
         activeNPC.ActivateNPC();
         activeNPC.SetNpcTalking(true);
-    }
-
-    public void PauseAllNPCs()
-    {
-        foreach (var npc in npcList)
-        { 
-            if (!npc.isDialoguePaused)
-            {
-                npc.PauseDialogue();
-            }
-        }
-    }
+    }*/
 
     public GroupChatGPT ChooseRandomNPC()
     {
-        foreach (var npc in npcList)
-        {
-            npc.DeactivateNPC();
-        }
-
         int randomIndex = Random.Range(0, npcList.Count);
         activeNPC = npcList[randomIndex];
         Debug.Log($"{activeNPC.gameObject.name} has been chosen as the active NPC.");
@@ -183,9 +156,15 @@ public class GroupConversationManager : MonoBehaviour
         PauseAllNPCs();
     }
 
-    public GroupChatGPT GetActiveNPC()
+    public void PauseAllNPCs()
     {
-        return activeNPC;
+        foreach (var npc in npcList)
+        { 
+            if (!npc.isDialoguePaused)
+            {
+                npc.PauseDialogue();
+            }
+        }
     }
 
     private void OnButtonPressed()
@@ -209,9 +188,9 @@ public class GroupConversationManager : MonoBehaviour
     {
         lastExitTime = Time.time;
 
-        if (activeNPC != null)
+        foreach (var npc in npcList)
         {
-            activeNPC.PauseDialogue();
+            npc.PauseDialogue();
         }
     }
 
