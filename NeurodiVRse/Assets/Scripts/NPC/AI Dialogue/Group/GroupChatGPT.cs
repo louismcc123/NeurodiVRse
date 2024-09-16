@@ -1,42 +1,46 @@
 using OpenAI;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GroupChatGPT : ChatGPT
 {
+    [SerializeField] protected Button interruptButton;
+    
     private List<GroupChatGPT> npcGroup = new List<GroupChatGPT>();
 
-    private GroupAIDialogueController groupAIDialogueController; 
+    //public bool isCurrentlyActive = false;
+    private bool isHandlingMessage = false;
+
+    private GroupAIDialogueController groupAIDialogueController;
+    private GroupConversationManager groupConversationManager;
 
     protected override void Start()
     {
         base.Start();
 
         groupAIDialogueController = GetComponent<GroupAIDialogueController>();
+        groupConversationManager = GetComponentInParent<GroupConversationManager>();
 
         if (!npcGroup.Contains(this))
         {
             npcGroup.Add(this);
         }
-        Debug.Log($"GroupChatGPT started for NPC: {gameObject.name}");
+        
+        interruptButton.onClick.AddListener(OnCancelResponse);
     }
 
     protected override async void SendReply()
     {
-        Debug.Log("GroupChatGPT SendReply method called.");
-
         if (isDialoguePaused)
         {
             Debug.Log("Dialogue is paused. Reply not sent.");
             return;
         }
 
-        // Choose a random NPC from the conversation manager if this isn't already the active NPC
-        GroupConversationManager conversationManager = FindObjectOfType<GroupConversationManager>();
-        if (conversationManager != null)
-        {
-            activeNPC = conversationManager.ChooseRandomNPC();
-        }
+        groupConversationManager.NotifyConversationUpdate(this);
+
+        GroupChatGPT activeNPC = groupConversationManager.GetActiveNPC();
 
         if (activeNPC != this)
         {
@@ -44,12 +48,87 @@ public class GroupChatGPT : ChatGPT
             return;
         }
 
-        base.SendReply();
+        var newMessage = new ChatMessage()
+        {
+            Role = "user",
+            Content = inputField.text
+        };
+
+        Debug.Log($"New player message: {newMessage.Content}");
+
+        if (messages.Count == 0)
+        {
+            newMessage.Content = prompt + "\n" + inputField.text + maxMessageLengthinstruction;
+        }
+
+        messages.Add(newMessage);
+        PlayerResponded(true);
+        GreetingPlayed(true);
+        send.enabled = false;
+        enter.enabled = false;
+        inputField.text = "";
+        inputField.enabled = false;
+        keyboard.SetActive(false);
+        SetNpcTalking(true);
+        groupConversationManager.NotifyNPCsToFaceSpeaker();
+
+        //Debug.Log("Sending request to OpenAI...");
+
+        var completionResponse = await openai.CreateChatCompletion(new CreateChatCompletionRequest()
+        {
+            Model = "gpt-3.5-turbo",
+            Messages = messages
+        });
+
+        if (completionResponse.Choices != null && completionResponse.Choices.Count > 0)
+        {
+            var message = completionResponse.Choices[0].Message;
+            message.Content = message.Content.Trim();
+
+            string filteredContent = FilterInstructionalText(message.Content);
+            Debug.Log($"Received response: {filteredContent}");
+
+            if (!string.IsNullOrEmpty(filteredContent))
+            {
+                HandleResponse(filteredContent);
+                messages.Add(new ChatMessage { Role = "assistant", Content = filteredContent });
+                AppendMessage(new ChatMessage { Role = "assistant", Content = filteredContent });
+
+                onChatGPTMessageReceived?.Invoke(filteredContent);
+            }
+            else
+            {
+                Debug.LogWarning("Filtered content is empty after removing instructional text.");
+            }
+
+            if (completionResponse.Choices.Count > 1)
+            {
+                var advice = completionResponse.Choices[1].Message;
+                advice.Content = advice.Content.Trim();
+                DisplayAdvice(advice.Content);
+                Debug.Log($"Received advice: {advice.Content}");
+            }
+            else
+            {
+                Debug.Log("No advice message received.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No text was generated from this prompt.");
+        }
+
+        groupConversationManager.ChooseNextSpeaker();
+        send.enabled = true;
+        enter.enabled = true;
+        inputField.enabled = true;
+        PlayerResponded(false);
+        //groupConversationManager.OnPlayerFinishedSpeaking();
     }
 
     protected override void HandleResponse(string responseContent)
     {
-        base.HandleResponse(responseContent);
+        //base.HandleResponse(responseContent);
         Debug.Log($"{gameObject.name} received response: {responseContent}");
         NotifyGroupMembers(responseContent);
     }
@@ -72,11 +151,11 @@ public class GroupChatGPT : ChatGPT
     {
         Debug.Log($"{gameObject.name} received message from {sender.gameObject.name}: {messageContent}");
 
-        if (isDialoguePaused || activeNPC != this)
+        if (isHandlingMessage || isDialoguePaused || activeNPC != this)
         {
-            Debug.Log($"{gameObject.name} is not the active NPC or dialogue is paused.");
             return;
         }
+        isHandlingMessage = true;
 
         var newMessage = new ChatMessage()
         {
@@ -86,29 +165,47 @@ public class GroupChatGPT : ChatGPT
 
         messages.Add(newMessage);
         SendReply();
+        isHandlingMessage = false;
     }
 
     public void GreetPlayer()
     {
-        string greeting = "Hey! Welcome to the party!";
-        Debug.Log($"{gameObject.name} is greeting the player with message: {greeting}");
+        string greeting = "Hey! Glad you could join us.";
+        HandleResponse(greeting);
+        messages.Add(new ChatMessage { Role = "assistant", Content = greeting });
+        onChatGPTMessageReceived?.Invoke(greeting);
 
-        groupAIDialogueController.NPCTalking();
-
-        ChatMessage message = new ChatMessage { Role = "npc", Content = greeting };
-        AppendMessage(message);
-        ttsBridge.Speak(messageText.text);
+        groupConversationManager.NotifyConversationUpdate(this);
+        groupConversationManager.NotifyNPCsToFaceSpeaker();
+        GreetingPlayed(true);
     }
 
-    protected override void SetNpcTalking(bool isTalking)
+    public override void ResumeDialogue()
     {
-        if (isTalking)
-        {
-            groupAIDialogueController.NPCTalking();
-        }
-        else
-        {
-            groupAIDialogueController.NPCStopTalking();
-        }
+        isDialoguePaused = false;
+        openAICanvas.SetActive(true);
+        SetNpcTalking(true);
+        ActivateNPC();
+    }
+
+    public override void SetNpcTalking(bool isTalking)
+    {
+        groupAIDialogueController.isThisNPCTalking = isTalking;
+        //Debug.Log($"{gameObject.name} has been set to is talking: {isTalking}");
+    }
+
+    public void PlayerResponded(bool responded)
+    {
+        groupConversationManager.playerResponded = responded;
+    }
+
+    public void GreetingPlayed(bool greetingPlayed)
+    {
+        groupConversationManager.greetingPlayed = greetingPlayed;
+    }
+
+    private void OnCancelResponse()
+    {
+        groupConversationManager.HandleInterruption();
     }
 }

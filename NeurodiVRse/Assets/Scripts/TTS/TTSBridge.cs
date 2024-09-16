@@ -31,7 +31,7 @@ public class TTSBridge : MonoBehaviour
         if (ttsSpeaker != null && !string.IsNullOrEmpty(presetVoiceID))
         {
             ttsSpeaker.presetVoiceID = presetVoiceID;
-            Debug.Log($"Voice preset changed to {presetVoiceID} for active NPC.");
+            //Debug.Log($"Voice preset changed to {presetVoiceID} for active NPC.");
         }
         else
         {

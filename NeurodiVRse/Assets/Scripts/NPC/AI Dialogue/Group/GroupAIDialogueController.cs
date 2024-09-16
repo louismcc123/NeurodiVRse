@@ -1,26 +1,23 @@
 using Meta.WitAi.TTS.Utilities;
 using OpenAI;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class GroupAIDialogueController : MonoBehaviour
 {
-    [SerializeField] private GameObject openAICanvas;
     [SerializeField] private GameObject NPCDialogueCanvas;
     [SerializeField] private TTSSpeaker ttsSpeaker;
 
     public bool isThisNPCTalking = false;
 
     private Animator animator;
-    private GroupChatGPT groupChatGPT;
-    private GroupConversationManager groupConversationManager;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        groupChatGPT = GetComponent<GroupChatGPT>();
-        groupConversationManager = GetComponentInParent<GroupConversationManager>();
     }
 
     private void OnEnable()
@@ -39,21 +36,23 @@ public class GroupAIDialogueController : MonoBehaviour
         }
     }
 
-    public void NPCTalking()
+    private void Update()
     {
-        NPCDialogueCanvas.SetActive(true);
-        animator.SetBool("IsTalking", true);
-    }
-
-    public void NPCStopTalking()
-    {
-        NPCDialogueCanvas.SetActive(false);
-        animator.SetBool("IsTalking", false);
+        if (isThisNPCTalking)
+        {
+            NPCDialogueCanvas.SetActive(true);
+            animator.SetBool("IsTalking", true);
+        }
+        else
+        {
+            NPCDialogueCanvas.SetActive(false);
+            animator.SetBool("IsTalking", false);
+        }
     }
 
     private void HandlePlaybackComplete()
     {
-        NPCStopTalking();
-        groupConversationManager.OnNPCFinishedSpeaking();
+        isThisNPCTalking = false;
+        //groupConversationManager.OnNPCFinishedSpeaking();
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class GroupChatGPTTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject instructionCanvas;
+    [SerializeField] private GameObject openAICanvas;
 
     private float timePlayerExited = -1f;
     public float resumeTimeThreshold = 5f;
@@ -28,19 +29,11 @@ public class GroupChatGPTTrigger : MonoBehaviour
             //groupConversationManager.playerInRange = true;
             meshRenderer.enabled = false;
             instructionCanvas.SetActive(false);
+            openAICanvas.SetActive(true);
 
             if (groupConversationManager != null)
             {
-                if (Time.time - timePlayerExited > resumeTimeThreshold)
-                {
-                    Debug.Log("Starting new conversation.");
-                    groupConversationManager.StartConversation();
-                }
-                else
-                {
-                    Debug.Log("Resuming conversation.");
-                    groupConversationManager.ResumeConversation();
-                }
+                groupConversationManager.OnPlayerEnterTrigger();
             }
         }
     }
@@ -51,14 +44,13 @@ public class GroupChatGPTTrigger : MonoBehaviour
         {
             Debug.Log("Player out of range");
 
-            //groupConversationManager.playerInRange = false;
+            openAICanvas.SetActive(false);
 
             timePlayerExited = Time.time;
 
             if (groupConversationManager != null)
             {
-                Debug.Log("Pausing conversation.");
-                groupConversationManager.PauseConversation();
+                groupConversationManager.OnPlayerExitTrigger();
             }
 
             meshRenderer.enabled = true;

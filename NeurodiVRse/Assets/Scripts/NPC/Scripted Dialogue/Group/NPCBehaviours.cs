@@ -12,6 +12,7 @@ public class NPCBehaviours : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
 
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
