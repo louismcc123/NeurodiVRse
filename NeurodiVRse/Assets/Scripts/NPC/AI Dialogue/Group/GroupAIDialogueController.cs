@@ -53,6 +53,7 @@ public class GroupAIDialogueController : MonoBehaviour
     private void HandlePlaybackComplete()
     {
         isThisNPCTalking = false;
+        Debug.Log("HandlePlaybackComplete");
         //groupConversationManager.OnNPCFinishedSpeaking();
     }
 }

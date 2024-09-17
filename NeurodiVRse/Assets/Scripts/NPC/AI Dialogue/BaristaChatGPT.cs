@@ -59,15 +59,44 @@ namespace OpenAI
 
         public IEnumerator SayThankYou()
         {
-            aiDialogueController.isNpcTalking = true;
+            SetNpcTalking(true);
 
-            AppendMessage(new ChatMessage { Role = "npc", Content = "Thank you. Your coffee will be ready in just a moment." });
+            string thankYou = "Thank you. Your coffee will be ready in just a moment.";
+
+            var thankYouMessage = new ChatMessage()
+            {
+                Role = "assistant",
+                Content = thankYou
+            };
+
+            AppendMessage(thankYouMessage);
+            ttsBridge.Speak(thankYouMessage.Content);
+
+            yield return new WaitForSeconds(3f);
+
+            PauseDialogue();
+            StartCoroutine(StartCoffeePreparationSequence());
+        }
+
+        public IEnumerator SayEnjoy()
+        {
+            SetNpcTalking(true);
+
+            string enjoy = "Here's your coffee. Enjoy!";
+
+            var enjoyMessage = new ChatMessage()
+            {
+                Role = "assistant",
+                Content = enjoy
+            };
+
+            AppendMessage(enjoyMessage);
+            ttsBridge.Speak(enjoyMessage.Content);
 
             yield return new WaitForSeconds(2f);
 
-            PauseDialogue();
-
-            StartCoroutine(StartCoffeePreparationSequence());
+            SetNpcTalking(false);
+            openAICanvas.SetActive(true);
         }
 
         private IEnumerator StartCoffeePreparationSequence()
@@ -85,7 +114,7 @@ namespace OpenAI
             Debug.Log(gameObject.name + ": Coffee cup instantiated.");
 
             ResumeDialogue();
-            openAICanvas.SetActive(true);
+            StartCoroutine(SayEnjoy());
         }
 
         private IEnumerator StartCoffeePreparation()

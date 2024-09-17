@@ -169,6 +169,17 @@ public class DialogueManager : MonoBehaviour
         }
 
         PlayResponseAudioClip(response.responseAudio);
+
+        foreach (Transform child in playerResponseButtonParent)
+        {
+            Button button = child.GetComponent<Button>();
+            if (button != null)
+            {
+                button.onClick.RemoveAllListeners();
+                //button.interactable = false;
+            }
+        }
+
         StartCoroutine(HandleResponseWithDelay(response, title));
     }
 
