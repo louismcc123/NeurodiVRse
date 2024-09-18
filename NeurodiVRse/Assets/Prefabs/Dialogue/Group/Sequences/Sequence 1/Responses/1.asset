@@ -15,6 +15,6 @@ MonoBehaviour:
   responseText: "Yeah, Liverpool started strong but couldn\u2019t keep up. Manchester
     City\u2019s strategy was on point!"
   responseAudio: {fileID: 0}
-  nextSequence: 2
+  nextSequence: {fileID: 11400000, guid: e899b55ad2e69dc48a3b94eefdaa20eb, type: 2}
   score: 0
   adviceText: 

@@ -524,13 +524,14 @@ public class GroupDialogueManager : MonoBehaviour
     {
         PlayerDialogueCanvas.SetActive(false);
 
-        if (response.nextSequence >= 0 && response.nextSequence < allSequences.Count)
+        if (response.nextSequence != null)
         {
-            GroupDialogueSequence nextSequence = allSequences[response.nextSequence];
+            GroupDialogueSequence nextSequence = response.nextSequence;
             StartGroupDialogue(nextSequence);
         }
         else
         {
+            Debug.Log("no next sequence set. ending dialogue");
             EndGroupDialogue();
         }
     }

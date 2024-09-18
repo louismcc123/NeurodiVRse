@@ -7,7 +7,7 @@ public class GroupDialogueResponse : ScriptableObject
 {
     public string responseText;
     public AudioClip responseAudio;
-    public int nextSequence;
+    public GroupDialogueSequence nextSequence;
     public int score;
     public string adviceText;
 }

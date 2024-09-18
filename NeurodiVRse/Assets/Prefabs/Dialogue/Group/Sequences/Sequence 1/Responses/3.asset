@@ -15,6 +15,6 @@ MonoBehaviour:
   responseText: "I don\u2019t really get football. Isn\u2019t it just about kicking
     a ball around?"
   responseAudio: {fileID: 0}
-  nextSequence: 3
+  nextSequence: {fileID: 11400000, guid: 0c3e0a85b84c2fc4eb5264f70e4d0832, type: 2}
   score: 0
   adviceText: 
