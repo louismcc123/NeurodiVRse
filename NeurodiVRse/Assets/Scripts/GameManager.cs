@@ -1,39 +1,73 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //public static GameManager Instance;
+
+    [SerializeField] private GameObject loadingCanvas;
+    [SerializeField] private Image loadingBar;
+
     public GameObject gameOverUI;
     public GameObject endGameUI;
     public GameObject incompleteLevelUI;
 
     public Door door;
 
-    public void PlayCafeLLMGame()
+   /* private void Awake()
     {
-        SceneManager.LoadScene(1);
-    }
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }*/
 
-    public void PlayCafeScriptedGame()
+    /*public async void LoadScene(int sceneIndex)
     {
-        SceneManager.LoadScene(2);
-    }
+        var scene = SceneManager.LoadSceneAsync(sceneIndex);
+        scene.allowSceneActivation = false;
 
-    public void PlayPartyLLMGame()
-    {
-        SceneManager.LoadScene(3);
-    }
+        loadingCanvas.SetActive(true);
+        loadingBar.fillAmount = 0; // Ensure loading bar starts from 0
 
-    public void PlayPartyScriptedGame()
+        while (!scene.isDone)
+        {
+            loadingBar.fillAmount = Mathf.Clamp01(scene.progress / 0.9f);
+
+            // Check if the scene is almost loaded
+            if (scene.progress >= 0.9f)
+            {
+                // Optionally, you could add a small delay to make sure everything is ready
+                //await Task.Delay(500);
+                scene.allowSceneActivation = true; // Allow the scene to activate
+            }
+            else
+            {
+                await Task.Delay(100);  // Wait before updating progress
+            }
+        }
+
+        // Ensure loading canvas is deactivated only after scene is fully loaded
+        loadingCanvas.SetActive(false);
+    }*/
+
+    public void LoadScene(int sceneIndex)
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(sceneIndex);
     }
 
     public void Back()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void Quit()
@@ -43,12 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(0);
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GameOver()
@@ -67,3 +96,12 @@ public class GameManager : MonoBehaviour
         incompleteLevelUI.SetActive(false);
     }
 }
+
+    // SCENE INDEXES
+    // MainMenu (0)
+    // CafeIntro (1)
+    // CafeLLM (2)
+    // CafeScripted (3)
+    // PartyIntro (4)
+    // PartyLLM (5)
+    // PartyScripted (6)
