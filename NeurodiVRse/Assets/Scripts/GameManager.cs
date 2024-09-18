@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public Door door;
 
-   /* private void Awake()
+    /* private void Awake()
     {
         if(Instance == null)
         {

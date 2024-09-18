@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GroupActor : MonoBehaviour
@@ -11,4 +12,6 @@ public class GroupActor : MonoBehaviour
     public GroupDialogueSequence initialSequence;
     public GroupDialogueManager dialogueManager;
     public GameObject NPCDialogueCanvas;
+    public GameObject DialogueParent;
+    public TextMeshProUGUI DialogueTitleText, DialogueBodyText;
 }

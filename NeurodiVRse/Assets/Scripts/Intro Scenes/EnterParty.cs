@@ -96,7 +96,7 @@ public class EnterParty : MonoBehaviour
     private IEnumerator FadeScreen(float startAlpha, float endAlpha)
     {
         float elapsedTime = 0f;
-        Color currentColor = fadeImage.color;
+        Color currentColour = fadeImage.color;
 
         if (elapsedTime < 3f)
         {
@@ -105,7 +105,7 @@ public class EnterParty : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 float alpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / fadeDuration);
 
-                fadeImage.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+                fadeImage.color = new Color(currentColour.r, currentColour.g, currentColour.b, alpha);
                 yield return null;
             }
         }

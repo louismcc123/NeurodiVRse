@@ -5,7 +5,8 @@ using UnityEngine;
 public class GroupDialogueTrigger : MonoBehaviour
 {
     [SerializeField] private GameObject instructionCanvas;
-    
+    [SerializeField] private GroupDialogueSequence initialSequence;
+
     private float timePlayerExited = -Mathf.Infinity;
     public float resumeTimeThreshold = 5f;
 
@@ -32,7 +33,7 @@ public class GroupDialogueTrigger : MonoBehaviour
                 if (Time.time - timePlayerExited > resumeTimeThreshold)
                 {
                     Debug.Log("Starting new group dialogue.");
-                    groupDialogueManager.StartGroupDialogue();
+                    groupDialogueManager.StartGroupDialogue(initialSequence);
                 }
                 else
                 {
