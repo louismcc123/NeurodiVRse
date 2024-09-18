@@ -65,10 +65,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
-    public void Back()
+    /*public void Back()
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
+    }*/
 
     public void Quit()
     {
