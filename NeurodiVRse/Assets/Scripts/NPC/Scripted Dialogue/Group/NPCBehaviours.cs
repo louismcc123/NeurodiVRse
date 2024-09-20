@@ -46,17 +46,17 @@ public class NPCBehaviours : MonoBehaviour
 
     public void StartTalking()
     {
-        if (this.animator != null)
+        if (animator != null)
         {
-            this.animator.SetBool("IsTalking", true);
+            animator.SetBool("IsTalking", true);
         }
     }
 
     public void StopTalking()
     {
-        if (this.animator != null)
+        if (animator != null)
         {
-            this.animator.SetBool("IsTalking", false);
+            animator.SetBool("IsTalking", false);
         }
     }
 }

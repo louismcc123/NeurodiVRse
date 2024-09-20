@@ -13,3 +13,5 @@ public class DialogueNode : ScriptableObject
         return responses == null || responses.Count == 0;
     }
 }
+
+

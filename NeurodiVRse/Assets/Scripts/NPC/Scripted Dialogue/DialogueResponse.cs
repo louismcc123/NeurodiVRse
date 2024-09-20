@@ -9,3 +9,4 @@ public class DialogueResponse : ScriptableObject
     public int score;
     public string adviceText;
 }
+

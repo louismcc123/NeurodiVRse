@@ -21,3 +21,4 @@ public class Actor : MonoBehaviour
         dialogueManager.StartDialogue(Name, initialDialogueNode);
     }
 }
+
