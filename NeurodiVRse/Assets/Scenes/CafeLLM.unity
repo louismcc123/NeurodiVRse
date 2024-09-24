@@ -18253,7 +18253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab7ef74ccbc0f546a71c0f43eda1892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NpcAiDialogue: {fileID: 978863318}
 --- !u!135 &978863320
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -18422,7 +18421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab7ef74ccbc0f546a71c0f43eda1892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NpcAiDialogue: {fileID: 980113133}
 --- !u!114 &980113136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26595,7 +26593,8 @@ MonoBehaviour:
   door: {fileID: 843577171}
   phone: {fileID: 1026383110}
   characterController: {fileID: 1380370717}
-  NpcAiDialogue: {fileID: 1380370725}
+  aiDialogueController: {fileID: 0}
+  npcInteraction: {fileID: 0}
 --- !u!114 &1380370725
 MonoBehaviour:
   m_ObjectHideFlags: 0

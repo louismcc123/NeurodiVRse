@@ -18,7 +18,6 @@ public class STTBridge : MonoBehaviour
     [Header("Voice")]
     [SerializeField] private AppVoiceExperience appVoiceExperience;
 
-    // Whether voice is activated
     public bool IsActive => _active;
     private bool _active = false;
     private Coroutine _deactivationCoroutine;
@@ -124,9 +123,10 @@ public class STTBridge : MonoBehaviour
                     _deactivationCoroutine = null;
                 }
             }
-
-            UpdateButtonStates();
         }
+            UpdateButtonStates();
+
+
     }
 
     private void StartDeactivationTimer()

@@ -137,7 +137,7 @@ public class Door : MonoBehaviour
         if (playerStats != null)
         {
             float playerScore = playerStats.GetCurrentScore();
-            scoreText.text = "Score: " + playerScore + "/100";
+            scoreText.text = "Score: " + playerScore + " / " + playerStats.maxScore;
         }
 
         gameManager.EndGame();

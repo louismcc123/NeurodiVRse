@@ -7,9 +7,13 @@ public class MainMenuNPC : MonoBehaviour
     public Animator animator;
     public TTSSpeaker ttsSpeaker;
 
+    private string welcome = "Welcome to Neurodiverse, the interactive virtual reality game for social skills development.";
+    private string pickScenario = "Pick a scenario to practice your social skills in.";
+    private string about = "This game has been designed to expose neurodivergent people to social scenarios to allow them to adapt social skills and interactions with neurotypical people.\r\n\r\nPlayers have opportunity to explore interactions with artificial intelligent characters in the game and the effectiveness of this teaching method is being researched.";
+
     private void Start()
     {
-        StartCoroutine(SayHello());
+        StartCoroutine(SayScript(welcome));
     }
 
     private void OnEnable()
@@ -30,14 +34,12 @@ public class MainMenuNPC : MonoBehaviour
 
     public void StartSayPickScenario()
     {
-        ttsSpeaker.Stop();
-        StartCoroutine(SayPickScenario());
+        StartCoroutine(SayScript(pickScenario));
     }
 
     public void StartSayAbout()
     {
-        ttsSpeaker.Stop();
-        StartCoroutine(SayAbout());
+        StartCoroutine(SayScript(about));
     }
 
     public void StopTalking()
@@ -46,33 +48,11 @@ public class MainMenuNPC : MonoBehaviour
         ttsSpeaker.Stop();
     }
 
-    public IEnumerator SayHello()
+    public IEnumerator SayScript(string script)
     {
+        ttsSpeaker.Stop();
         animator.SetBool("IsTalking", true);
-
-        string welcome = "Welcome to Neurodiverse, the interactive virtual reality game for social skills development.";
-        ttsSpeaker.Speak(welcome);
-
-        yield return new WaitForSeconds(1f);
-    }
-
-    public IEnumerator SayPickScenario()
-    {
-        animator.SetBool("IsTalking", true);
-
-        string pickScenario = "Pick a scenario to practice your social skills in.";
-        ttsSpeaker.Speak(pickScenario);
-
-        yield return new WaitForSeconds(1f);
-    }
-
-    public IEnumerator SayAbout()
-    {
-        animator.SetBool("IsTalking", true);
-
-        string about = "This game has been designed to expose neurodivergent people to social scenarios to allow them to adapt social skills and interactions with neurotypical people.\r\n\r\nPlayers have opportunity to explore interactions with artificial intelligent characters in the game and the effectiveness of this teaching method is being researched.";
-        ttsSpeaker.Speak(about);
-
+        ttsSpeaker.Speak(script);
         yield return new WaitForSeconds(1f);
     }
 
