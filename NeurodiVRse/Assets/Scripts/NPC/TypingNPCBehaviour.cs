@@ -13,10 +13,6 @@ public class TypingNPCBehaviour : MonoBehaviour
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        if (animator == null)
-        {
-            Debug.LogError(gameObject.name + ": Animator component not found on any child GameObject.");
-        }
     }
 
     private void Start()

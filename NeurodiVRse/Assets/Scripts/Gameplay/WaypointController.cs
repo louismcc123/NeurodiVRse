@@ -13,17 +13,22 @@ public class WaypointController : MonoBehaviour
     {
         if (currentWaypoint < waypoints.Length)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, 
-                Quaternion.LookRotation(waypoints[currentWaypoint].position - transform.position), 
-                rotationSpeed * Time.deltaTime);
+            Vector3 direction = waypoints[currentWaypoint].position - transform.position;
 
-            Vector3 moveDirection = waypoints[currentWaypoint].position - transform.position;
+            if (Vector3.Angle(transform.forward, direction) > 0.1f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
 
-            if (moveDirection.magnitude < 1)
+            if (direction.magnitude > 0.1f)
+            {
+                transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            }
+            else
             {
                 currentWaypoint++;
             }
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
         }
         else
         {
