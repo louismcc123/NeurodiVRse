@@ -14,6 +14,7 @@ MonoBehaviour:
     opponent, just like in chess or real sports.
   m_EditorClassIdentifier: 
   character: Ethan
-  dialogueText: 
+  dialogueText: Yeah I love it! eSports often come down to strategy and understanding
+    your opponent, just like in chess or real sports.
   dialogueAudio: {fileID: 8300000, guid: 6fd46c0dac33f6546ab59c3abbcd6893, type: 3}
   leaveAfterDialogue: 0

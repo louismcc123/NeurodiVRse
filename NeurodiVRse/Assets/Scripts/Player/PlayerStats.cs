@@ -52,7 +52,6 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.Log("Player died.");
             isDead = true;
-            gameObject.SetActive(false);
             gameManager.GameOver();
         }
         else if (currentScore >= maxScore)
@@ -72,7 +71,7 @@ public class PlayerStats : MonoBehaviour
 
     public void DisplayFinalScore(TextMeshProUGUI scoreText)
     {
-        scoreText.text = "Score: " + totalScore;
+        scoreText.text = "Score: " + currentScore + " / " + maxScore;
         scoreText.gameObject.SetActive(true);
     }
 }

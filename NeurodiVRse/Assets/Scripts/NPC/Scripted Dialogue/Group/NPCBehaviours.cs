@@ -11,7 +11,7 @@ public class NPCBehaviours : MonoBehaviour
     public float moveSpeed = 0.8f;
     public float rotationSpeed = 5f;
 
-    private bool isMoving = false;
+    private bool isLeaving = false;
 
     private Transform currentSpeaker;
     private Animator animator;
@@ -50,6 +50,15 @@ public class NPCBehaviours : MonoBehaviour
         }
     }
 
+    public void StartLeavingParty()
+    {
+        if (!isLeaving)
+        {
+            isLeaving = true;
+            StartCoroutine(LeaveParty());
+        }
+    }
+
     public IEnumerator LeaveParty()
     {
         if (animator != null)
@@ -67,11 +76,11 @@ public class NPCBehaviours : MonoBehaviour
         while (Vector3.Distance(transform.position, door.position) > 0.1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, door.position, moveSpeed * Time.deltaTime);
-            
+
             Vector3 direction = (door.position - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)), rotationSpeed * Time.deltaTime);
-            transform.rotation = lookRotation;
-            
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
+
             yield return null;
         }
 

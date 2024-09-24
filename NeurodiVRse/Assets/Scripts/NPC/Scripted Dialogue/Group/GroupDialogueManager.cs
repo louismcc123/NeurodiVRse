@@ -15,6 +15,7 @@ public class GroupDialogueManager : MonoBehaviour
     public GameObject playerDialogueCanvas;
     public Transform playerResponseButtonParent;
     public GameObject responseButtonPrefab;
+    public AudioSource playerAudioSource;
 
     [Header("Advice")]
     public GameObject adviceCanvas;
@@ -77,7 +78,16 @@ public class GroupDialogueManager : MonoBehaviour
         }
 
         Debug.Log("All nodes processed. Showing player responses.");
-        ShowPlayerResponses(sequence.responses);
+
+        if (sequence.responses == null || sequence.responses.Count == 0)
+        {
+            Debug.Log("No responses in sequence. Ending game.");
+            endGameCanvas.SetActive(true);
+        }
+        else
+        {
+            ShowPlayerResponses(sequence.responses);
+        }
     }
 
     private IEnumerator PlayNode(GroupDialogueNode node)
@@ -121,13 +131,23 @@ public class GroupDialogueManager : MonoBehaviour
         
         if (node.leaveAfterDialogue)
         {
+            RemoveNodeManager(nodeManager);
             yield return StartCoroutine(MakeNPCLeave(npcBehaviours));
         }
     }
 
     private IEnumerator MakeNPCLeave(NPCBehaviours npcBehaviours)
     {
+        npcBehaviours.StartLeavingParty();
         yield return StartCoroutine(npcBehaviours.LeaveParty());
+    }
+
+    public void RemoveNodeManager(NPCNodeManager manager)
+    {
+        if (nodeManagers.Contains(manager))
+        {
+            nodeManagers.Remove(manager);
+        }
     }
 
     private NPCNodeManager FindNodeManagerForNode(GroupDialogueNode node)
@@ -201,26 +221,44 @@ public class GroupDialogueManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(response.adviceText))
         {
-            adviceCanvas.SetActive(true);
+            StartCoroutine(ShowAdviceForDuration(5f));
         }
         else
         {
             adviceCanvas.SetActive(false);
         }
 
+        playerAudioSource.clip = response.responseAudio;
+        playerAudioSource.Play();
+
+        StartCoroutine(WaitForAudioAndProceed(response));
+    }
+
+    private IEnumerator WaitForAudioAndProceed(GroupDialogueResponse response)
+    {
+        while (playerAudioSource.isPlaying)
+        {
+            yield return null;
+        }
+
         if (response.nextSequence != null)
         {
-            GroupDialogueSequence nextSequence = response.nextSequence;
-            StartGroupDialogue(nextSequence);
+            StartGroupDialogue(response.nextSequence);
         }
         else
         {
-            Debug.Log("no next sequence set. ending dialogue");
             EndGroupDialogue();
 
             endGameCanvas.SetActive(true);
             playerStats.DisplayFinalScore(finalScoreText);
         }
+    }
+
+    private IEnumerator ShowAdviceForDuration(float duration)
+    {
+        adviceCanvas.SetActive(false);
+        yield return new WaitForSeconds(duration);
+        adviceCanvas.SetActive(false);
     }
 
     private void HideDialogue()
@@ -235,6 +273,7 @@ public class GroupDialogueManager : MonoBehaviour
         }
 
         playerDialogueCanvas.SetActive(false);
+        adviceCanvas.SetActive(false);
     }
 
 
