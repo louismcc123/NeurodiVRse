@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: Ethan
   dialogueText: Sounds like a classic. I usually stick to eSports though - less heartache!
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: e8052a893bea8f647af5a470849cd9e1, type: 3}
   leaveAfterDialogue: 0

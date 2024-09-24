@@ -16,5 +16,5 @@ MonoBehaviour:
   character: Tom
   dialogueText: "Well, each to their own. I find history fascinating - it\u2019s
     like piecing together puzzles from the past."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 8ffd20c7436424940b0dcd6438805d23, type: 3}
   leaveAfterDialogue: 0

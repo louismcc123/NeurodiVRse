@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: Ethan
   dialogueText: "Must be exciting! What\u2019s the next place on your list?"
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 2ece2284745be4b479b962c76324ae47, type: 3}
   leaveAfterDialogue: 0

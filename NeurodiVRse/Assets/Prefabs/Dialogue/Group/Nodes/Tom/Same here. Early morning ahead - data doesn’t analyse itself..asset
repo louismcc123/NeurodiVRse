@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: Tom
   dialogueText: "Same here. Early morning ahead - data doesn\u2019t analyse itself."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: b49eedf059f17754e8a69fd00a9c2b91, type: 3}
   leaveAfterDialogue: 0

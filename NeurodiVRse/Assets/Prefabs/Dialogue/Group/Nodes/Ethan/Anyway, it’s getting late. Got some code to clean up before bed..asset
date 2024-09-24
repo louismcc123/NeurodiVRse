@@ -15,5 +15,5 @@ MonoBehaviour:
   character: Ethan
   dialogueText: "Anyway, it\u2019s getting late. Got some code to clean up before
     bed."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 614b3eeaa55036745adeb7df29bcdf48, type: 3}
   leaveAfterDialogue: 0

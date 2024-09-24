@@ -16,5 +16,5 @@ MonoBehaviour:
   character: Ethan
   dialogueText: "I\u2019m thinking about going to Scotland next. I\u2019ve heard
     the Highlands are stunning."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 14b02cdad5a1d114bbcf91e33f29f6c0, type: 3}
   leaveAfterDialogue: 0

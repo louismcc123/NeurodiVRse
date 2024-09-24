@@ -16,5 +16,5 @@ MonoBehaviour:
   character: Ethan
   dialogueText: "I\u2019ve been working on a new indie game. I\u2019ve been working
     in Scotland a lot to meet with an artist up there."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 2369e8ff2cd37c84bab8a1c9f0833135, type: 3}
   leaveAfterDialogue: 0

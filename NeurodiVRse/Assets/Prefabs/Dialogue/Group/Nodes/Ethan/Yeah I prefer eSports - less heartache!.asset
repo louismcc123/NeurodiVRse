@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: Ethan
   dialogueText: Yeah I prefer eSports - less heartache!
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 5faae02a70d141b40849f8c81e5eda74, type: 3}
   leaveAfterDialogue: 0

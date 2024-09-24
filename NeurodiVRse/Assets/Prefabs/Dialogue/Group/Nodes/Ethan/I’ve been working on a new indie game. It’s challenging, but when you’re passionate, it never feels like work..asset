@@ -16,5 +16,5 @@ MonoBehaviour:
   character: Ethan
   dialogueText: "I\u2019ve been working on a new indie game. It\u2019s challenging,
     but when you\u2019re passionate, it never feels like work."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 1c6c3dd1d373ce34ab3c5b29ad5ffaaa, type: 3}
   leaveAfterDialogue: 0

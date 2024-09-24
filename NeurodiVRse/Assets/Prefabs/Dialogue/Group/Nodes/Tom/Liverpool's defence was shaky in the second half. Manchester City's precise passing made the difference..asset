@@ -16,5 +16,5 @@ MonoBehaviour:
   character: Tom
   dialogueText: Liverpool's defence was shaky in the second half. Manchester City's
     precise passing made the difference.
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 3d60981ac169d1b49aa578b3ccfb2633, type: 3}
   leaveAfterDialogue: 0

@@ -16,4 +16,5 @@ MonoBehaviour:
   character: Tom
   dialogueText: That sounds cool! I do prefer city breaks - museums, historical sites,
     and good food. Not really into hiking.
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 462908a49bbf50644ae5e012d667d4cf, type: 3}
+  leaveAfterDialogue: 0

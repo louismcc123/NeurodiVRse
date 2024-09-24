@@ -18,5 +18,5 @@ MonoBehaviour:
   dialogueText: "I went to Edinburgh last week for a conference. The city\u2019s
     history is impressive, but I spent most of my time visiting museums. I\u2019m
     a sucker for ancient artefacts."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: b1ae6011b2a43f344ba9dd12505f8ca3, type: 3}
   leaveAfterDialogue: 0

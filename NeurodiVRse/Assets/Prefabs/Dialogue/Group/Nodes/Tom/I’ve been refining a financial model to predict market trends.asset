@@ -16,5 +16,5 @@ MonoBehaviour:
   dialogueText: "I\u2019ve been refining a financial model to predict market trends
     - nothing too flashy, but it\u2019s fascinating how data can reveal patterns.
     Also been working on a chess AI in my spare time."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: c27236801b1603f45a8d75962ab1a613, type: 3}
   leaveAfterDialogue: 0

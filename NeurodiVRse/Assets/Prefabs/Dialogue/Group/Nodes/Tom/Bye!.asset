@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: Tom
   dialogueText: Bye!
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 0fd0a99fa672fbc49bef219e33e6fd82, type: 3}
   leaveAfterDialogue: 0
