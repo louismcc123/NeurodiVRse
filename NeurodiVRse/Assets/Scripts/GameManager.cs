@@ -108,10 +108,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject loadingUI;
-    public GameObject gameOverUI;
-    public GameObject endGameUI;
-    public GameObject incompleteLevelUI;
+    [SerializeField] private GameObject loadingUI;
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject endGameUI;
+    [SerializeField] private GameObject incompleteLevelUI;
+    //[SerializeField] private GameObject controllers;
 
     public Door door;
 
@@ -134,6 +135,7 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         loadingUI.SetActive(true);
+        //controllers.SetActive(false);
         LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
