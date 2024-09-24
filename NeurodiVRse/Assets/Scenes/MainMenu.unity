@@ -5910,7 +5910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3f5af401691fc45b1068dc7215ad3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingUI: {fileID: 0}
+  loadingUI: {fileID: 23933320}
   gameOverUI: {fileID: 0}
   endGameUI: {fileID: 0}
   incompleteLevelUI: {fileID: 0}
