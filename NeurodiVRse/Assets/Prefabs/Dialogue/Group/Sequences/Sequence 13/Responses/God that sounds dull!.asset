@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed076e6f5f5990c4cba01e4f8d8930d5, type: 3}
+  m_Name: God that sounds dull!
+  m_EditorClassIdentifier: 
+  responseText: You sound like a nerd.
+  responseAudio: {fileID: 8300000, guid: 288cf1316ea64da41a6cbe0144ad35da, type: 3}
+  nextSequence: {fileID: 11400000, guid: 617ee8cbb11f7e64682ca19fe490a396, type: 2}
+  score: 2
+  adviceText: Avoid name-calling or making others feel judged - focus on understanding
+    their passion instead.

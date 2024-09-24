@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -7,9 +8,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class PartyLeavingDoor : MonoBehaviour
 {
     public GameObject leaveCanvas;
+    public TextMeshProUGUI leaveScoreText;
     public Transform player;
 
     private XRSimpleInteractable interactable;
+
+    public PlayerStats playerStats;
 
     void Start()
     {
@@ -50,6 +54,7 @@ public class PartyLeavingDoor : MonoBehaviour
             if (dist < 3)
             {
                 leaveCanvas.SetActive(true);
+                playerStats.DisplayFinalScore(leaveScoreText);
             }
         }
     }

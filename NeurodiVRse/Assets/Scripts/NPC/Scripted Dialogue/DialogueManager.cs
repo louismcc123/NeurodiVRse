@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject responseButtonPrefab;
 
     [Header("Advice")]
-    public GameObject AdviceCanvas;
+    public GameObject adviceCanvas;
     public TextMeshProUGUI adviceText;
 
     [Header("Scoring")]
@@ -68,7 +68,7 @@ public class DialogueManager : MonoBehaviour
         DialogueBodyText.text = node.dialogueText;
         DialogueTitleText.text = title;
         adviceText.text = "";
-        AdviceCanvas.SetActive(false);
+        adviceCanvas.SetActive(false);
         NPCDialogueCanvas.SetActive(true);
 
         animator.SetBool("IsTalking", true);
@@ -84,7 +84,7 @@ public class DialogueManager : MonoBehaviour
         isConversationFinished = true;
         currentDialogueNode = null;
         animator.SetBool("IsTalking", false);
-        playerStats.DisplayFinalScore();
+        playerStats.DisplayFinalScore(finalScoreText);
         this.enabled = false;
     }
 
@@ -161,11 +161,11 @@ public class DialogueManager : MonoBehaviour
 
         if (!string.IsNullOrEmpty(response.adviceText))
         {
-            AdviceCanvas.SetActive(true);
+            adviceCanvas.SetActive(true);
         }
         else
         {
-            AdviceCanvas.SetActive(false);
+            adviceCanvas.SetActive(false);
         }
 
         PlayResponseAudioClip(response.responseAudio);
@@ -244,11 +244,11 @@ public class DialogueManager : MonoBehaviour
         NPCDialogueCanvas.SetActive(false);
         DialogueParent.SetActive(false);
         PlayerResponseCanvas.SetActive(false);
-        AdviceCanvas.SetActive(false);
+        adviceCanvas.SetActive(false);
         finalScoreText.gameObject.SetActive(false);
     }
 
-    protected void PauseDialogue(DialogueNode nextNode, string title)
+    public void PauseDialogue(DialogueNode nextNode, string title)
     {
         pausedNode = nextNode;
         pausedTitle = title;

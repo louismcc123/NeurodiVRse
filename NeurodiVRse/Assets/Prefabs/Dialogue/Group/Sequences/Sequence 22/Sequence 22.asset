@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064e4cd00119a3f45ab8afcc0d601761, type: 3}
+  m_Name: Sequence 22
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 11400000, guid: 1749501d9ca51f940bdeb93c5f252a4a, type: 2}
+  - {fileID: 11400000, guid: 751fb1fb403c3a343a79523b11159931, type: 2}
+  - {fileID: 11400000, guid: 55e1714cece22eb4ab16aef0456e6fe1, type: 2}
+  - {fileID: 11400000, guid: ffeb1d6aaf1b04b499184d4516db3675, type: 2}
+  responses:
+  - {fileID: 11400000, guid: c89260b9c8c9b354ebc8fce12d53f6e5, type: 2}
+  - {fileID: 11400000, guid: eaa277e60aadaef428635546c356c3e4, type: 2}
+  - {fileID: 11400000, guid: 5cfdb71e8f5e1264c9f667056fa976f7, type: 2}
+  completed: 0

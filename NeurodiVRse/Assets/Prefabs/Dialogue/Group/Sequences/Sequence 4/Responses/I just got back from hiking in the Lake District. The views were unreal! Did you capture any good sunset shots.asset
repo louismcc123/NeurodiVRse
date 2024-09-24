@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed076e6f5f5990c4cba01e4f8d8930d5, type: 3}
+  m_Name: I just got back from hiking in the Lake District. The views were unreal!
+    Did you capture any good sunset shots
+  m_EditorClassIdentifier: 
+  responseText: I just got back from hiking in the Lake District. The views were
+    unreal! Did you capture any good sunset shots?
+  responseAudio: {fileID: 8300000, guid: 1ac1374ff96d9c94e8e0b9a04ad5a1a8, type: 3}
+  nextSequence: {fileID: 11400000, guid: 97850d5a27fa6aa45863dd6ba7e46cb8, type: 2}
+  score: 0
+  adviceText: "Great job connecting with Sofia\u2019s experience and asking a thoughtful
+    question to keep the conversation engaging!"

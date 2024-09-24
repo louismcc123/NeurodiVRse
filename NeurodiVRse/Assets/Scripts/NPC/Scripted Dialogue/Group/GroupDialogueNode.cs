@@ -8,4 +8,5 @@ public class GroupDialogueNode : ScriptableObject
     public string character;
     public string dialogueText;
     public AudioClip dialogueAudio;
+    public bool leaveAfterDialogue;
 }

@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class ChatTrigger : MonoBehaviour
 {
-    public AIDialogueController NpcAiDialogue;
+    private AIDialogueController aiDialogueController;
+    private NPCInteraction npcInteraction;
+
+    private void Awake()
+    {
+        aiDialogueController = GetComponent<AIDialogueController>();
+        if (aiDialogueController != null)
+        {
+            Debug.LogWarning("ChatTrigger could not find aiDialogueController");
+        }
+
+        npcInteraction = GetComponent<NPCInteraction>();
+        if (npcInteraction != null)
+        {
+            Debug.LogWarning("ChatTrigger could not find npcInteraction");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (NpcAiDialogue != null)
+            if (aiDialogueController != null)
             {
-                NpcAiDialogue.playerInRange = true;
+                aiDialogueController.playerInRange = true;
+            }
+            if (npcInteraction != null)
+            {
+                npcInteraction.playerInRange = true;
             }
         }
     }
@@ -21,9 +41,13 @@ public class ChatTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (NpcAiDialogue != null)
+            if (aiDialogueController != null)
             {
-                NpcAiDialogue.playerInRange = false;
+                aiDialogueController.playerInRange = false;
+            }
+            if (npcInteraction != null)
+            {
+                npcInteraction.playerInRange = false;
             }
         }
     }

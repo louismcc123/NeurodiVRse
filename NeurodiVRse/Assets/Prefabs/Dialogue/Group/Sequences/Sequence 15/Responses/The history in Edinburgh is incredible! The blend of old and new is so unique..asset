@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed076e6f5f5990c4cba01e4f8d8930d5, type: 3}
+  m_Name: The history in Edinburgh is incredible! The blend of old and new is so
+    unique.
+  m_EditorClassIdentifier: 
+  responseText: 'The history in Edinburgh is incredible! The blend of old and new
+    is so unique. '
+  responseAudio: {fileID: 8300000, guid: 963fc8d4e0902cb48a9c1e6efdb31f78, type: 3}
+  nextSequence: {fileID: 11400000, guid: f1618643e013d4243b77bcd7c7f83dbb, type: 2}
+  score: 0
+  adviceText: "Great response! You\u2019re showing enthusiasm and acknowledging the
+    topic in a positive way."

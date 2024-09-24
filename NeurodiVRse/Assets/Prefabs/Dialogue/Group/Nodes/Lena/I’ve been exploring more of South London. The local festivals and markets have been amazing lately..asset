@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4981bb661119914f9c588731f428d3a, type: 3}
+  m_Name: "I\u2019ve been exploring more of South London. The local festivals and
+    markets have been amazing lately."
+  m_EditorClassIdentifier: 
+  character: Lena
+  dialogueText: "I\u2019ve been exploring more of South London. The local festivals
+    and markets have been amazing lately."
+  dialogueAudio: {fileID: 8300000, guid: 4a0f6a2f7a6bb264bab7a608ad79cb26, type: 3}
+  leaveAfterDialogue: 0

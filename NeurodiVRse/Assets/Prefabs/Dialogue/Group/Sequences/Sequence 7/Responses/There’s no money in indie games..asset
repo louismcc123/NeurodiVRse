@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed076e6f5f5990c4cba01e4f8d8930d5, type: 3}
+  m_Name: "There\u2019s no money in indie games."
+  m_EditorClassIdentifier: 
+  responseText: "There\u2019s no money in indie games."
+  responseAudio: {fileID: 8300000, guid: a9ef6b449a3770646a39c01e5a2d3574, type: 3}
+  nextSequence: {fileID: 11400000, guid: 74d118b423f49e049a35eb91f8e403f4, type: 2}
+  score: 2
+  adviceText: Avoid being discouraging - try supporting others' passions, even if
+    you have concerns.

@@ -12,7 +12,8 @@ public class LeavingNPCBehaviour : MonoBehaviour
     private Door doorScript;
 
     public CharacterController characterController;
-    public AIDialogueController NpcAiDialogue;
+    public AIDialogueController aiDialogueController;
+    public NPCInteraction npcInteraction;
 
     private void Awake()
     {
@@ -74,9 +75,13 @@ public class LeavingNPCBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (NpcAiDialogue != null)
+            if (aiDialogueController != null)
             {
-                NpcAiDialogue.playerInRange = true;
+                aiDialogueController.playerInRange = true;
+            }
+            if (npcInteraction != null)
+            {
+                npcInteraction.playerInRange = true;
             }
         }
     }
@@ -85,9 +90,13 @@ public class LeavingNPCBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (NpcAiDialogue != null)
+            if (aiDialogueController != null)
             {
-                NpcAiDialogue.playerInRange = false;
+                aiDialogueController.playerInRange = false;
+            }
+            if (npcInteraction != null)
+            {
+                npcInteraction.playerInRange = false;
             }
 
             characterController.ResumeMovement();

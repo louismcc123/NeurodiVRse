@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed076e6f5f5990c4cba01e4f8d8930d5, type: 3}
+  m_Name: I love hiking! The Lake District sounds amazing. Did you capture any good
+    sunset shots
+  m_EditorClassIdentifier: 
+  responseText: I love hiking! The Lake District sounds amazing. Did you capture
+    any good sunset shots?
+  responseAudio: {fileID: 8300000, guid: 97d509e67cd35bf4e9e9e973834ce889, type: 3}
+  nextSequence: {fileID: 11400000, guid: 13022a2c7b21e1c499097d049d090157, type: 2}
+  score: 0
+  adviceText: Excellent job showing enthusiasm and asking a specific question to
+    keep the conversation engaging and personal!

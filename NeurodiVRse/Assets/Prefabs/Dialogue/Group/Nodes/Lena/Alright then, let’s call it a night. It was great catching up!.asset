@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4981bb661119914f9c588731f428d3a, type: 3}
+  m_Name: "Alright then, let\u2019s call it a night. It was great catching up!"
+  m_EditorClassIdentifier: 
+  character: Lena
+  dialogueText: "Alright then, let\u2019s call it a night. It was great catching
+    up!"
+  dialogueAudio: {fileID: 8300000, guid: 32b74ddf09725ef40a8b1acdc677f072, type: 3}
+  leaveAfterDialogue: 0

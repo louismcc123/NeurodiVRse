@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
 
     private bool isDead;
 
-    public TextMeshProUGUI finalScoreText;
+    //public TextMeshProUGUI finalScoreText;
     public int totalScore = 0;
 
     //public ScoreBar scoreBar;
@@ -19,6 +19,11 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
+        if (gameManager == null)
+        {
+            gameManager = FindFirstObjectByType<GameManager>();
+        }
+
         maxScore = 5f;
         currentScore = maxScore;
         //scoreBar.SetSliderMax(maxScore);
@@ -65,9 +70,9 @@ public class PlayerStats : MonoBehaviour
         return currentScore;
     }
 
-    public void DisplayFinalScore()
+    public void DisplayFinalScore(TextMeshProUGUI scoreText)
     {
-        finalScoreText.text = "Final Score: " + totalScore;
-        finalScoreText.gameObject.SetActive(true);
+        scoreText.text = "Score: " + totalScore;
+        scoreText.gameObject.SetActive(true);
     }
 }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed076e6f5f5990c4cba01e4f8d8930d5, type: 3}
+  m_Name: "That sounds amazing! Scotland is a great place to collaborate. I didn\u2019t
+    know you worked with an artist."
+  m_EditorClassIdentifier: 
+  responseText: "That sounds amazing! Scotland is a great place to collaborate. I
+    didn\u2019t know you worked with an artist."
+  responseAudio: {fileID: 8300000, guid: 3f0a72c1ad71f204ca908c8f5ef3afc4, type: 3}
+  nextSequence: {fileID: 11400000, guid: 0e2a4568cad37fb4587255c2fb57b74f, type: 2}
+  score: 0
+  adviceText: "Great response! You\u2019re showing enthusiasm and acknowledging the
+    topic in a positive way."

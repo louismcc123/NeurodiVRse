@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed076e6f5f5990c4cba01e4f8d8930d5, type: 3}
+  m_Name: Bye.
+  m_EditorClassIdentifier: 
+  responseText: Bye.
+  responseAudio: {fileID: 8300000, guid: ba97c973bd3e11f439c758f8c18f5329, type: 3}
+  nextSequence: {fileID: 11400000, guid: 65b7201b3bb34e244b6e1baaac6412d9, type: 2}
+  score: 2
+  adviceText: Try adding more warmth to avoid sounding abrupt or uninterested.

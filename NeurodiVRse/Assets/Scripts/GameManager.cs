@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
 {
     //public static GameManager Instance;
 
-    [SerializeField] private GameObject loadingCanvas;
-    [SerializeField] private Image loadingBar;
+    //[SerializeField] private GameObject loadingCanvas;
+    //[SerializeField] private Image loadingBar;
 
     public GameObject gameOverUI;
     public GameObject endGameUI;

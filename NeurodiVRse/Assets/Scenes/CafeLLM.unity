@@ -32631,8 +32631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3f5af401691fc45b1068dc7215ad3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingCanvas: {fileID: 1017067273}
-  loadingBar: {fileID: 1939186134}
   gameOverUI: {fileID: 1057539138}
   endGameUI: {fileID: 1054391360}
   incompleteLevelUI: {fileID: 1489139339}
@@ -95172,9 +95170,8 @@ MonoBehaviour:
   maxScore: 5
   currentScore: 0
   hasCoffee: 0
-  finalScoreText: {fileID: 943556777}
   totalScore: 0
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1650113105}
 --- !u!4 &8348461865147138702
 Transform:
   m_ObjectHideFlags: 0

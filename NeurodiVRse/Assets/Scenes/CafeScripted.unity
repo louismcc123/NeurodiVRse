@@ -8691,8 +8691,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5521543, y: 4, z: 5.2891297}
-  m_Center: {x: 0.026076674, y: 2, z: 0.35543513}
+  m_Size: {x: 3.5521543, y: 4, z: 4.9905434}
+  m_Center: {x: 0.026076674, y: 2, z: 0.5047283}
 --- !u!23 &510424642
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19785,6 +19785,7 @@ GameObject:
   - component: {fileID: 978863317}
   - component: {fileID: 978863318}
   - component: {fileID: 978863319}
+  - component: {fileID: 978863320}
   m_Layer: 0
   m_Name: Sitting NPC
   m_TagString: Untagged
@@ -19811,8 +19812,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5239031, y: 2.84, z: 2.4658082}
-  m_Center: {x: 0.87805015, y: 0.64, z: 3.3628676}
+  m_Size: {x: 2.24, y: 2.84, z: 2.91}
+  m_Center: {x: 0.85, y: 0.64, z: 3.3628676}
 --- !u!4 &978863316
 Transform:
   m_ObjectHideFlags: 0
@@ -19864,7 +19865,7 @@ MonoBehaviour:
   PlayerResponseCanvas: {fileID: 438487686}
   playerResponseButtonParent: {fileID: 1620352327}
   responseButtonPrefab: {fileID: 569264072482746707, guid: 34c139637eea5d04390f0aef65756bad, type: 3}
-  AdviceCanvas: {fileID: 1234220756}
+  adviceCanvas: {fileID: 1234220756}
   adviceText: {fileID: 1445239058}
   playerStats: {fileID: 8337743163943675437}
   finalScoreText: {fileID: 943556777}
@@ -19884,6 +19885,20 @@ MonoBehaviour:
   aButton: {fileID: -6647528642814688547, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   interactCanvas: {fileID: 768643762}
   playerInRange: 0
+--- !u!114 &978863320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978863312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab7ef74ccbc0f546a71c0f43eda1892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiDialogueController: {fileID: 0}
+  npcInteraction: {fileID: 978863319}
 --- !u!1 &980113124
 GameObject:
   m_ObjectHideFlags: 0
@@ -19898,6 +19913,7 @@ GameObject:
   - component: {fileID: 980113125}
   - component: {fileID: 980113131}
   - component: {fileID: 980113132}
+  - component: {fileID: 980113133}
   m_Layer: 0
   m_Name: Businessman NPC
   m_TagString: Untagged
@@ -19924,7 +19940,7 @@ MonoBehaviour:
   PlayerResponseCanvas: {fileID: 438487686}
   playerResponseButtonParent: {fileID: 1620352327}
   responseButtonPrefab: {fileID: 569264072482746707, guid: 34c139637eea5d04390f0aef65756bad, type: 3}
-  AdviceCanvas: {fileID: 1234220756}
+  adviceCanvas: {fileID: 1234220756}
   adviceText: {fileID: 1445239058}
   playerStats: {fileID: 8337743163943675437}
   finalScoreText: {fileID: 943556777}
@@ -20011,6 +20027,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typingDuration: 30
   idleDuration: 10
+--- !u!114 &980113133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980113124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab7ef74ccbc0f546a71c0f43eda1892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiDialogueController: {fileID: 0}
+  npcInteraction: {fileID: 980113131}
 --- !u!4 &987778880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4523554469456766, guid: 80b8d62454dc44cf2984af37c98f941e, type: 3}
@@ -25052,7 +25082,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1291798431}
-  - component: {fileID: 1291798432}
   - component: {fileID: 1291798439}
   - component: {fileID: 1291798430}
   - component: {fileID: 1291798433}
@@ -25103,27 +25132,6 @@ Transform:
   m_Father: {fileID: 1699807787}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!65 &1291798432
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291798428}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 6, y: 4, z: 6}
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &1291798433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25215,7 +25223,7 @@ MonoBehaviour:
   - {fileID: 1554064465}
   - {fileID: 477416705}
   rotationSpeed: 5
-  agent: {fileID: 0}
+  agent: {fileID: 1291798441}
 --- !u!195 &1291798441
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -25257,7 +25265,7 @@ MonoBehaviour:
   PlayerResponseCanvas: {fileID: 438487686}
   playerResponseButtonParent: {fileID: 1620352327}
   responseButtonPrefab: {fileID: 569264072482746707, guid: 34c139637eea5d04390f0aef65756bad, type: 3}
-  AdviceCanvas: {fileID: 1234220756}
+  adviceCanvas: {fileID: 1234220756}
   adviceText: {fileID: 1445239058}
   playerStats: {fileID: 8337743163943675437}
   finalScoreText: {fileID: 943556777}
@@ -26446,12 +26454,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865edbac6dae9794f8a0fce3e144a458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 877075189}
   waypoints:
   - {fileID: 317304478}
   - {fileID: 490258398}
   rotationSpeed: 5
-  agent: {fileID: 0}
+  agent: {fileID: 1380370716}
 --- !u!114 &1380370718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26471,7 +26479,7 @@ MonoBehaviour:
   PlayerResponseCanvas: {fileID: 438487686}
   playerResponseButtonParent: {fileID: 1620352327}
   responseButtonPrefab: {fileID: 569264072482746707, guid: 34c139637eea5d04390f0aef65756bad, type: 3}
-  AdviceCanvas: {fileID: 1234220756}
+  adviceCanvas: {fileID: 1234220756}
   adviceText: {fileID: 1445239058}
   playerStats: {fileID: 8337743163943675437}
   finalScoreText: {fileID: 943556777}
@@ -26537,7 +26545,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 2, z: 0.5}
+  m_Size: {x: 1.5, y: 2, z: 1.5}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &1380370723
 Transform:
@@ -26572,7 +26580,8 @@ MonoBehaviour:
   door: {fileID: 843577171}
   phone: {fileID: 1802688329}
   characterController: {fileID: 1380370717}
-  NpcAiDialogue: {fileID: 0}
+  aiDialogueController: {fileID: 0}
+  npcInteraction: {fileID: 1380370725}
 --- !u!114 &1380370725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34162,8 +34171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3f5af401691fc45b1068dc7215ad3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingCanvas: {fileID: 551589247}
-  loadingBar: {fileID: 1553162958}
   gameOverUI: {fileID: 1057539138}
   endGameUI: {fileID: 1054391360}
   incompleteLevelUI: {fileID: 1489139339}
@@ -60116,9 +60123,8 @@ MonoBehaviour:
   maxScore: 100
   currentScore: 0
   hasCoffee: 0
-  finalScoreText: {fileID: 943556777}
   totalScore: 0
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1730287279}
 --- !u!4 &8348461865147138702
 Transform:
   m_ObjectHideFlags: 0

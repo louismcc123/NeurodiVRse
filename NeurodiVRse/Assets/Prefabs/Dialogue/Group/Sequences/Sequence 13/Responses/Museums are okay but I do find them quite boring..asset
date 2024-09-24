@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed076e6f5f5990c4cba01e4f8d8930d5, type: 3}
+  m_Name: Museums are okay but I do find them quite boring.
+  m_EditorClassIdentifier: 
+  responseText: Museums are okay but I do find them quite boring.
+  responseAudio: {fileID: 8300000, guid: f5f852f1b4925e84fbc0f4b1df075ab7, type: 3}
+  nextSequence: {fileID: 11400000, guid: 4341a0ed427e5b248a8c099abefb5649, type: 2}
+  score: 1
+  adviceText: Honesty is fine, but try to avoid focusing on the negative - balance
+    it by asking a question or showing interest in their perspective.

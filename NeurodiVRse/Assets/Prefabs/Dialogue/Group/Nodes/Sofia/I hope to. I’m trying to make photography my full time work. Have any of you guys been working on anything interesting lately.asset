@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4981bb661119914f9c588731f428d3a, type: 3}
+  m_Name: "I hope to. I\u2019m trying to make photography my full time work. Have
+    any of you guys been working on anything interesting lately"
+  m_EditorClassIdentifier: 
+  character: Sofia
+  dialogueText: "I hope to. I\u2019m trying to make photography my full-time work.
+    Have any of you guys been working on anything interesting lately?"
+  dialogueAudio: {fileID: 8300000, guid: 1a207e4f4bac64444b73c370afa997bd, type: 3}
+  leaveAfterDialogue: 0

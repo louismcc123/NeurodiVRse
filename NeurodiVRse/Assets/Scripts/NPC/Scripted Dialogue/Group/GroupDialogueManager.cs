@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.ComponentModel;
 
 public class GroupDialogueManager : MonoBehaviour
 {
@@ -11,9 +12,18 @@ public class GroupDialogueManager : MonoBehaviour
     public List<GroupDialogueSequence> allSequences;
 
     [Header("Player Dialogue")]
-    public GameObject PlayerDialogueCanvas;
+    public GameObject playerDialogueCanvas;
     public Transform playerResponseButtonParent;
     public GameObject responseButtonPrefab;
+
+    [Header("Advice")]
+    public GameObject adviceCanvas;
+    public TextMeshProUGUI adviceText;
+
+    [Header("Scoring")]
+    public PlayerStats playerStats;
+    public GameObject endGameCanvas;
+    public TextMeshProUGUI finalScoreText;
 
     private bool isDialogueActive = false;
 
@@ -108,6 +118,16 @@ public class GroupDialogueManager : MonoBehaviour
 
         npcBehaviours.StopTalking();
         actor.NPCDialogueCanvas.SetActive(false);
+        
+        if (node.leaveAfterDialogue)
+        {
+            yield return StartCoroutine(MakeNPCLeave(npcBehaviours));
+        }
+    }
+
+    private IEnumerator MakeNPCLeave(NPCBehaviours npcBehaviours)
+    {
+        yield return StartCoroutine(npcBehaviours.LeaveParty());
     }
 
     private NPCNodeManager FindNodeManagerForNode(GroupDialogueNode node)
@@ -132,7 +152,7 @@ public class GroupDialogueManager : MonoBehaviour
         }
 
         Debug.Log("Showing player responses."); 
-        PlayerDialogueCanvas.SetActive(true);
+        playerDialogueCanvas.SetActive(true);
 
         foreach (Transform child in playerResponseButtonParent)
         {
@@ -174,7 +194,19 @@ public class GroupDialogueManager : MonoBehaviour
 
     private void SelectResponse(GroupDialogueResponse response)
     {
-        PlayerDialogueCanvas.SetActive(false);
+        playerDialogueCanvas.SetActive(false);
+        playerStats.totalScore += response.score;
+        playerStats.SubtractScore(response.score);
+        adviceText.text = response.adviceText;
+
+        if (!string.IsNullOrEmpty(response.adviceText))
+        {
+            adviceCanvas.SetActive(true);
+        }
+        else
+        {
+            adviceCanvas.SetActive(false);
+        }
 
         if (response.nextSequence != null)
         {
@@ -185,6 +217,9 @@ public class GroupDialogueManager : MonoBehaviour
         {
             Debug.Log("no next sequence set. ending dialogue");
             EndGroupDialogue();
+
+            endGameCanvas.SetActive(true);
+            playerStats.DisplayFinalScore(finalScoreText);
         }
     }
 
@@ -196,12 +231,10 @@ public class GroupDialogueManager : MonoBehaviour
             if (actor != null)
             {
                 actor.NPCDialogueCanvas.SetActive(false);
-
-
             }
         }
 
-        PlayerDialogueCanvas.SetActive(false);
+        playerDialogueCanvas.SetActive(false);
     }
 
 
