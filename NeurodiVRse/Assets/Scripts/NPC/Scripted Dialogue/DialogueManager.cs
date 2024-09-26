@@ -78,16 +78,6 @@ public class DialogueManager : MonoBehaviour
         currentDialogueNode = node;
     }
 
-    public void EndDialogue()
-    {
-        HideDialogue();
-        isConversationFinished = true;
-        currentDialogueNode = null;
-        animator.SetBool("IsTalking", false);
-        playerStats.DisplayFinalScore(finalScoreText);
-        this.enabled = false;
-    }
-
     private IEnumerator DisplayResponsesWithDelay(string title, DialogueNode node)
     {
         foreach (Transform child in playerResponseButtonParent)
@@ -231,6 +221,16 @@ public class DialogueManager : MonoBehaviour
             playerAudioSource.clip = clip;
             playerAudioSource.Play();
         }
+    }
+
+    public void EndDialogue()
+    {
+        HideDialogue();
+        isConversationFinished = true;
+        currentDialogueNode = null;
+        animator.SetBool("IsTalking", false);
+        playerStats.DisplayFinalScore(finalScoreText);
+        this.enabled = false;
     }
 
     private void ShowDialogue()

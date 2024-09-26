@@ -50,18 +50,13 @@ public class PlayerStats : MonoBehaviour
 
         if (currentScore <= 0 && !isDead)
         {
-            Debug.Log("Player died.");
             isDead = true;
             gameManager.GameOver();
         }
         else if (currentScore >= maxScore)
         {
             currentScore = maxScore;
-            Debug.Log("Player score reached maximum.");
         }
-
-        Debug.Log("Player score adjusted. Current score: " + currentScore);
-        //scoreBar.SetSlider(currentScore);
     }
 
     public float GetCurrentScore()

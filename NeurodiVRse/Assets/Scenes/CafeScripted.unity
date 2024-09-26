@@ -21049,6 +21049,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2123747047}
     m_Modifications:
+    - target: {fileID: 109434732392105323, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ab8022179cff83469108820d76ec536, type: 2}
     - target: {fileID: 109434732395284509, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
       propertyPath: m_Name
       value: Left Hand Model
@@ -24959,6 +24963,7 @@ GameObject:
   - component: {fileID: 1433335412}
   - component: {fileID: 1433335414}
   - component: {fileID: 1433335413}
+  - component: {fileID: 1433335415}
   m_Layer: 0
   m_Name: Player Trigger
   m_TagString: Player
@@ -25016,6 +25021,33 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1433335415
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433335411}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1434741957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34774,6 +34806,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Hand Model
       objectReference: {fileID: 0}
+    - target: {fileID: 5686134208196863108, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ab8022179cff83469108820d76ec536, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -125,8 +125,6 @@ public class STTBridge : MonoBehaviour
             }
         }
             UpdateButtonStates();
-
-
     }
 
     private void StartDeactivationTimer()

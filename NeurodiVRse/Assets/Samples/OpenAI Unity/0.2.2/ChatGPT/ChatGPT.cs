@@ -183,8 +183,6 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
             {
                 activeNPC = null;
             }
-
-            //Debug.Log($"{gameObject.name}: NPC deactivated.");
         }
 
         protected void DisplayAdvice(string adviceContent)
@@ -198,7 +196,6 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
         public virtual void PauseDialogue()
         {
             isDialoguePaused = true;
-            //Debug.Log($"Dialogue paused.");
 
             SetNpcTalking(false);
             npcDialogueCanvas.SetActive(false);
@@ -208,7 +205,6 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
         public virtual void ResumeDialogue()
         {
             isDialoguePaused = false;
-            //Debug.Log($"Dialogue resumed.");
 
             SetNpcTalking(true);
         }

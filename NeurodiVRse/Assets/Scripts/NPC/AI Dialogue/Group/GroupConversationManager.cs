@@ -103,7 +103,14 @@ public class GroupConversationManager : MonoBehaviour
                 {
                     if (npc != activeNPC)
                     {
-                        npcBehaviours.FaceSpeaker(activeNPC.transform);
+                        if (activeNPC != null)
+                        {                            
+                            npcBehaviours.FaceSpeaker(activeNPC.transform);
+                        }
+                        else
+                        {                            
+                            npcBehaviours.FaceSpeaker(player.transform);
+                        }
                     }
                 }
             }

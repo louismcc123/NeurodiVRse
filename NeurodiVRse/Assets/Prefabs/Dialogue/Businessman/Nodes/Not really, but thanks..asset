@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Not really, but thanks.
   m_EditorClassIdentifier: 
   dialogueText: Not really, but thanks.
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 344801930d416b24f9b913012947d380, type: 3}
   responses:
   - {fileID: 11400000, guid: 529c4e0b8e4744147bc434f93643fa56, type: 2}

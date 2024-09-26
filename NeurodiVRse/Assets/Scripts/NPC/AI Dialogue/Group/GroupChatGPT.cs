@@ -76,8 +76,6 @@ public class GroupChatGPT : ChatGPT
         SetNpcTalking(true);
         groupConversationManager.NotifyNPCsToFaceSpeaker();
 
-        //Debug.Log("Sending request to OpenAI...");
-
         var completionResponse = await openai.CreateChatCompletion(new CreateChatCompletionRequest()
         {
             Model = "gpt-3.5-turbo",
@@ -132,7 +130,6 @@ public class GroupChatGPT : ChatGPT
 
     protected override void HandleResponse(string responseContent)
     {
-        //base.HandleResponse(responseContent);
         Debug.Log($"{gameObject.name} received response: {responseContent}");
         NotifyGroupMembers(responseContent);
     }

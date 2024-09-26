@@ -1835,6 +1835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Hand Model
       objectReference: {fileID: 0}
+    - target: {fileID: 5686134208196863108, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ab8022179cff83469108820d76ec536, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7095,6 +7099,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1487476401}
     m_Modifications:
+    - target: {fileID: 109434732392105323, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ab8022179cff83469108820d76ec536, type: 2}
     - target: {fileID: 109434732395284509, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
       propertyPath: m_Name
       value: Left Hand Model
@@ -7401,6 +7409,10 @@ PrefabInstance:
     - target: {fileID: 3550832292187419423, guid: e7e41a5ed3743804eacae1e009586e72, type: 3}
       propertyPath: presetVoiceID
       value: REBECCA
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550832292895390901, guid: e7e41a5ed3743804eacae1e009586e72, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.509
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

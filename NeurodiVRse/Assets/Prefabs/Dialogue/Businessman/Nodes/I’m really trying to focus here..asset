@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "I\u2019m really trying to focus here."
   m_EditorClassIdentifier: 
   dialogueText: "I\u2019m really trying to focus here."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: aa354d4d59104eb4b9b2de75c09aef86, type: 3}
   responses:
   - {fileID: 11400000, guid: 30cb0df02d0f17b4da9c974e966aa426, type: 2}
   - {fileID: 11400000, guid: 6afe416032b5bf644bec0971c22f57f5, type: 2}

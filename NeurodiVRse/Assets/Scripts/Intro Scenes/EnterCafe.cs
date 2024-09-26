@@ -103,12 +103,10 @@ public class EnterCafe : MonoBehaviour
 
         if (isScripted)
         {
-            //GameManager.Instance.LoadScene(3);
             gameManager.LoadScene(3);
         }
         else
         {
-            //GameManager.Instance.LoadScene(2);
             gameManager.LoadScene(2);
         }
     }

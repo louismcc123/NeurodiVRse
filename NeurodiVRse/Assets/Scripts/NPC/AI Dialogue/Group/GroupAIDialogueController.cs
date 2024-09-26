@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GroupAIDialogueController : MonoBehaviour
 {
-    [SerializeField] private GameObject NPCDialogueCanvas;
+    [SerializeField] private GameObject nPCDialogueCanvas;
     [SerializeField] private TTSSpeaker ttsSpeaker;
 
     public bool isThisNPCTalking = false;
@@ -39,12 +39,12 @@ public class GroupAIDialogueController : MonoBehaviour
     {
         if (isThisNPCTalking)
         {
-            NPCDialogueCanvas.SetActive(true);
+            nPCDialogueCanvas.SetActive(true);
             animator.SetBool("IsTalking", true);
         }
         else
         {
-            NPCDialogueCanvas.SetActive(false);
+            nPCDialogueCanvas.SetActive(false);
             animator.SetBool("IsTalking", false);
         }
     }

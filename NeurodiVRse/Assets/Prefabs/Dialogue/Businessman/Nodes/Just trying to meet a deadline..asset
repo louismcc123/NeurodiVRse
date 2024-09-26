@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Just trying to meet a deadline.
   m_EditorClassIdentifier: 
   dialogueText: Just trying to meet a deadline.
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 44242f0a088b2564988756acd8f0682e, type: 3}
   responses:
   - {fileID: 11400000, guid: 2d3bfaca08891ee4e8fcacd2111c635d, type: 2}
   - {fileID: 11400000, guid: 8b61005bcb496c14fafc34b4cf307282, type: 2}

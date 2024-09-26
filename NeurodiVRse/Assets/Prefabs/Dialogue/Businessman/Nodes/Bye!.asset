@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bye!
   m_EditorClassIdentifier: 
   dialogueText: Bye!
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: c6cc3aad4632a304191bbfcd423312cd, type: 3}
   responses: []

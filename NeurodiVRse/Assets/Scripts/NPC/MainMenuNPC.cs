@@ -9,7 +9,9 @@ public class MainMenuNPC : MonoBehaviour
 
     private string welcome = "Welcome to Neurodiverse, the interactive virtual reality game for social skills development.";
     private string pickScenario = "Pick a scenario to practice your social skills in.";
-    private string about = "This game has been designed to expose neurodivergent people to social scenarios to allow them to adapt social skills and interactions with neurotypical people.\r\n\r\nPlayers have opportunity to explore interactions with artificial intelligent characters in the game and the effectiveness of this teaching method is being researched.";
+    private string about = "This game has been designed to expose neurodivergent people to social scenarios to allow them to " +
+        "adapt social skills and interactions with neurotypical people.\r\n\r\nPlayers have opportunity to explore interactions " +
+        "with artificial intelligent characters in the game and the effectiveness of this teaching method is being researched.";
 
     private void Start()
     {

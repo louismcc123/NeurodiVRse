@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: I appreciate that. Anything else
   m_EditorClassIdentifier: 
   dialogueText: ' I appreciate that. Anything else?'
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 690757b9524209e4190c89a2bda4bdbe, type: 3}
   responses:
   - {fileID: 11400000, guid: e5fbcdcacb759014b852999f8f5fa277, type: 2}
   - {fileID: 11400000, guid: 54e327612cb8ead4ea12041fa418de1c, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Yes, I do have a lot on right now.
   m_EditorClassIdentifier: 
   dialogueText: Yes, I do have a lot on right now.
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: eaaf032f095afc64e955d9e63d66d7f3, type: 3}
   responses:
   - {fileID: 11400000, guid: afa8294d0965712419cbedb2f3f2430d, type: 2}
   - {fileID: 11400000, guid: 6c8e65d9c0208b247870caa769c50622, type: 2}
