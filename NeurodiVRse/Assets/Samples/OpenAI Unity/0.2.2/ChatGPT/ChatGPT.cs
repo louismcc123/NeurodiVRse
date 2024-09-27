@@ -31,10 +31,10 @@ namespace OpenAI
         [SerializeField] private VoicePreset voicePreset;
 
         [Header("Events")]
-        public static Action<string> onChatGPTMessageReceived;
+        public static Action<string> onChatGPTMessageReceived; // Event triggered when a message is received from OpenAI
 
         protected OpenAIApi openai = new OpenAIApi();
-        protected List<ChatMessage> messages = new List<ChatMessage>();
+        protected List<ChatMessage> messages = new List<ChatMessage>(); // List of chat messages in the current conversation
         protected string prompt = "Act as an NPC in a VR environment. " +
             "Respond to the user as appropriate for your role. ";
         protected string characterInstruction = "Never break character or say that you are artificial intelligence.";
@@ -51,7 +51,7 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
         {
             if (!string.IsNullOrEmpty(npcPrompt))
             {
-                prompt = npcPrompt;
+                prompt = npcPrompt; // set custom npc prompt
             }
 
             inputField.enabled = true;
@@ -62,7 +62,7 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
             aiDialogueController = GetComponent<AIDialogueController>();
         }
 
-        protected virtual async void SendReply()
+        protected virtual async void SendReply() // Sends the player's input to OpenAI and processes the response
         {
             if (isDialoguePaused || activeNPC != this)
             {
@@ -70,7 +70,7 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
                 return;
             }
 
-            var newMessage = new ChatMessage()
+            var newMessage = new ChatMessage() // Create a new message from the player's input
             {
                 Role = "user",
                 Content = inputField.text
@@ -78,49 +78,50 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
 
             Debug.Log($"New player message: {newMessage.Content}");
 
-            if (messages.Count == 0)
+            if (messages.Count == 0) // If it's the first message, include the prompt and instructions
             {
                 newMessage.Content = prompt + characterInstruction + "\n" + inputField.text + maxMessageLengthinstruction;
             }
 
-            messages.Add(newMessage);
+            messages.Add(newMessage); // Add the player's message to the list of messages
+            // Disable the input and send buttons while waiting for the response
             send.enabled = false;
             enter.enabled = false;
-            inputField.text = "";
+            inputField.text = ""; // Clear the input field
             inputField.enabled = false;
             keyboard.SetActive(false);
-            SetNpcTalking(true);
+            SetNpcTalking(true); // Indicate NPC is now talking for ui and animation
 
             Debug.Log("Sending request to OpenAI...");
 
-            var completionResponse = await openai.CreateChatCompletion(new CreateChatCompletionRequest()
+            var completionResponse = await openai.CreateChatCompletion(new CreateChatCompletionRequest() // Send the message to OpenAI's chat model
             {
                 Model = "gpt-3.5-turbo",
                 Messages = messages
             });
 
-            if (completionResponse.Choices != null && completionResponse.Choices.Count > 0)
+            if (completionResponse.Choices != null && completionResponse.Choices.Count > 0) // Process the OpenAI response and update NPC dialogue
             {
                 var message = completionResponse.Choices[0].Message;
                 message.Content = message.Content.Trim();
 
-                string filteredContent = FilterInstructionalText(message.Content);
+                string filteredContent = FilterInstructionalText(message.Content); // Filter out any unwanted instructional text from the response
                 Debug.Log($"Received response: {filteredContent}");
 
                 if (!string.IsNullOrEmpty(filteredContent))
                 {
-                    HandleResponse(filteredContent);
-                    messages.Add(new ChatMessage { Role = "assistant", Content = filteredContent });
-                    AppendMessage(new ChatMessage { Role = "assistant", Content = filteredContent });
+                    HandleResponse(filteredContent); // Apply NPC response logic e.g. barista payment sequence
+                    messages.Add(new ChatMessage { Role = "assistant", Content = filteredContent }); // Store response
+                    AppendMessage(new ChatMessage { Role = "assistant", Content = filteredContent }); // Display response
 
-                    onChatGPTMessageReceived?.Invoke(filteredContent);
+                    onChatGPTMessageReceived?.Invoke(filteredContent); // Trigger event indicating a new NPC message was received
                 }
                 else
                 {
                     Debug.LogWarning("Filtered content is empty after removing instructional text.");
                 }
 
-                if (completionResponse.Choices.Count > 1)
+                if (completionResponse.Choices.Count > 1) // If there's additional advice in the response, display it
                 {
                     var advice = completionResponse.Choices[1].Message;
                     advice.Content = advice.Content.Trim();
@@ -137,12 +138,13 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
                 Debug.LogWarning("No text was generated from this prompt.");
             }
 
+            // Re-enable the input and send buttons after the response
             send.enabled = true;
             enter.enabled = true;
             inputField.enabled = true;
         }
 
-        protected void AppendMessage(ChatMessage message)
+        protected void AppendMessage(ChatMessage message) // Display response and call for animations
         {
             SetNpcTalking(true);
             messageText.text = string.Empty;
@@ -153,15 +155,15 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
 
         protected virtual void HandleResponse(string responseContent)
         {
-
+            // Can be overridden to handle specific responses in derived classes
         }
 
         protected string FilterInstructionalText(string content)
         {
-            return System.Text.RegularExpressions.Regex.Replace(content, @"\([^)]*\)", "").Trim();
+            return System.Text.RegularExpressions.Regex.Replace(content, @"\([^)]*\)", "").Trim(); // Removes any instructional text in parentheses from the response
         }
 
-        public void ActivateNPC()
+        public void ActivateNPC() // Activates this NPC as the current active one for dialogue
         {
             activeNPC = this;
 
@@ -177,7 +179,7 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
             Debug.Log($"{gameObject.name}: NPC activated.");
         }
 
-        public void DeactivateNPC()
+        public void DeactivateNPC() 
         {
             if (activeNPC == this)
             {
@@ -185,7 +187,7 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
             }
         }
 
-        protected void DisplayAdvice(string adviceContent)
+        protected void DisplayAdvice(string adviceContent)  // Displays any additional advice received from OpenAI
         {
             if (!string.IsNullOrEmpty(adviceContent))
             {
@@ -193,7 +195,7 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
             }
         }
 
-        public virtual void PauseDialogue()
+        public virtual void PauseDialogue() // Pauses the dialogue, hiding the NPC's dialogue canvas and stopping interactions
         {
             isDialoguePaused = true;
 
@@ -202,16 +204,15 @@ protected string maxMessageLengthinstruction = "Limit the length of your " +
             openAICanvas.SetActive(false);
         }
 
-        public virtual void ResumeDialogue()
+        public virtual void ResumeDialogue() // Resumes the dialogue if it was paused
         {
             isDialoguePaused = false;
-
-            SetNpcTalking(true);
+            SetNpcTalking(true); 
         }
 
         public virtual void SetNpcTalking(bool isTalking)
         {
-            aiDialogueController.isNpcTalking = isTalking;
+            aiDialogueController.isNpcTalking = isTalking; // Trigger animations and ui
         }
     }
 }

@@ -27,16 +27,16 @@ namespace OpenAI
             cashButton.onClick.AddListener(OnCashSelected);
         }
         
-        protected override void HandleResponse(string responseContent)
+        protected override void HandleResponse(string responseContent) // Handles ChatGPT's response content and checks if payment is requested
         {
             if (IsRequestingPayment(responseContent))
             {
-                PauseDialogue();
-                paymentCanvas.SetActive(true);
+                PauseDialogue(); // Pauses the conversation for payment
+                paymentCanvas.SetActive(true); // Displays the payment options
             }
         }
 
-        private bool IsRequestingPayment(string response)
+        private bool IsRequestingPayment(string response) // Detects if the response mentions payment-related terms like "card" or "cash"
         {
             return response.Contains("card", System.StringComparison.OrdinalIgnoreCase)
                 || response.Contains("cash", System.StringComparison.OrdinalIgnoreCase)
@@ -46,18 +46,16 @@ namespace OpenAI
         private void OnCardSelected()
         {
             paymentCanvas.SetActive(false);
-            cardManager.InstantiateCard();
-            //StartCoroutine(StartCoffeePreparationSequence());
+            cardManager.InstantiateCard(); // Triggers card payment process
         }
 
         private void OnCashSelected()
         {
             paymentCanvas.SetActive(false);
-            cashManager.InstantiateCash();
-            //StartCoroutine(StartCoffeePreparationSequence());
+            cashManager.InstantiateCash(); // Triggers cash payment process
         }
 
-        public IEnumerator SayThankYou()
+        public IEnumerator SayThankYou() // Plays a thank you message and begins the coffee preparation sequence
         {
             SetNpcTalking(true);
 
@@ -69,18 +67,19 @@ namespace OpenAI
                 Content = thankYou
             };
 
-            AppendMessage(thankYouMessage);
-            ttsBridge.Speak(thankYouMessage.Content);
+            AppendMessage(thankYouMessage); // adds the thank you message to the dialogue history
+            ttsBridge.Speak(thankYouMessage.Content); // Speak the message
 
             yield return new WaitForSeconds(3f);
 
-            PauseDialogue();
-            StartCoroutine(StartCoffeePreparationSequence());
+            PauseDialogue();  // Pauses the conversation
+            StartCoroutine(StartCoffeePreparationSequence()); // Begins coffee preparation
         }
 
-        public IEnumerator SayEnjoy()
+       
+        public IEnumerator SayEnjoy() // Plays an "enjoy" message after coffee preparation is complete
         {
-            SetNpcTalking(true);
+            SetNpcTalking(true);  // Sets NPC to talking state
 
             string enjoy = "Here's your coffee. Enjoy!";
 
@@ -90,40 +89,42 @@ namespace OpenAI
                 Content = enjoy
             };
 
-            AppendMessage(enjoyMessage);
-            ttsBridge.Speak(enjoyMessage.Content);
+            AppendMessage(enjoyMessage); // adds the enjoy message to the dialogue history
+            ttsBridge.Speak(enjoyMessage.Content); // Uses text-to-speech to speak the message
 
             yield return new WaitForSeconds(2f);
 
-            SetNpcTalking(false);
-            openAICanvas.SetActive(true);
+            SetNpcTalking(false); // Ends talking state
+            openAICanvas.SetActive(true); // Reactivates dialogue interface
         }
 
         private IEnumerator StartCoffeePreparationSequence()
         {
-            characterController.MoveToWaypoint(2);
-            yield return new WaitUntil(() => !characterController.IsMoving());
+            characterController.MoveToWaypoint(2);  // Moves NPC to coffee machine
+            yield return new WaitUntil(() => !characterController.IsMoving()); // Wait until NPC reaches the waypoint
 
-            StartCoroutine(StartCoffeePreparation());
-            yield return new WaitForSeconds(8f);
+            StartCoroutine(StartCoffeePreparation()); // Starts the coffee preparation process
+            yield return new WaitForSeconds(8f); 
 
-            characterController.MoveToWaypoint(3);
-            yield return new WaitUntil(() => !characterController.IsMoving());
+            characterController.MoveToWaypoint(3);  // Moves NPC to coffee drop off location
+            yield return new WaitUntil(() => !characterController.IsMoving()); 
 
-            Instantiate(coffeeCupPrefab, coffeeCupSpawnPosition.position, coffeeCupSpawnPosition.rotation);
+           
+            Instantiate(coffeeCupPrefab, coffeeCupSpawnPosition.position, coffeeCupSpawnPosition.rotation); // Instantiates a coffee cup at the coffee spawn position
             Debug.Log(gameObject.name + ": Coffee cup instantiated.");
 
-            ResumeDialogue();
-            StartCoroutine(SayEnjoy());
+            ResumeDialogue(); // Resumes conversation after coffee preparation
+            StartCoroutine(SayEnjoy()); // NPC tells the player to enjoy the coffee
         }
 
-        private IEnumerator StartCoffeePreparation()
+        
+        private IEnumerator StartCoffeePreparation() // play steam particle system for 5 secs
         {
             Debug.Log(gameObject.name + ": StartCoffeePreparation");
 
             risingSteam.SetActive(true);
             yield return new WaitForSeconds(5f);
-            risingSteam.SetActive(false);
+            risingSteam.SetActive(false); 
         }
     }
 }

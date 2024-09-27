@@ -52,14 +52,14 @@ public class EnterParty : MonoBehaviour
         StartCoroutine(EnterPartyRoutine(false));
     }
 
-    private void OnButtonPress()
+    private void OnButtonPress() // Handles the UI changes and disables XR components when a button is pressed
     {
         welcomeCanvas.SetActive(false);
         fadeCanvas.SetActive(true);
         DisableXRComponents();
     }
 
-    private void DisableXRComponents()
+    private void DisableXRComponents() // disable player
     {
         if (locomotionSystem != null)
             locomotionSystem.enabled = false;
@@ -79,16 +79,14 @@ public class EnterParty : MonoBehaviour
 
     private IEnumerator EnterPartyRoutine(bool isScripted)
     {
-        yield return StartCoroutine(FadeScreen(0, 100));
+        yield return StartCoroutine(FadeScreen(0, 100)); // fade screen to black
 
         if (isScripted)
         {
-            //GameManager.Instance.LoadScene(6);
             gameManager.LoadScene(6);
         }
         else
         {
-            //GameManager.Instance.LoadScene(7);
             gameManager.LoadScene(5);
         }
     }

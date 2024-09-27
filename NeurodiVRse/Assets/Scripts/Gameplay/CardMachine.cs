@@ -11,7 +11,7 @@ public class CardMachine : MonoBehaviour
         if (other.CompareTag("Card"))
         {
             Debug.Log("Card tapped on the machine");
-            cardManager.OnCardTapped();
+            cardManager.OnCardTapped(); // Resume dialogue and destroy card
         }
     }
 }

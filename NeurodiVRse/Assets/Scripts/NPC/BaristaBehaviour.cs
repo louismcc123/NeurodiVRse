@@ -20,13 +20,13 @@ public class BaristaBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange)
+        if (playerInRange) // Check if the player is in range
         {
-            FaceTowardsPlayer();
-
-            if (!hasMovedToWaypoint)
+            FaceTowardsPlayer(); // face player
+           
+            if (!hasMovedToWaypoint) // Move to a specific waypoint only once, if not already moved
             {
-                characterController.MoveToWaypoint(1);
+                characterController.MoveToWaypoint(1); // Move to till
                 hasMovedToWaypoint = true;
             }
         }
@@ -36,15 +36,15 @@ public class BaristaBehaviour : MonoBehaviour
     {
         if (player == null) 
         { 
-            return;
+            return; // Exit if there's no player reference
         }
-
-        if (characterController.IsMoving() || characterController.GetCurrentWaypoint() == 2)
+       
+        if (characterController.IsMoving() || characterController.GetCurrentWaypoint() == 2) // Prevent facing the player if the character is moving or at coffee machine
         {
             //Debug.Log("Not facing player because character is moving or waypoint is 2.");
             return;
         }
 
-        characterController.FacePlayer();
+        characterController.FacePlayer(); // Make the NPC face the player
     }
 }

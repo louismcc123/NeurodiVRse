@@ -52,7 +52,7 @@ public class EnterCafe : MonoBehaviour
     {
         if (isMoving)
         {
-            MoveToWaypoint();
+            MoveToWaypoint(); // Continuously move the player towards the waypoint if isMoving is true
         }
     }
 
@@ -68,14 +68,14 @@ public class EnterCafe : MonoBehaviour
         StartCoroutine(EnterCafeRoutine(false));
     }
 
-    private void OnButtonPress()
-    {
+    private void OnButtonPress() // Handles the UI changes and disables XR components when a button is pressed
+    {        
         welcomeCanvas.SetActive(false);
         fadeCanvas.SetActive(true);
         DisableXRComponents();
     }
 
-    private void DisableXRComponents()
+    private void DisableXRComponents() // Disable player
     {
         if (locomotionSystem != null)
             locomotionSystem.enabled = false;
@@ -95,9 +95,9 @@ public class EnterCafe : MonoBehaviour
 
     private IEnumerator EnterCafeRoutine(bool isScripted)
     {
-        OpenDoors();
-        MoveToWaypoint();
-        StartCoroutine(FadeScreen(0, 100));
+        OpenDoors(); 
+        MoveToWaypoint(); // move player into cafe
+        StartCoroutine(FadeScreen(0, 100)); // fade screen to black
         yield return new WaitUntil(() => Vector3.Distance(player.transform.position, waypoint.position) < 0.1f);
         fadeImage.color = Color.black;
 

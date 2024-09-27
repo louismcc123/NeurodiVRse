@@ -27,23 +27,23 @@ public class CharacterController : MonoBehaviour
         }
         else
         {
-            animator.applyRootMotion = false;
+            animator.applyRootMotion = false;// Ensures the agent controls the movement, not the animation
         }
 
         if (waypoints.Length > 0)
         {
-            MoveToWaypoint(0);
+            MoveToWaypoint(0); // Move to first waypoint
         }
     }
 
     private void Update()
     {
-        CheckIfReachedWaypoint();
-        UpdateAnimator();
+        CheckIfReachedWaypoint(); // Check if character has reached waypoint
+        UpdateAnimator(); // Update the walking animation state
 
         if (isMoving)
         {
-            RotateTowardsDestination();
+            RotateTowardsDestination(); // Face destination
         }
     }
 
@@ -52,7 +52,7 @@ public class CharacterController : MonoBehaviour
         if (waypointIndex >= 0 && waypointIndex < waypoints.Length)
         {
             currentWaypoint = waypointIndex;
-            agent.SetDestination(waypoints[waypointIndex].position);
+            agent.SetDestination(waypoints[waypointIndex].position); // Set destination of new waypoint on the navmeshagent
             isMoving = true;
             hasReachedCurrentWaypoint = false;
             Debug.Log(gameObject.name + ": Moving to waypoint: " + waypointIndex);
@@ -63,29 +63,30 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    private void CheckIfReachedWaypoint()
+    private void CheckIfReachedWaypoint() // Check if character has reached current waypoint
     {
         if (!hasReachedCurrentWaypoint && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            if (!agent.hasPath || agent.velocity.sqrMagnitude <= 0.1f)
+            if (!agent.hasPath || agent.velocity.sqrMagnitude <= 0.1f) // // Check if the agent has no path and has stopped
             {
                 isMoving = false;
-                animator.SetBool("IsWalking", false);
+                animator.SetBool("IsWalking", false); // Stop walking animation
                 hasReachedCurrentWaypoint = true;
                 Debug.Log(gameObject.name + ": Reached waypoint: " + currentWaypoint);
             }
         }
     }
 
-    private void RotateTowardsDestination()
+    private void RotateTowardsDestination() // Face destination while moving
     {
         if (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
         {
             if (agent != null)
             {
-                agent.updateRotation = false;
+                agent.updateRotation = false; // Disabling rotation by navmeshagent due to bugs/conflicts
             }
 
+            // Calculate the direction to the destination
             Vector3 direction = (agent.steeringTarget - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * Time.deltaTime);
@@ -108,7 +109,7 @@ public class CharacterController : MonoBehaviour
     {
         if (isMoving)
         {
-            agent.isStopped = true;
+            agent.isStopped = true; // Stop the movement
             isMoving = false;
             Debug.Log(gameObject.name + ": Movement paused at waypoint: " + currentWaypoint);
         }
@@ -118,10 +119,10 @@ public class CharacterController : MonoBehaviour
     {
         if (!isMoving)
         {
-            agent.isStopped = false; 
+            agent.isStopped = false; // Resume movement
             isMoving = true;
             Debug.Log(gameObject.name + ": Resuming movement towards waypoint: " + currentWaypoint);
-            agent.SetDestination(waypoints[currentWaypoint].position);
+            agent.SetDestination(waypoints[currentWaypoint].position); // Continue towards the current waypoint
         }
     }
 
@@ -140,7 +141,7 @@ public class CharacterController : MonoBehaviour
         return hasReachedCurrentWaypoint;
     }
 
-    private void UpdateAnimator()
+    private void UpdateAnimator() // Updates the walking animation based on whether the character is moving
     {
         bool shouldBeWalking = isMoving;
 
@@ -148,5 +149,6 @@ public class CharacterController : MonoBehaviour
         {
             animator.SetBool("IsWalking", shouldBeWalking);
         }
-    }
+    }   
+
 }

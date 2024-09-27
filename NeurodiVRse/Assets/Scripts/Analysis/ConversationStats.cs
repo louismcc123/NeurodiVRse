@@ -12,27 +12,27 @@ public class ConversationStats : MonoBehaviour
     public float totalLLMScore = 0f;
     public int llmCount = 0;
 
-    public float averageScriptedConversationTime => scriptedCount > 0 ? totalScriptedConversationTime / scriptedCount : 0f;
-    public float averageScriptedScore => scriptedCount > 0 ? totalScriptedScore / scriptedCount : 0f;
+    public float averageScriptedConversationTime => scriptedCount > 0 ? totalScriptedConversationTime / scriptedCount : 0f; // Average conversation time for scripted conversations
+    public float averageScriptedScore => scriptedCount > 0 ? totalScriptedScore / scriptedCount : 0f; // Average score for scripted conversations
 
-    public float averageLLMConversationTime => llmCount > 0 ? totalLLMConversationTime / llmCount : 0f;
-    public float averageLLMScore => llmCount > 0 ? totalLLMScore / llmCount : 0f;
+    public float averageLLMConversationTime => llmCount > 0 ? totalLLMConversationTime / llmCount : 0f; // Average conversation time for LLM conversations
+    public float averageLLMScore => llmCount > 0 ? totalLLMScore / llmCount : 0f; // Average score for LLM conversations
 
     public void RecordScriptedConversation(float conversationTime, float score)
     {
-        totalScriptedConversationTime += conversationTime;
-        totalScriptedScore += score;
-        scriptedCount++;
+        totalScriptedConversationTime += conversationTime; // Add to total time
+        totalScriptedScore += score; // Add to total score
+        scriptedCount++; // Increment count
     }
 
     public void RecordLLMConversation(float conversationTime, float score)
     {
-        totalLLMConversationTime += conversationTime;
-        totalLLMScore += score;
-        llmCount++;
+        totalLLMConversationTime += conversationTime; // Add to total time
+        totalLLMScore += score; // Add to total score
+        llmCount++; // Increment count
     }
 
-    public void ResetStatistics()
+    public void ResetStatistics() // Resets all recorded statistics to zero.
     {
         totalScriptedConversationTime = 0f;
         totalScriptedScore = 0f;

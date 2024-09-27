@@ -61,6 +61,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        // Reset dialogue state
         isDialoguePaused = false;
         isConversationFinished = false;
         Debug.Log(gameObject.name + ": Starting dialogue: " + node.dialogueText);
@@ -72,23 +73,24 @@ public class DialogueManager : MonoBehaviour
         NPCDialogueCanvas.SetActive(true);
 
         animator.SetBool("IsTalking", true);
-        PlayNodeAudioClip(node.dialogueAudio);
-        StartCoroutine(DisplayResponsesWithDelay(title, node));
+        PlayNodeAudioClip(node.dialogueAudio); // Play audio clip for the current node
+        StartCoroutine(DisplayResponsesWithDelay(title, node)); // Start displaying responses after a delay
 
-        currentDialogueNode = node;
+        currentDialogueNode = node; // Set the current dialogue node
     }
 
     private IEnumerator DisplayResponsesWithDelay(string title, DialogueNode node)
     {
         foreach (Transform child in playerResponseButtonParent)
         {
-            child.gameObject.SetActive(false);
+            child.gameObject.SetActive(false); // Hide all previous response buttons
         }
 
-        yield return new WaitForSeconds(node.dialogueAudio != null ? node.dialogueAudio.length : 1f);
+        yield return new WaitForSeconds(node.dialogueAudio != null ? node.dialogueAudio.length : 1f); // Wait for audio clip to finish or for 1 second if there is no clip
 
         animator.SetBool("IsTalking", false);
 
+        // Shuffle responses and limit to 3 responses
         List<DialogueResponse> shuffledResponses = new List<DialogueResponse>(node.responses);
         ShuffleList(shuffledResponses);
         int responseCount = Mathf.Min(shuffledResponses.Count, 3);
@@ -98,7 +100,7 @@ public class DialogueManager : MonoBehaviour
             DialogueResponse response = shuffledResponses[i];
             GameObject buttonObj;
 
-            if (i < playerResponseButtonParent.childCount)
+            if (i < playerResponseButtonParent.childCount) // Reuse existing button or create a new one if needed
             {
                 buttonObj = playerResponseButtonParent.GetChild(i).gameObject;
                 buttonObj.SetActive(true);
@@ -116,7 +118,7 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                responseText.text = response.responseText;
+                responseText.text = response.responseText; // Set response text
                 Debug.Log(gameObject.name + ": Set response text to: " + response.responseText);
             }
 
@@ -132,7 +134,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        for (int i = responseCount; i < playerResponseButtonParent.childCount; i++)
+        for (int i = responseCount; i < playerResponseButtonParent.childCount; i++) // Hide any remaining buttons
         {
             playerResponseButtonParent.GetChild(i).gameObject.SetActive(false);
         }
@@ -142,14 +144,14 @@ public class DialogueManager : MonoBehaviour
 
     public void SelectResponse(DialogueResponse response, string title)
     {
-        playerStats.totalScore += response.score;
-        playerStats.SubtractScore(response.score);
-        adviceText.text = response.adviceText;
+        playerStats.totalScore += response.score; // Update player's total score
+        playerStats.SubtractScore(response.score); // Adjust player's score based on the response
+        adviceText.text = response.adviceText; // Set advice text based on the response
 
         Debug.Log(gameObject.name + ": Response selected: " + response.responseText);
         Debug.Log(gameObject.name + ": Total Score: " + totalScore);
 
-        if (!string.IsNullOrEmpty(response.adviceText))
+        if (!string.IsNullOrEmpty(response.adviceText)) // Show or hide advice canvas based on advice text
         {
             adviceCanvas.SetActive(true);
         }
@@ -158,15 +160,14 @@ public class DialogueManager : MonoBehaviour
             adviceCanvas.SetActive(false);
         }
 
-        PlayResponseAudioClip(response.responseAudio);
+        PlayResponseAudioClip(response.responseAudio); // Play audio clip for the response
 
         foreach (Transform child in playerResponseButtonParent)
         {
             Button button = child.GetComponent<Button>();
             if (button != null)
             {
-                button.onClick.RemoveAllListeners();
-                //button.interactable = false;
+                button.onClick.RemoveAllListeners(); // Remove all listeners from response buttons to prevent multiple selections
             }
         }
 
@@ -175,7 +176,7 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator HandleResponseWithDelay(DialogueResponse response, string title)
     {
-        if (response.responseAudio != null)
+        if (response.responseAudio != null) // Wait for audio clip to finish
         {
             Debug.Log(gameObject.name + ": Waiting for audio clip to finish: " + response.responseAudio.name);
             yield return new WaitForSeconds(response.responseAudio.length);
@@ -188,7 +189,7 @@ public class DialogueManager : MonoBehaviour
 
         animator.SetBool("IsTalking", false);
 
-        if (response.nextNode != null && !response.nextNode.IsLastNode())
+        if (response.nextNode != null && !response.nextNode.IsLastNode()) // Transition to the next node if available
         {
             Debug.Log(gameObject.name + ": Transitioning to next node: " + response.nextNode.dialogueText);
             HandleNextNode(response, title);
@@ -196,13 +197,13 @@ public class DialogueManager : MonoBehaviour
         else
         {
             Debug.Log(gameObject.name + ": Ending dialogue. Displaying final score.");
-            EndDialogue();
+            EndDialogue(); // End the dialogue if there are no more nodes
         }
     }
 
     protected virtual void HandleNextNode(DialogueResponse response, string title)
     {
-        StartDialogue(title, response.nextNode);
+        StartDialogue(title, response.nextNode); // Start the next dialogue node
     }
 
     private void PlayNodeAudioClip(AudioClip clip)

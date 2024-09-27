@@ -51,7 +51,7 @@ public class Door : MonoBehaviour
                 interactCanvas.SetActive(true);
             }
 
-            if (aButton.action.triggered)
+            if (aButton.action.triggered) // if player interacts with door
             {
                 HandleDoorInteraction();
             }
@@ -62,7 +62,7 @@ public class Door : MonoBehaviour
         }
     }
 
-    private bool IsPlayerFacingDoor()
+    private bool IsPlayerFacingDoor() // check to see if player is facing door
     {
         Vector3 directionToDoor = (transform.position - Player.transform.position).normalized;
         float dotProduct = Vector3.Dot(Player.transform.forward, directionToDoor);
@@ -81,8 +81,8 @@ public class Door : MonoBehaviour
         {
             if (playerStats.hasCoffee)
             {
-                StartCoroutine(Opening());
-                EndGame();
+                StartCoroutine(Opening()); // open doors
+                EndGame(); // show end game ui
             }
             else
             {
@@ -91,7 +91,7 @@ public class Door : MonoBehaviour
         }
         else
         {
-            StartCoroutine(Closing());
+            StartCoroutine(Closing()); // close doors
         }
     }
 
@@ -140,7 +140,7 @@ public class Door : MonoBehaviour
             scoreText.text = "Score: " + playerScore + " / " + playerStats.maxScore;
         }
 
-        gameManager.EndGame();
+        gameManager.EndGame(); // show end game canvas
     }
 
     void ShowIncompleteLevelUI()

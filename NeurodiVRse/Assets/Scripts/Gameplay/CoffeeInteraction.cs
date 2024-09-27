@@ -28,7 +28,7 @@ public class CoffeeInteraction : MonoBehaviour
         GetComponent<XRGrabInteractable>().onSelectExited.RemoveListener(OnDrop);
     }
 
-    private void OnPickup(XRBaseInteractor interactor)
+    private void OnPickup(XRBaseInteractor interactor) // Detect when player has coffee
     {
         if (playerStats != null)
         {
