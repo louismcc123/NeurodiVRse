@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Well, enjoy your day...
   m_EditorClassIdentifier: 
   dialogueText: Well enjoy your day...
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 78d003802b980f94a998a5571b917fae, type: 3}
   responses: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Multitasking, you know
   m_EditorClassIdentifier: 
   dialogueText: Multitasking, you know?
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 62479508a2d85414aacc5b0c4a4056d9, type: 3}
   responses:
   - {fileID: 11400000, guid: f32d7dd1493bc0148acdee25066f31d9, type: 2}
   - {fileID: 11400000, guid: 2310e6e4147594b4fa061173aa4a23ed, type: 2}

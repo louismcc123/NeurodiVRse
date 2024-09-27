@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Just texting a friend, nothing exciting
   m_EditorClassIdentifier: 
   dialogueText: Just texting a friend, nothing exciting.
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 553fadb03531a1c4d818a09eeb804bb6, type: 3}
   responses:
   - {fileID: 11400000, guid: bf7931ec44beffc4ba182d8679285ae3, type: 2}
   - {fileID: 11400000, guid: fdc41a3029f56354e9604370b82caec4, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Yeah, I should probably watch where I\u2019m going."
   m_EditorClassIdentifier: 
   dialogueText: "Yeah, I should probably watch where I\u2019m going."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 1583c3fe5c12da54aa77b57d256fa930, type: 3}
   responses:
   - {fileID: 11400000, guid: a859319899c42fc459ea8cc23087e4b8, type: 2}
   - {fileID: 11400000, guid: a6a3ec757afe196478338964fa9a8b49, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Yeah I'm good thanks.
   m_EditorClassIdentifier: 
   dialogueText: "Yeah I\u2019m good thanks."
-  dialogueAudio: {fileID: 0}
+  dialogueAudio: {fileID: 8300000, guid: 18722e38548989141a6275871be4c6cc, type: 3}
   responses:
   - {fileID: 11400000, guid: d5d62ea7db19c0b418d9f8932faa4848, type: 2}
   - {fileID: 11400000, guid: b260c377ceec0b847b73d0d4a443746f, type: 2}
